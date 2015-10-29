@@ -1,0 +1,54 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:five="http://namespaces.zope.org/five"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    xmlns:i18n="http://namespaces.zope.org/i18n"
+    i18n_domain="redturtle.tiles.management">
+
+  <includeDependencies package="." />
+
+  <i18n:registerTranslations directory="locales" />
+
+  <include package=".browser" />
+
+
+  <genericsetup:registerProfile
+      name="default"
+      title="redturtle.tiles.management"
+      directory="profiles/default"
+      description="Installs the redturtle.tiles.management add-on."
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      />
+
+  <genericsetup:importStep
+      name="redturtle.tiles.management-postInstall"
+      title="redturtle.tiles.management post_install import step"
+      description="Post install import step from redturtle.tiles.management"
+      handler=".setuphandlers.post_install">
+  </genericsetup:importStep>
+
+  <genericsetup:registerProfile
+      name="uninstall"
+      title="redturtle.tiles.management"
+      directory="profiles/uninstall"
+      description="Uninstalls the redturtle.tiles.management add-on."
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      />
+
+  <genericsetup:importStep
+      name="redturtle.tiles.management-uninstall"
+      title="redturtle.tiles.management uninstall import step"
+      description="Import step run during ininstalling redturtle.tiles.management"
+      handler=".setuphandlers.uninstall">
+  </genericsetup:importStep>
+
+  <!-- provide marker interface to all persistent tiles -->
+  <!--class class="plone.tiles.PersistentTile">
+    <implements interface=".interfaces.ICreatedTile" />
+  </class-->
+  <subscriber
+    for="plone.tiles.interfaces.ITile
+         zope.lifecycleevent.interfaces.IObjectAddedEvent"
+    handler=".event_handler.tileCreated"
+    />
+</configure>

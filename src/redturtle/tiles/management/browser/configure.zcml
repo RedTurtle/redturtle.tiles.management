@@ -1,0 +1,51 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:plone="http://namespaces.plone.org/plone"
+    i18n_domain="redturtle.tiles.management">
+
+  <!-- Set overrides folder for Just-a-Bunch-Of-Templates product -->
+  <include package="z3c.jbot" file="meta.zcml" />
+  <browser:jbot
+      directory="overrides"
+      layer="redturtle.tiles.management.interfaces.IRedturtleTilesManagementLayer"
+      />
+  <!-- Publish static files -->
+  <browser:resourceDirectory
+      name="redturtle.tiles.management"
+      directory="static"
+      />
+
+  <!-- Customized add view and form - invoked from the @@add-tile traversal view -->
+  <adapter
+      for="plone.dexterity.interfaces.IDexterityItem
+           zope.publisher.interfaces.browser.IDefaultBrowserLayer
+           plone.tiles.interfaces.ITileType"
+      provides="plone.app.tiles.interfaces.ITileAddView"
+      factory=".tiles_view.TilesAddView"
+      />
+
+  <class class=".tiles_view.TilesAddView">
+      <require
+          permission="cmf.ModifyPortalContent"
+          interface="zope.publisher.interfaces.browser.IBrowserPage"
+          />
+  </class>
+
+  <browser:page
+      name="tiles_view"
+      for="*"
+      template="tiles_view.pt"
+      class=".tiles_view.BaseView"
+      permission="zope2.View"
+      layer="redturtle.tiles.management.interfaces.IRedturtleTilesManagementLayer"
+      />
+
+  <browser:page
+      name="reorder_tiles"
+      for="*"
+      class=".tiles_view.ReorderTilesView"
+      permission="plone.app.tiles.AddTile"
+      layer="redturtle.tiles.management.interfaces.IRedturtleTilesManagementLayer"
+      />
+</configure>

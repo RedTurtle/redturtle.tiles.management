@@ -1,0 +1,3 @@
+graft src/redturtle
+graft docs/
+include *.cfg *.rst *.in

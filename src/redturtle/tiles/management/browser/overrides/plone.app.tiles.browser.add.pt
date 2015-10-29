@@ -1,0 +1,30 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      i18n:domain="plone"
+      tal:omit-tag="">
+<metal:block use-macro="context/@@tile-form-layout/macros/master">
+  <metal:block fill-slot="main">
+
+    <h1 class="documentFirstHeading" i18n:translate="heading_add_new_tile">Create tile</h1>
+
+    <p class="documentDescription" i18n:translate="description_add_new_tile">
+      Select the type of tile you want to create
+    </p>
+
+    <metal:tiletypes define-macro="tiletypes">
+
+        <ul class="nav nav-pills">
+          <li tal:repeat="tiletype view/tileTypes">
+            <a tal:attributes="href string:${context/absolute_url}/@@add-tile/${tiletype/__name__}">
+              <span tal:replace="tiletype/title">Tile type title</span>
+            </a>
+            <small tal:replace="tiletype/description">Tile type description</small>
+          </li>
+        </ul>
+    </metal:tiletypes>
+
+  </metal:block>
+</metal:block>
+</html>
