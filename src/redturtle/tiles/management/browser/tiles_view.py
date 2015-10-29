@@ -1,24 +1,9 @@
 # -*- coding: utf-8 -*-
 from plone.app.blocks.interfaces import IBlocksTransformEnabled
 from Products.Five import BrowserView
-from zope.interface import implementer
 from zope.annotation.interfaces import IAnnotations
-from plone.app.tiles.browser.add import DefaultAddView
-from plone.app.tiles.browser.add import DefaultAddForm
+from zope.interface import implementer
 import json
-
-
-class TilesAddForm(DefaultAddForm):
-
-    def nextURL(self, tile):
-        return self.context.absolute_url()
-
-
-class TilesAddView(DefaultAddView):
-    """
-    Overrides default add view
-    """
-    form = TilesAddForm
 
 
 @implementer(IBlocksTransformEnabled)

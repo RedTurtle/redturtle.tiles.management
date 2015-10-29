@@ -22,12 +22,28 @@
            zope.publisher.interfaces.browser.IDefaultBrowserLayer
            plone.tiles.interfaces.ITileType"
       provides="plone.app.tiles.interfaces.ITileAddView"
-      factory=".tiles_view.TilesAddView"
+      factory=".tiles_forms.TilesAddView"
       />
 
-  <class class=".tiles_view.TilesAddView">
+  <class class=".tiles_forms.TilesAddView">
       <require
-          permission="cmf.ModifyPortalContent"
+          permission="plone.app.tiles.AddTile"
+          interface="zope.publisher.interfaces.browser.IBrowserPage"
+          />
+  </class>
+  <!-- Customized edit view and form - invoked from the @@edit-tile traversal view -->
+
+  <adapter
+      for="plone.dexterity.interfaces.IDexterityItem
+           zope.publisher.interfaces.browser.IDefaultBrowserLayer
+           plone.tiles.interfaces.ITileType"
+      provides="plone.app.tiles.interfaces.ITileEditView"
+      factory=".tiles_forms.TilesEditView"
+      />
+
+  <class class=".tiles_forms.TilesEditView">
+      <require
+          permission="plone.app.tiles.AddTile"
           interface="zope.publisher.interfaces.browser.IBrowserPage"
           />
   </class>

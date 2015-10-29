@@ -33,7 +33,7 @@ require([
 
   //sortable tiles
   var sortable = new Sortable($('.tilesWrapper'), {
-    selector: 'div',
+    selector: 'div.tileWrapper',
     drop: function($el, delta) {
       if (delta !== 0){
         var tile_ids = $('.tileWrapper').map(function(index, obj) {

@@ -20,7 +20,6 @@
          tal:attributes="data-absoluteurl context/absolute_url">
       <tal:tile repeat="tile tiles">
         <div tal:attributes="data-tile tile/view_url" />
-        <hr />
       </tal:tile>
     </div>
   </metal:block>
