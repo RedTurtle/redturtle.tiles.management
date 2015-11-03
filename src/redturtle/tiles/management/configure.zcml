@@ -9,6 +9,12 @@
 
   <i18n:registerTranslations directory="locales" />
 
+  <!--Register permission id-->
+  <permission
+     id="tiles.management.ManageTiles"
+     title="tiles management: Manage Tiles"
+     />
+
   <include package=".browser" />
 
 
@@ -43,12 +49,19 @@
   </genericsetup:importStep>
 
   <!-- provide marker interface to all persistent tiles -->
-  <!--class class="plone.tiles.PersistentTile">
-    <implements interface=".interfaces.ICreatedTile" />
-  </class-->
   <subscriber
     for="plone.tiles.interfaces.ITile
          zope.lifecycleevent.interfaces.IObjectAddedEvent"
     handler=".event_handler.tileCreated"
+    />
+  <!--subscriber
+    for="plone.tiles.interfaces.ITile
+         zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+    handler=".event_handler.tileModified"
+    /-->
+  <subscriber
+    for="plone.tiles.interfaces.ITile
+         zope.lifecycleevent.interfaces.IObjectRemovedEvent"
+    handler=".event_handler.tileDeleted"
     />
 </configure>

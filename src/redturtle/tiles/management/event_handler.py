@@ -1,5 +1,7 @@
-
+# -*- coding: utf-8 -*-
 from zope.annotation.interfaces import IAnnotations
+from plone import api
+import re
 
 
 def tileCreated(tile, event):
@@ -10,10 +12,21 @@ def tileCreated(tile, event):
     annotations = IAnnotations(context)
     if "tiles_list" not in annotations:
         annotations['tiles_list'] = []
+
     new_tile = {
         'tile_id': tile_id,
-        'edit_url': tile.edit_url,
-        'view_url': tile.url,
-        'delete_url': tile.delete_url,
         }
+    try:
+        tile_type = re.search("@@(.*?)/", tile.url).group(1)
+    except AttributeError:
+        tile_type = ""
+    if tile_type:
+        new_tile['tile_type'] = tile_type
     annotations['tiles_list'].append(new_tile)
+
+
+def tileDeleted(tile, event):
+    annotations = IAnnotations(tile.context)
+    for tile_info in annotations.get('tiles_list', []):
+        if tile_info.get('tile_id') == tile.id:
+            annotations['tiles_list'].remove(tile_info)

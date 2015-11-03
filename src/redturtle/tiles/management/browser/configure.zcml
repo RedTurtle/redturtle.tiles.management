@@ -31,8 +31,8 @@
           interface="zope.publisher.interfaces.browser.IBrowserPage"
           />
   </class>
-  <!-- Customized edit view and form - invoked from the @@edit-tile traversal view -->
 
+  <!-- Customized edit view and form - invoked from the @@edit-tile traversal view -->
   <adapter
       for="plone.dexterity.interfaces.IDexterityItem
            zope.publisher.interfaces.browser.IDefaultBrowserLayer
@@ -43,10 +43,19 @@
 
   <class class=".tiles_forms.TilesEditView">
       <require
-          permission="plone.app.tiles.AddTile"
+          permission="tiles.management.ManageTiles"
           interface="zope.publisher.interfaces.browser.IBrowserPage"
           />
   </class>
+
+  <!-- Customized delete view and form - invoked from the @@edit-tile traversal view -->
+  <adapter
+      for="plone.dexterity.interfaces.IDexterityItem
+           zope.publisher.interfaces.browser.IDefaultBrowserLayer
+           plone.tiles.interfaces.ITileType"
+      provides="plone.app.tiles.interfaces.ITileDeleteView"
+      factory=".tiles_forms.TilesDeleteView"
+      />
 
   <browser:page
       name="tiles_view"
@@ -61,7 +70,7 @@
       name="reorder_tiles"
       for="*"
       class=".tiles_view.ReorderTilesView"
-      permission="plone.app.tiles.AddTile"
+      permission="tiles.management.ManageTiles"
       layer="redturtle.tiles.management.interfaces.IRedturtleTilesManagementLayer"
       />
 </configure>

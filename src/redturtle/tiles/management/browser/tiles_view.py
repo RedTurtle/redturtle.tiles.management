@@ -4,6 +4,8 @@ from Products.Five import BrowserView
 from zope.annotation.interfaces import IAnnotations
 from zope.interface import implementer
 import json
+from plone import api
+from plone.memoize import view
 
 
 @implementer(IBlocksTransformEnabled)
@@ -11,9 +13,36 @@ class BaseView(BrowserView):
     '''
     '''
 
+    @view.memoize
     def get_tiles_list(self):
         annotations = IAnnotations(self.context)
         return annotations.get('tiles_list')
+
+    def get_json_tiles(self):
+        if api.user.is_anonymous():
+            return ""
+        current = api.user.get_current()
+        if api.user.has_permission(
+            'tiles.management.ManageTiles',
+            user=current,
+            obj=self.context):
+            return json.dumps(self.get_tiles_list())
+        return ""
+
+    def can_add_tiles(self):
+        if api.user.is_anonymous():
+            return False
+        current = api.user.get_current()
+        return api.user.has_permission(
+            'plone.app.tiles.AddTile',
+            user=current,
+            obj=self.context)
+
+    def get_tile_url(self, tile):
+        return "%s/@@%s/%s" % (
+            self.context.absolute_url(),
+            tile.get('tile_type'),
+            tile.get('tile_id'))
 
 
 class ReorderTilesView(BrowserView):
