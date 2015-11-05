@@ -20,7 +20,7 @@ require([
 
   //edit buttons
   var tiles = $('.tilesList').attr('data-jsontiles');
-  if (tiles === undefined) {
+  if (!tiles) {
     //the user can't manage tiles
     return;
   }
