@@ -4,6 +4,16 @@ require([
   'mockup-patterns-modal',
 ], function($, Sortable, Modal) {
   'use strict';
+
+  //add tile button
+  $('.add-tile-btn').each(function() {
+    var add_modal = new Modal($(this), {
+      templateOptions: {
+        classModal: 'plone-modal-content add-tile-modal',
+      }
+    });
+  });
+
   //edit buttons
   var tiles = $('.tilesList').attr('data-jsontiles');
   // debugger;
