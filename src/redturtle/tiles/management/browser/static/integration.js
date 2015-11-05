@@ -35,7 +35,7 @@ require([
     var edit_url = absolute_url + '/@@edit-tile/' + tile_obj.tile_type + '/' + tile_obj.tile_id;
     var delete_url = absolute_url + '/@@delete-tile/' + tile_obj.tile_type + '/' + tile_obj.tile_id;
     var html = '<div class="tileEditButtons">';
-      html += '<a class="plone-btn plone-btn-primary tileEditLink" href="' + edit_url + '">';
+      html += '<a class="plone-btn plone-btn-info tileEditLink" href="' + edit_url + '">';
       html += '<span class="icon-edit" aria-hidden="true"></span>';
       html += '</a>';
       html += '<a class="pat-plone-modal plone-btn plone-btn-danger tileDeleteLink" href="' + delete_url + '">';

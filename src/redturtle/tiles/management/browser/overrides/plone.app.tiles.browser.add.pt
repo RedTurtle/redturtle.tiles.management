@@ -15,14 +15,12 @@
 
     <metal:tiletypes define-macro="tiletypes">
 
-        <ul class="list-group">
-          <li tal:repeat="tiletype view/tileTypes" class="list-group-item">
-            <a tal:attributes="href string:${context/absolute_url}/@@add-tile/${tiletype/__name__}">
-              <span tal:replace="tiletype/title">Tile type title</span>
-            </a>
+        <div class="list-group">
+          <a tal:repeat="tiletype view/tileTypes" class="list-group-item" tal:attributes="href string:${context/absolute_url}/@@add-tile/${tiletype/__name__}">
+            <span class="tileTitle" tal:content="tiletype/title">Tile type title</span>            
             <small tal:content="tiletype/description">Tile type description</small>
-          </li>
-        </ul>
+          </a>
+        </div>
     </metal:tiletypes>
 
   </metal:block>
