@@ -8,15 +8,18 @@ require([
   //add tile button
   $('.add-tile-btn').each(function() {
     var add_modal = new Modal($(this), {
+      buttons: '.formControls input[type="submit"]#buttons-save, .formControls input[type="submit"]#buttons-cancel',
       templateOptions: {
         classModal: 'plone-modal-content add-tile-modal',
+      },
+      handleLinkAction: function($action, options, patternOptions) {
+        window.location.href = $action.attr('href');
       }
     });
   });
 
   //edit buttons
   var tiles = $('.tilesList').attr('data-jsontiles');
-  // debugger;
   if (tiles === undefined) {
     //the user can't manage tiles
     return;
@@ -41,7 +44,18 @@ require([
     $(html).hide().prependTo($(tile_wrapper));
     $('.tileDeleteLink').each(function() {
       var delete_modal = new Modal($(this), {
-        loadLinksWithinModal: false
+        templateOptions: {
+          classModal: 'plone-modal-content delete-tile-modal',
+        },
+        actionOptions: {
+          redirectOnResponse: false,
+          onSuccess: function(self, response, state, xhr, form) {
+            if (state === "success") {
+              self.hide();
+              self.reloadWindow();
+            }
+          }
+        }
       });
     });
     $(tile_wrapper).mouseenter(function() {

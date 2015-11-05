@@ -136,8 +136,16 @@ class TilesEditView(DefaultEditView):
 
 class TilesDeleteForm(DefaultDeleteForm):
 
-    def nextURL(self, tile):
+    def nextURL(self, tile=None):
         return self.context.absolute_url()
+
+    @button.buttonAndHandler(_('Delete'), name='delete')
+    def handleDelete(self, action):
+        super(TilesDeleteForm, self).handleDelete(self, action)
+
+    def updateActions(self):
+        super(DefaultDeleteForm, self).updateActions()
+        self.actions["delete"].addClass("context")
 
 
 class TilesDeleteView(DefaultDeleteView):
