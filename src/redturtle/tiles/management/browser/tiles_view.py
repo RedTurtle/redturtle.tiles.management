@@ -16,7 +16,7 @@ class BaseView(BrowserView):
     @view.memoize
     def get_tiles_list(self):
         annotations = IAnnotations(self.context)
-        return annotations.get('tiles_list')
+        return annotations.get('tiles_list', [])
 
     def get_json_tiles(self):
         if api.user.is_anonymous():

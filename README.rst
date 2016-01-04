@@ -6,33 +6,55 @@
 redturtle.tiles.management
 ==============================================================================
 
-Tell me what your product does
+A tiles management system, easier than plone.app.mosaic that uses
+`plone.app.tiles`__ and `Mockup`__ functionalities to build a simple UI.
+
+__ https://github.com/plone/plone.app.tiles
+__ https://github.com/plone/mockup
 
 Features
 --------
 
-- Can be bullet points
+- Simple UI to add/remove/edit registered tiles
+- Tiles sorting with drag-and-drop (thanks to mockup)
+- Base view and macro to be reused in custom templates
 
+Usage
+-----
 
-Examples
---------
+To use this feature, you only need to do 2 simple steps:
 
-This add-on can be seen in action at the following sites:
-- Is there a page on the internet where everybody can see the features?
+1) Make you view implements IBlocksTransformEnabled interface::
 
+    from plone.app.blocks.interfaces import IBlocksTransformEnabled
+    from Products.Five import BrowserView
+    from zope.interface import implementer
 
-Documentation
--------------
+    @implementer(IBlocksTransformEnabled)
+    class MyView(BrowserView):
+        ...
 
-Full documentation for end users can be found in the "docs" folder, and is also available online at http://docs.plone.org/foo/bar
+2) use a specific macro in the template, where you want to insert the tiles::
 
+    <tal:tiles metal:use-macro="context/tiles_view/macros/tiles-macro" />
+
+3) the used tiles need to expose their id to allows the UI to handle correct actions::
+
+    <div data-tileid="${view/id}">
+      .. your tile html
+    </div>
+
+The last point can be improved because with this restriction we can't use standard tiles, but only custom tiles.
+
+After this, you see a new "Add tile" button in the view, and clicking on it,
+you can see a list of available tiles.
 
 Translations
 ------------
 
 This product has been translated into
 
-- Klingon (thanks, K'Plai)
+- Italian
 
 
 Installation
@@ -54,16 +76,8 @@ and then running "bin/buildout"
 Contribute
 ----------
 
-- Issue Tracker: https://github.com/collective/redturtle.tiles.management/issues
-- Source Code: https://github.com/collective/redturtle.tiles.management
-- Documentation: https://docs.plone.org/foo/bar
-
-
-Support
--------
-
-If you are having issues, please let us know.
-We have a mailing list located at: project@example.com
+- Issue Tracker: https://github.com/RedTurtle/redturtle.tiles.management/issues
+- Source Code: https://github.com/RedTurtle/redturtle.tiles.management
 
 
 License
