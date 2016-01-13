@@ -45,6 +45,7 @@ setup(
     install_requires=[
         'plone.api',
         'plone.app.blocks',
+        'plone.app.tiles',
         'plone.formwidget.contenttree',
         'setuptools',
         'z3c.jbot',
