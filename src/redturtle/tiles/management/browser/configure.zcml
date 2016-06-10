@@ -18,7 +18,7 @@
 
   <!-- Customized add view and form - invoked from the @@add-tile traversal view -->
   <adapter
-      for="plone.dexterity.interfaces.IDexterityItem
+      for="plone.dexterity.interfaces.IDexterityContent
            zope.publisher.interfaces.browser.IDefaultBrowserLayer
            plone.tiles.interfaces.ITileType"
       provides="plone.app.tiles.interfaces.ITileAddView"
@@ -34,7 +34,7 @@
 
   <!-- Customized edit view and form - invoked from the @@edit-tile traversal view -->
   <adapter
-      for="plone.dexterity.interfaces.IDexterityItem
+      for="plone.dexterity.interfaces.IDexterityContent
            zope.publisher.interfaces.browser.IDefaultBrowserLayer
            plone.tiles.interfaces.ITileType"
       provides="plone.app.tiles.interfaces.ITileEditView"
@@ -50,7 +50,7 @@
 
   <!-- Customized delete view and form - invoked from the @@edit-tile traversal view -->
   <adapter
-      for="plone.dexterity.interfaces.IDexterityItem
+      for="plone.dexterity.interfaces.IDexterityContent
            zope.publisher.interfaces.browser.IDefaultBrowserLayer
            plone.tiles.interfaces.ITileType"
       provides="plone.app.tiles.interfaces.ITileDeleteView"
