@@ -1,3 +1,5 @@
 .tileEditButtons {
-  float: right;
+    float: right;
+    position: relative;
+    z-index: 9999;
 }
