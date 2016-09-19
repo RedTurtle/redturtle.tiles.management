@@ -2,8 +2,8 @@ Changelog
 =========
 
 
-0.1 (unreleased)
-----------------
+0.1.0 (unreleased)
+------------------
 
 - Initial release.
   [cekk]
