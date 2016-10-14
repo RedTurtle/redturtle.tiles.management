@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from plone import api
-from plone.app.tiles import MessageFactory as tmf
 from plone.app.tiles.browser.add import DefaultAddForm
 from plone.app.tiles.browser.add import DefaultAddView
 from plone.app.tiles.browser.delete import DefaultDeleteForm
@@ -87,7 +86,7 @@ class TilesEditForm(DefaultEditForm):
 
     # Buttons/actions
 
-    @button.buttonAndHandler(tmf('Save'), name='save')
+    @button.buttonAndHandler(_('Save'), name='save')
     def handleSave(self, action):
         data, errors = self.extractData()
         if errors:

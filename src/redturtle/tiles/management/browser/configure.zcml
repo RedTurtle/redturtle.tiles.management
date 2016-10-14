@@ -27,7 +27,7 @@
 
   <class class=".tiles_forms.TilesAddView">
       <require
-          permission="plone.app.tiles.AddTile"
+          permission="cmf.ModifyPortalContent"
           interface="zope.publisher.interfaces.browser.IBrowserPage"
           />
   </class>

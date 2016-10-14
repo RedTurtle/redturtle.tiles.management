@@ -34,7 +34,7 @@ class BaseView(BrowserView):
             return False
         current = api.user.get_current()
         return api.user.has_permission(
-            'plone.app.tiles.AddTile',
+            'cmf.ModifyPortalContent',
             user=current,
             obj=self.context)
 
@@ -50,6 +50,7 @@ class ReorderTilesView(BrowserView):
     '''
 
     def __call__(self):
+        import pdb;pdb.set_trace()
         if not self.request.form.get('tile_ids'):
             return ""
         try:

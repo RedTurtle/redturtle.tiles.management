@@ -17,16 +17,16 @@ require([
           }
         });
       });
-    
+
       //edit buttons
       var tiles = $('.tilesList').attr('data-jsontiles');
       if (!tiles) {
         //the user can't manage tiles
         return;
       }
-      var absolute_url = $("body").data().baseUrl;
+      var absolute_url = $("body").data().baseUrl || window.location.href;
       var tiles_obj = JSON.parse(tiles);
-    
+
       tiles_obj.forEach(function(tile_obj) {
         var tile_wrapper = $('[data-tileid=' + tile_obj.tile_id + ']');
         if (tile_wrapper === undefined) {

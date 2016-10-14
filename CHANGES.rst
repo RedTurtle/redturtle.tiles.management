@@ -5,7 +5,8 @@ Changelog
 0.1.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Replaced unused plone.app.tiles.AddTile permission with "cmf.ModifyPortalContent"
+  [cekk]
 
 
 0.1.0 (2016-09-19)
