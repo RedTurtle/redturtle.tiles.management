@@ -7,7 +7,8 @@ Changelog
 
 - Replaced unused plone.app.tiles.AddTile permission with "cmf.ModifyPortalContent"
   [cekk]
-
+- Add Plone4 compatibility
+  [cekk]
 
 0.1.0 (2016-09-19)
 ------------------
