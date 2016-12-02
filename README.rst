@@ -73,6 +73,21 @@ Install redturtle.tiles.management by adding it to your buildout::
 and then running "bin/buildout"
 
 
+Compatibility
+-------------
+This package is developed with mockup, so is fully compatible for Plone 5.
+
+For Plone 4 there is an additional javascript with some mockup's patterns used for
+drag and drop behavior.
+
+You need to include two javascripts in your view template or register them in
+the global jsregistry. I don't want to register globally these resources
+because they are used only in one single view:
+
+- `++resource++rer.giovazoom.plonetheme.javascripts/mockup.js`
+- `++resource++redturtle.tiles.management/integration.js`
+
+
 Contribute
 ----------
 
