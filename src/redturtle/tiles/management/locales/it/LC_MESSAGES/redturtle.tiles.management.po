@@ -19,34 +19,33 @@ msgstr ""
 
 #: ../browser/tiles_forms.py:67
 msgid "Cancel"
-msgstr ""
+msgstr "Annulla"
 
 #: ../browser/tiles_forms.py:141
 msgid "Delete"
-msgstr ""
+msgstr "Rimuovi"
 
 #: ../browser/tiles_forms.py:29
 msgid "Save"
-msgstr ""
+msgstr "Salva"
 
 #: ../browser/tiles_forms.py:70
 msgid "Tile add cancelled"
-msgstr ""
+msgstr "Aggiunta della tile annullata"
 
 #: ../browser/tiles_forms.py:63
 msgid "Tile added"
-msgstr ""
+msgstr "Tile creata"
 
 #: ../browser/tiles_forms.py:124
 msgid "Tile edit cancelled"
-msgstr ""
+msgstr "Modifica della tile annullata"
 
 #: ../browser/tiles_forms.py:117
 msgid "Tile edited"
-msgstr ""
+msgstr "Tile modificata"
 
 #. Default: "Add new tile"
 #: ../browser/tiles_view.pt:29
 msgid "add_new_tile_label"
-msgstr ""
-
+msgstr "Aggiungi nuova tile"

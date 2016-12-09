@@ -34,7 +34,7 @@ class BaseView(BrowserView):
             return False
         current = api.user.get_current()
         return api.user.has_permission(
-            'plone.app.tiles.AddTile',
+            'Modify portal content',
             user=current,
             obj=self.context)
 

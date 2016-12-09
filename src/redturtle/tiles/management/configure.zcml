@@ -3,6 +3,7 @@
     xmlns:five="http://namespaces.zope.org/five"
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
     xmlns:i18n="http://namespaces.zope.org/i18n"
+    xmlns:zcml="http://namespaces.zope.org/zcml"
     i18n_domain="redturtle.tiles.management">
 
   <includeDependencies package="." />
@@ -17,14 +18,26 @@
 
   <include package=".browser" />
 
+  <!-- Plone 5 profiles -->
+  <configure zcml:condition="have plone-5">
+    <genericsetup:registerProfile
+        name="default"
+        title="redturtle.tiles.management"
+        directory="profiles/default"
+        description="Installs the redturtle.tiles.management add-on."
+        provides="Products.GenericSetup.interfaces.EXTENSION"
+        />
+  </configure>
 
-  <genericsetup:registerProfile
-      name="default"
-      title="redturtle.tiles.management"
-      directory="profiles/default"
-      description="Installs the redturtle.tiles.management add-on."
-      provides="Products.GenericSetup.interfaces.EXTENSION"
-      />
+  <configure zcml:condition="not-have plone-5">
+    <genericsetup:registerProfile
+        name="plone4"
+        title="redturtle.tiles.management: plone4 profile"
+        directory="profiles/plone4"
+        description="Installs the redturtle.tiles.management add-on."
+        provides="Products.GenericSetup.interfaces.EXTENSION"
+        />
+  </configure>
 
   <genericsetup:importStep
       name="redturtle.tiles.management-postInstall"
