@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-0.2.0 (unreleased)
+0.2.0 (2016-12-09)
 ------------------
 
 - Replaced unused plone.app.tiles.AddTile permission with "cmf.ModifyPortalContent"
