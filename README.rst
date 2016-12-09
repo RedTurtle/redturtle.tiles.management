@@ -84,7 +84,7 @@ You need to include two javascripts in your view template or register them in
 the global jsregistry. I don't want to register globally these resources
 because they are used only in one single view:
 
-- `++resource++rer.giovazoom.plonetheme.javascripts/mockup.js`
+- `++resource++redturtle.tiles.management/mockup.min.js`
 - `++resource++redturtle.tiles.management/integration.js`
 
 

@@ -50,7 +50,6 @@ class ReorderTilesView(BrowserView):
     '''
 
     def __call__(self):
-        import pdb;pdb.set_trace()
         if not self.request.form.get('tile_ids'):
             return ""
         try:
