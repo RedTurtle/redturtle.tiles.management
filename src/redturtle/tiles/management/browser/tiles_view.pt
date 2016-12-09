@@ -21,12 +21,12 @@
 <metal:block define-macro="content-core"
     tal:define="templateId template/getId;">
   <metal:block define-macro="tiles-macro">
-    <div class="tilesWrapper">
+    <div class="tilesWrapper" i18n:domain="redturtle.tiles.management">
       <div class="actionsTiles"
            tal:condition="view/can_add_tiles">
         <a tal:attributes="href string:${context/absolute_url}/@@add-tile"
            class="plone-btn plone-btn-primary add-tile-btn">
-          <span>Add new tile</span>
+          <span i18n:translate="add_new_tile_label">Add new tile</span>
         </a>
       </div>
       <div class="tilesList"

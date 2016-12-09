@@ -11,6 +11,8 @@ Changelog
   [cekk]
 - Fix permission for add tile to "cmf.ModifyPortalContent"
   [arsenico13]
+- Add italian translations
+  [cekk]
 
 
 0.1.0 (2016-09-19)
