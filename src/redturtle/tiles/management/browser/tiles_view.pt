@@ -7,11 +7,11 @@
     i18n:domain="plone">
 
     <metal:styleslot fill-slot="style_slot">
-      <link rel="stylesheet" tal:attributes="href string:${portal_url}/++resource++rer.giovazoom.plonetheme.stylesheets/mockup.min.css">
+      <link rel="stylesheet" tal:attributes="href string:${portal_url}/++resource++redturtle.tiles.management/mockup.min.css">
     </metal:styleslot>
     <metal:javascriptslot fill-slot="javascript_head_slot">
       <script type="text/javascript"
-              tal:attributes="src string:${portal_url}/++resource++rer.giovazoom.plonetheme.javascripts/mockup.js"></script>
+              tal:attributes="src string:${portal_url}/++resource++redturtle.tiles.management/mockup.min.js"></script>
       <script type="text/javascript"
               tal:attributes="src string:${portal_url}/++resource++redturtle.tiles.management/integration.js"></script>
 
