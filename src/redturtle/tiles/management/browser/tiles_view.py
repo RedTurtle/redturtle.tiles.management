@@ -23,7 +23,7 @@ class BaseView(BrowserView):
             return ""
         current = api.user.get_current()
         if api.user.has_permission(
-            'tiles.management.ManageTiles',
+            'Modify portal content',
             user=current,
             obj=self.context):
             return json.dumps(self.get_tiles_list())
