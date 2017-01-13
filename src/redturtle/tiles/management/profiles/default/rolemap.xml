@@ -4,6 +4,7 @@
     <permission name="tiles management: Manage Tiles"
                 acquire="True">
       <role name="Manager"/>
+      <role name="Editor"/>
       <role name="Site Administrator"/>
     </permission>
   </permissions>

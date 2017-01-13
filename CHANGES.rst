@@ -6,6 +6,7 @@ Changelog
 ------------------
 
 - Fixed resources import in tiles_view [pnicolli]
+- Fixed rolemap. Permission to edit tiles given to 'Editor' #10460 [arsenico13]
 
 
 0.2.0 (2016-12-09)
