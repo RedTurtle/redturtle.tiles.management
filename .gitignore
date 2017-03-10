@@ -6,6 +6,7 @@
 .project
 .pydevproject
 .settings/
+.DS_Store
 bin/
 buildout-cache/
 develop-eggs/
