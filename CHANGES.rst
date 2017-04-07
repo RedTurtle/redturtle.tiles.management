@@ -8,6 +8,7 @@ Changelog
 - Fixed resources import in tiles_view [pnicolli]
 - Fixed rolemap. Permission to edit tiles given to 'Editor' #10460 [arsenico13]
 - .DS_Store added to .gitignore and MANIFEST [arsenico13]
+- Fixed tiles edit link. This fixes the edit capability when a page is a default view for a folder. [arsenico13]
 
 
 0.2.0 (2016-12-09)

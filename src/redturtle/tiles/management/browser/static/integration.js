@@ -24,7 +24,7 @@ require([
         //the user can't manage tiles
         return;
       }
-      var absolute_url = $("body").data().baseUrl || window.location.href;
+      var absolute_url = $("body").data().baseUrl || $('base').attr('href');
       var tiles_obj = JSON.parse(tiles);
 
       tiles_obj.forEach(function(tile_obj) {
