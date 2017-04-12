@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-0.2.1 (unreleased)
+0.2.1 (2017-04-12)
 ------------------
 
 - Fixed resources import in tiles_view [pnicolli]
