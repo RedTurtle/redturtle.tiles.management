@@ -2,10 +2,13 @@ Changelog
 =========
 
 
-0.2.2 (unreleased)
+1.0.0 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Massive changes in tiles storing (with p.a.blocks plone.layoutaware behavior)
+  and in tiles management: now it's a pattern that can be instantiated several
+  times in the view
+  [cekk]
 
 
 0.2.1 (2017-04-12)
