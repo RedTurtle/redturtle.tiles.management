@@ -16,60 +16,26 @@
       directory="static"
       />
 
-  <!-- Customized add view and form - invoked from the @@add-tile traversal view -->
-  <adapter
-      for="plone.dexterity.interfaces.IDexterityContent
-           zope.publisher.interfaces.browser.IDefaultBrowserLayer
-           plone.tiles.interfaces.ITileType"
-      provides="plone.app.tiles.interfaces.ITileAddView"
-      factory=".tiles_forms.TilesAddView"
-      />
-
-  <class class=".tiles_forms.TilesAddView">
-      <require
-          permission="cmf.ModifyPortalContent"
-          interface="zope.publisher.interfaces.browser.IBrowserPage"
-          />
-  </class>
-
-  <!-- Customized edit view and form - invoked from the @@edit-tile traversal view -->
-  <adapter
-      for="plone.dexterity.interfaces.IDexterityContent
-           zope.publisher.interfaces.browser.IDefaultBrowserLayer
-           plone.tiles.interfaces.ITileType"
-      provides="plone.app.tiles.interfaces.ITileEditView"
-      factory=".tiles_forms.TilesEditView"
-      />
-
-  <class class=".tiles_forms.TilesEditView">
-      <require
-          permission="tiles.management.ManageTiles"
-          interface="zope.publisher.interfaces.browser.IBrowserPage"
-          />
-  </class>
-
-  <!-- Customized delete view and form - invoked from the @@edit-tile traversal view -->
-  <adapter
-      for="plone.dexterity.interfaces.IDexterityContent
-           zope.publisher.interfaces.browser.IDefaultBrowserLayer
-           plone.tiles.interfaces.ITileType"
-      provides="plone.app.tiles.interfaces.ITileDeleteView"
-      factory=".tiles_forms.TilesDeleteView"
-      />
-
   <browser:page
       name="tiles_view"
-      for="*"
-      template="tiles_view.pt"
-      class=".tiles_view.BaseView"
+      for="plone.app.blocks.layoutbehavior.ILayoutBehaviorAdaptable"
+      template="templates/tiles_view.pt"
       permission="zope2.View"
       layer="redturtle.tiles.management.interfaces.IRedturtleTilesManagementLayer"
       />
 
   <browser:page
+      name="tiles_management"
+      for="plone.app.blocks.layoutbehavior.ILayoutBehaviorAdaptable"
+      template="templates/tiles_management.pt"
+      class=".tiles_management.BaseView"
+      permission="zope2.View"
+      layer="redturtle.tiles.management.interfaces.IRedturtleTilesManagementLayer"
+      />
+  <browser:page
       name="reorder_tiles"
-      for="*"
-      class=".tiles_view.ReorderTilesView"
+      for="plone.app.blocks.layoutbehavior.ILayoutBehaviorAdaptable"
+      class=".tiles_management.ReorderTilesView"
       permission="tiles.management.ManageTiles"
       layer="redturtle.tiles.management.interfaces.IRedturtleTilesManagementLayer"
       />

@@ -9,5 +9,9 @@ class IRedturtleTilesManagementLayer(IDefaultBrowserLayer):
     """Marker interface that defines a browser layer."""
 
 
+class IRedturtleTilesManagementView(Interface):
+    """Marker interface that defines a tiles management view."""
+
+
 class ICreatedTile(Interface):
     """Marker interface for tiles. This is used to"""

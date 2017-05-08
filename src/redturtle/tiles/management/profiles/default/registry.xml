@@ -1,23 +1,36 @@
 <?xml version="1.0"?>
 <registry>
-  <records prefix="plone.resources/tiles-management"
+  <!-- PATTERN -->
+  <records prefix="plone.resources/tiles-management-pattern"
+           interface='Products.CMFPlone.interfaces.IResourceRegistry'>
+      <value key="js">++resource++redturtle.tiles.management/integration.js</value>
+  </records>
+
+  <!-- BUNDLE REGISTRATION AS RESOURCE -->
+  <records prefix="plone.resources/tiles-management-bundle"
         interface='Products.CMFPlone.interfaces.IResourceRegistry'>
-    <value key="js">++resource++redturtle.tiles.management/integration.js</value>
-    <value key="url"></value>
+    <value key="js">++resource++redturtle.tiles.management/bundle.js</value>
     <value key="css">
-        <element>++resource++redturtle.tiles.management/integration.css</element>
+      <element>++resource++redturtle.tiles.management/integration.css</element>
     </value>
   </records>
+
+  <!-- BUNDLE -->
   <records prefix="plone.bundles/redturtle-tiles-management"
             interface='Products.CMFPlone.interfaces.IBundleRegistry'>
     <value key="enabled">True</value>
     <value key="resources" purge="false">
-      <element>tiles-management</element>
+      <element>tiles-management-bundle</element>
     </value>
-    <value key="jscompilation">++resource++redturtle.tiles.management/integration.js</value>
-    <value key="csscompilation">++resource++redturtle.tiles.management/integration.css</value>
+    <value key="jscompilation">++resource++redturtle.tiles.management/tiles-management-compiled.js</value>
+    <value key="csscompilation">++resource++redturtle.tiles.management/tiles-management-compiled.css</value>
     <value key="last_compilation">2019-11-26 00:00:00</value>
     <value key="compile">True</value>
     <value key="depends">plone</value>
+    <value key="stub_js_modules">
+      <element>jquery</element>
+      <element>pat-base</element>
+    </value>
   </records>
+
 </registry>

@@ -1,17 +1,26 @@
 # -*- coding: utf-8 -*-
 from zope.annotation.interfaces import IAnnotations
 from plone import api
+from Acquisition import aq_base
 import re
+from persistent.mapping import PersistentMapping
+from persistent.list import PersistentList
 
+
+def getManagerId(tile):
+    managerId = tile.request.form.get('managerId')
+    if not managerId:
+        managerId = 'default'
+    return managerId
 
 def tileCreated(tile, event):
-    context = event.newParent
+    # avoid attributes acquisition
+    context = aq_base(event.newParent)
     tile_id = event.newName
     if not context:
         return
-    annotations = IAnnotations(context)
-    if "tiles_list" not in annotations:
-        annotations['tiles_list'] = []
+
+    managerId = getManagerId(tile)
 
     new_tile = {
         'tile_id': tile_id,
@@ -22,11 +31,24 @@ def tileCreated(tile, event):
         tile_type = ""
     if tile_type:
         new_tile['tile_type'] = tile_type
-    annotations['tiles_list'].append(new_tile)
+
+    # store tiles_order in persistent object attribute.
+    if not getattr(context, 'tiles_list', {}):
+        context.tiles_list = PersistentMapping()
+    if managerId not in context.tiles_list:
+        context.tiles_list[managerId] = PersistentList()
+    context.tiles_list[managerId].append(new_tile)
 
 
 def tileDeleted(tile, event):
-    annotations = IAnnotations(tile.context)
-    for tile_info in annotations.get('tiles_list', []):
+    context = aq_base(tile.context)
+    managerId = getManagerId(tile)
+    tiles_list = getattr(context, 'tiles_list', {})
+    if not tiles_list:
+        return
+    tilesForManager = tiles_list.get(managerId, [])
+    if not tilesForManager:
+        return
+    for tile_info in tilesForManager:
         if tile_info.get('tile_id') == tile.id:
-            annotations['tiles_list'].remove(tile_info)
+            context.tiles_list[managerId].remove(tile_info)

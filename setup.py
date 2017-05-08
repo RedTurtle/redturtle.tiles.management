@@ -54,9 +54,11 @@ setup(
     extras_require={
         'test': [
             'plone.app.testing',
+            'plone.testing>=5.0.0',
             'plone.app.contenttypes',
             'plone.app.robotframework[debug]',
-        ],
+            'unittest2',
+            ]
     },
     entry_points="""
     [z3c.autoinclude.plugin]

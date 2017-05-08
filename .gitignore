@@ -7,6 +7,7 @@
 .pydevproject
 .settings/
 .DS_Store
+.Python
 bin/
 buildout-cache/
 develop-eggs/
@@ -19,3 +20,6 @@ htmlcov/
 *.log
 output.xml
 *.swp
+include/
+lib/
+pip-selfcheck.json
