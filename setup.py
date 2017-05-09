@@ -45,7 +45,7 @@ setup(
     zip_safe=False,
     install_requires=[
         'plone.api',
-        'plone.app.blocks',
+        'plone.app.blocks>=4.0.0',
         'plone.app.tiles',
         'plone.formwidget.contenttree',
         'setuptools',
