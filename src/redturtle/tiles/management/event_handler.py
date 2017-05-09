@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-from zope.annotation.interfaces import IAnnotations
-from plone import api
 from Acquisition import aq_base
 import re
 from persistent.mapping import PersistentMapping
@@ -12,6 +10,7 @@ def getManagerId(tile):
     if not managerId:
         managerId = 'default'
     return managerId
+
 
 def tileCreated(tile, event):
     # avoid attributes acquisition

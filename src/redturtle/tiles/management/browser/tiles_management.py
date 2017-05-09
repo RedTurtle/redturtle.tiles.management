@@ -77,7 +77,9 @@ class ReorderTilesView(BrowserView):
             return ""
         try:
             sorted_ids = json.loads(tileIds)
-            order_dict = {tile_id: index for index, tile_id in enumerate(sorted_ids)}
+            order_dict = {
+                tile_id: index for index, tile_id in enumerate(sorted_ids)
+            }
             tilesForManager.sort(key=lambda x: order_dict[x["tile_id"]])
             # tilesForManager = tiles_list
             return ""
