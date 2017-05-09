@@ -88,3 +88,60 @@ class TestTilesManagement(unittest.TestCase):
             context=self.document,
             request=self.request)
         self.assertTrue(tiles_view.canEditTiles())
+
+    def test_extract_tiles_list(self):
+        tiles_list = {
+            'default': [
+                {
+                    'tile_id': 'firstTile',
+                    'tile_type': 'my.tile',
+                }
+            ]
+        }
+        self.document.tiles_list = tiles_list
+        tiles_view = api.content.get_view(
+            name="tiles_management",
+            context=self.document,
+            request=self.request)
+        self.assertEquals(tiles_view.get_tiles_list(), tiles_list['default'])
+
+    def test_extract_tiles_list_selected_manager(self):
+        tiles_list = {
+            'default': [
+                {
+                    'tile_id': 'firstTile',
+                    'tile_type': 'my.tile',
+                }
+            ],
+            'alternative': [
+                {
+                    'tile_id': 'alternativeTile',
+                    'tile_type': 'my.tile.alternative',
+                },
+                {
+                    'tile_id': 'secondAlternativeTile',
+                    'tile_type': 'my.othertile.alternative',
+                }
+            ]
+        }
+        self.document.tiles_list = tiles_list
+        self.request.form['managerId'] = 'alternative'
+        tiles_view = api.content.get_view(
+            name="tiles_management",
+            context=self.document,
+            request=self.request)
+        self.assertEquals(
+            tiles_view.get_tiles_list(), tiles_list['alternative'])
+
+    def test_extract_tile_url_from_infos(self):
+        tile = {
+            'tile_id': 'firstTile',
+            'tile_type': 'my.tile',
+        }
+        tiles_view = api.content.get_view(
+            name="tiles_management",
+            context=self.document,
+            request=self.request)
+        self.assertEquals(
+            tiles_view.get_tile_url(tile),
+            'http://nohost/plone/test-document/@@my.tile/firstTile')
