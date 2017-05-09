@@ -61,7 +61,7 @@
       handler=".setuphandlers.uninstall">
   </genericsetup:importStep>
 
-  <!-- provide marker interface to all persistent tiles -->
+  <!-- events handlers -->
   <subscriber
     for="plone.tiles.interfaces.ITile
          zope.lifecycleevent.interfaces.IObjectAddedEvent"

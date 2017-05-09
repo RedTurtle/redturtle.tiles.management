@@ -6,6 +6,9 @@
 redturtle.tiles.management
 ==============================================================================
 
+.. image:: https://travis-ci.org/RedTurtle/redturtle.tiles.management.svg?branch=master
+    :target: https://travis-ci.org/RedTurtle/redturtle.tiles.management
+
 A tiles management system, easier than plone.app.mosaic that uses
 `plone.app.tiles`__ and `Mockup`__ functionalities to build a simple UI.
 
@@ -17,37 +20,24 @@ Features
 
 - Simple UI to add/remove/edit registered tiles
 - Tiles sorting with drag-and-drop (thanks to mockup)
-- Base view and macro to be reused in custom templates
+- Tile manager is a pattern that can be included in every custom page
+- **plone.layoutaware** behavior enabled for Documents
+- Example *tiles_view* view available for all objects with "plone.layoutaware" behavior enabled
 
 Usage
 -----
 
-To use this feature, you only need to do 2 simple steps:
+Tiles manager works with plone.app.blocks features and its plone.layoutaware behavior, so you can use this functionality
+only on Content Types with this behavior enabled.
 
-1) Make you view implements IBlocksTransformEnabled interface::
+Installing this product, a new pattern will be available: "*pat-tiles-management*", and you only need to insert a pattern-style tag into your view like this:
 
-    from plone.app.blocks.interfaces import IBlocksTransformEnabled
-    from Products.Five import BrowserView
-    from zope.interface import implementer
+.. code::
 
-    @implementer(IBlocksTransformEnabled)
-    class MyView(BrowserView):
-        ...
+  <div class="pat-tiles-management" data-pat-tiles-management="managerId:myManager" />
 
-2) use a specific macro in the template, where you want to insert the tiles::
+You need to provide a **managerId** attribute, because multiple managers can be instantiated in a view, and with this, the pattern can handle the tiles stored in each manager.
 
-    <tal:tiles metal:use-macro="context/tiles_view/macros/tiles-macro" />
-
-3) the used tiles need to expose their id to allows the UI to handle correct actions::
-
-    <div data-tileid="${view/id}">
-      .. your tile html
-    </div>
-
-The last point can be improved because with this restriction we can't use standard tiles, but only custom tiles.
-
-After this, you see a new "Add tile" button in the view, and clicking on it,
-you can see a list of available tiles.
 
 Translations
 ------------
@@ -77,16 +67,7 @@ Compatibility
 -------------
 This package is developed with mockup, so is fully compatible for Plone 5.
 
-For Plone 4 there is an additional javascript with some mockup's patterns used for
-drag and drop behavior.
-
-You need to include two javascripts in your view template or register them in
-the global jsregistry. I don't want to register globally these resources
-because they are used only in one single view:
-
-- `++resource++redturtle.tiles.management/mockup.min.js`
-- `++resource++redturtle.tiles.management/integration.js`
-
+From 1.0.0 version, Plone 4 compatibility has been dropped, so you need to use the 0.x branch.
 
 Contribute
 ----------
