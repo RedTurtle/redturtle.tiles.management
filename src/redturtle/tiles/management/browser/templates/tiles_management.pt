@@ -18,17 +18,18 @@
     <metal:content-core fill-slot="content-core">
       <metal:block define-macro="content-core">
         <metal:block define-macro="tiles-macro">
-          <div class="tilesWrapper" i18n:domain="redturtle.tiles.management">
+          <div tal:attributes="class python:canEditTiles and 'editableTiles tilesWrapper' or 'tilesWrapper'"
+               i18n:domain="redturtle.tiles.management"
+               tal:define="canEditTiles view/canEditTiles">
             <div class="actionsTiles"
-                 tal:condition="view/canAddTiles">
+                 tal:condition="canEditTiles">
               <a tal:attributes="href string:${context/absolute_url}/@@add-tile"
                  class="plone-btn plone-btn-primary add-tile-btn">
                 <tal:label i18n:translate="add_new_tile_label">Add new tile</tal:label>
               </a>
             </div>
             <div class="tilesList"
-                 tal:define="tiles view/get_tiles_list;
-                             canEditTiles view/canEditTiles"
+                 tal:define="tiles view/get_tiles_list;"
                  tal:condition="tiles">
               <tal:tile repeat="tile tiles">
                 <div tal:attributes="data-tileid python:canEditTiles and tile.get('tile_id') or '';

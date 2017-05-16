@@ -8760,14 +8760,17 @@ define('tiles-management-pattern',[
         const contentlUrl = $('body').data('baseUrl');
         const tilesInfosUrl = contentlUrl + '/tiles_management?managerId=' + managerId + '&ajax_load=true .tilesWrapper';
         container.load(tilesInfosUrl, function () {
-          enableEditButtons(container);
-          enableSorting(container, managerId);
-          container.find('.add-tile-btn').each(function () {
-            $(this).click(function (e) {
-              e.preventDefault();
-              initializeAddButton($(this), e.target.href, managerId);
+          const addButton = container.find('.add-tile-btn');
+          if (addButton.length > 0) {
+            enableEditButtons(container);
+            enableSorting(container, managerId);
+            addButton.each(function () {
+              $(this).click(function (e) {
+                e.preventDefault();
+                initializeAddButton($(this), e.target.href, managerId);
+              });
             });
-          });
+          }
         });
 
       };

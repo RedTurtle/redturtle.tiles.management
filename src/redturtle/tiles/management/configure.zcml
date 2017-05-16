@@ -22,18 +22,8 @@
   <configure zcml:condition="have plone-5">
     <genericsetup:registerProfile
         name="default"
-        title="redturtle.tiles.management"
+        title="RedTurtle: Tiles management"
         directory="profiles/default"
-        description="Installs the redturtle.tiles.management add-on."
-        provides="Products.GenericSetup.interfaces.EXTENSION"
-        />
-  </configure>
-
-  <configure zcml:condition="not-have plone-5">
-    <genericsetup:registerProfile
-        name="plone4"
-        title="redturtle.tiles.management: plone4 profile"
-        directory="profiles/plone4"
         description="Installs the redturtle.tiles.management add-on."
         provides="Products.GenericSetup.interfaces.EXTENSION"
         />
@@ -48,7 +38,7 @@
 
   <genericsetup:registerProfile
       name="uninstall"
-      title="redturtle.tiles.management"
+      title="RedTurtle: Tiles management uninstall"
       directory="profiles/uninstall"
       description="Uninstalls the redturtle.tiles.management add-on."
       provides="Products.GenericSetup.interfaces.EXTENSION"

@@ -2,13 +2,13 @@
   margin: 1em 0;
 }
 
-.tileEditButtons {
+.editableTiles .tileEditButtons {
     float: right;
     position: relative;
     z-index: 9999;
 }
 
-.tilesList > *:hover {
+.editableTiles .tilesList > *:hover {
     cursor: move;
     cursor: -webkit-grab;
     background: #FFF5CD;
