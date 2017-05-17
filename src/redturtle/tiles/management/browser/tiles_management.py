@@ -19,12 +19,12 @@ class BaseView(BrowserView):
 
     implements(IRedturtleTilesManagementView)
 
-    @view.memoize
     def get_tiles_list(self):
         tiles_list = getattr(self.context, 'tiles_list', {})
-        managerId = self.request.form.get('managerId', 'default')
+        managerId = self.request.form.get('managerId', 'defaultManager')
         # it's a PersistentList
-        return list(tiles_list.get(managerId, []))
+        tiles = tiles_list.get(managerId, [])
+        return [x for x in tiles if (not x.get('tile_hidden') or self.canEditTiles())]
 
     def extractTileInfos(self, key):
         type, id = key.split('/')
@@ -33,6 +33,7 @@ class BaseView(BrowserView):
             'tile_type': type
         }
 
+    # @view.memoize
     def canEditTiles(self):
         if api.user.is_anonymous():
             return False
@@ -64,7 +65,7 @@ class ReorderTilesView(BrowserView):
 
     def __call__(self):
         tileIds = self.request.form.get('tileIds')
-        managerId = self.request.form.get('managerId', 'default')
+        managerId = self.request.form.get('managerId', 'defaultManager')
         if not tileIds:
             return ""
 
@@ -85,4 +86,31 @@ class ReorderTilesView(BrowserView):
             return ""
         except ValueError as e:
             logger.trace(e)
+            return json.dumps({'error': e.message})
+
+
+class ShowHideTilesView(BrowserView):
+    '''
+    '''
+
+    def __call__(self):
+        tileId = self.request.form.get('tileId')
+        managerId = self.request.form.get('managerId', 'defaultManager')
+        if not tileId:
+            return ""
+
+        context = aq_base(self.context)
+        tiles_list = getattr(context, 'tiles_list', None)
+        if not tiles_list:
+            return ""
+        try:
+            for i, tile in enumerate(tiles_list.get(managerId, [])):
+                if tile.get('tile_id') != tileId:
+                    continue
+                new_conf = tile
+                new_conf['tile_hidden'] = not new_conf.get('tile_hidden', False)
+                tiles_list[i] = new_conf
+            return ""
+        except Exception as e:
+            logger.exception(e)
             return json.dumps({'error': e.message})

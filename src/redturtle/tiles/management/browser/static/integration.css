@@ -18,6 +18,21 @@
   clear: both;
 }
 
+.editableTiles .tileWrapper.hiddenTile {
+    position: relative;
+}
+
+.editableTiles .tileWrapper.hiddenTile:after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(239,239,239,0.5);
+}
+
 .available-tiles {
   margin-bottom: 2em;
 }

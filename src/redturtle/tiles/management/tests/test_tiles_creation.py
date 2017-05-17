@@ -3,24 +3,12 @@
 from plone import api
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
-from plone.tiles.interfaces import ITile
 from redturtle.tiles.management.testing import REDTURTLE_TILES_MANAGEMENT_INTEGRATION_TESTING  # noqa
+from redturtle.tiles.management.tests.helpers import TestTile
 from zope.event import notify
-from zope.interface import implementer
 from zope.lifecycleevent import ObjectAddedEvent
 from zope.lifecycleevent import ObjectRemovedEvent
 import unittest2 as unittest
-# from zope.globalrequest import setRequest
-
-
-@implementer(ITile)
-class TestTile(object):
-
-    def __init__(self, context, request, url, id):
-        self.context = context
-        self.request = request
-        self.url = url
-        self.id = id
 
 
 class TestTilesCreation(unittest.TestCase):
@@ -48,7 +36,11 @@ class TestTilesCreation(unittest.TestCase):
         self.assertEqual(getattr(self.document, 'tiles_list', None), None)
         notify(ObjectAddedEvent(tile, self.document, tile.id))
         resStructure = {
-            'default': [{'tile_type': 'my.tile', 'tile_id': 'firstTile'}]
+            'defaultManager': [
+                {'tile_type': 'my.tile',
+                'tile_id': 'firstTile',
+                'tile_hidden': False,
+                }]
         }
         self.assertEqual(self.document.tiles_list, resStructure)
 
@@ -58,9 +50,10 @@ class TestTilesCreation(unittest.TestCase):
             context=self.document,
             request=self.request)
         notify(ObjectAddedEvent(tile2, self.document, tile2.id))
-        resStructure['default'].append({
+        resStructure['defaultManager'].append({
             'tile_type': 'alt.tile',
-            'tile_id': 'secondTile'
+            'tile_id': 'secondTile',
+            'tile_hidden': False
         })
         self.assertEqual(self.document.tiles_list, resStructure)
 
@@ -79,9 +72,17 @@ class TestTilesCreation(unittest.TestCase):
         notify(ObjectAddedEvent(tile, self.document, 'firstTile'))
         notify(ObjectAddedEvent(tile2, self.document, 'secondTile'))
         resStructure = {
-            'default': [
-                {'tile_type': 'my.tile', 'tile_id': 'firstTile'},
-                {'tile_type': 'alt.tile', 'tile_id': 'secondTile'}
+            'defaultManager': [
+                {
+                    'tile_type': 'my.tile',
+                    'tile_id': 'firstTile',
+                    'tile_hidden': False,
+                },
+                {
+                    'tile_type': 'alt.tile',
+                    'tile_id': 'secondTile',
+                    'tile_hidden': False,
+                }
             ]
         }
 
@@ -89,5 +90,5 @@ class TestTilesCreation(unittest.TestCase):
         # delete second tile
         notify(ObjectRemovedEvent(tile2, self.document, 'secondTile'))
         # remove it also from test structure
-        resStructure['default'].pop()
+        resStructure['defaultManager'].pop()
         self.assertEqual(self.document.tiles_list, resStructure)

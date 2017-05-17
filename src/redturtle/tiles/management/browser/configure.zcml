@@ -39,4 +39,12 @@
       permission="tiles.management.ManageTiles"
       layer="redturtle.tiles.management.interfaces.IRedturtleTilesManagementLayer"
       />
+
+  <browser:page
+      name="show_hide_tiles"
+      for="plone.app.blocks.layoutbehavior.ILayoutBehaviorAdaptable"
+      class=".tiles_management.ShowHideTilesView"
+      permission="tiles.management.ManageTiles"
+      layer="redturtle.tiles.management.interfaces.IRedturtleTilesManagementLayer"
+      />
 </configure>

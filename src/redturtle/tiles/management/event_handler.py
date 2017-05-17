@@ -8,7 +8,7 @@ from persistent.list import PersistentList
 def getManagerId(tile):
     managerId = tile.request.form.get('managerId')
     if not managerId:
-        managerId = 'default'
+        managerId = 'defaultManager'
     return managerId
 
 
@@ -21,9 +21,10 @@ def tileCreated(tile, event):
 
     managerId = getManagerId(tile)
 
-    new_tile = {
-        'tile_id': tile_id,
-        }
+    new_tile = PersistentMapping()
+    new_tile['tile_id'] = tile_id
+    new_tile['tile_hidden'] = False
+
     try:
         tile_type = re.search("@@(.*?)/", tile.url).group(1)
     except AttributeError:

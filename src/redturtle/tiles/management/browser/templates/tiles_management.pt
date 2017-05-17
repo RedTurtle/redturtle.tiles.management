@@ -32,9 +32,29 @@
                  tal:define="tiles view/get_tiles_list;"
                  tal:condition="tiles">
               <tal:tile repeat="tile tiles">
-                <div tal:attributes="data-tileid python:canEditTiles and tile.get('tile_id') or '';
-                                     data-tiletype python:canEditTiles and tile.get('tile_type') or ''"
+                <div tal:define="tile_hidden python:tile.get('tile_hidden', False);
+                                 tile_type python:tile.get('tile_type', '');
+                                 tile_id python:tile.get('tile_id', '')"
+                     tal:attributes="data-tileid python:canEditTiles and tile_id or '';
+                                     data-tiletype python:canEditTiles and tile_type or '';
+                                     data-tilehidden python:canEditTiles and tile_hidden or '';
+                                     class python:tile_hidden and 'tileWrapper hiddenTile' or 'tileWrapper'"
                      class="tileWrapper">
+                  <div class="tileEditButtons" tal:condition="canEditTiles">
+                    <a class="plone-btn plone-btn-info tileEditLink"
+                       href="${context/absolute_url}/@@edit-tile/${tile_type}/${tile_id}">
+                      <span class="icon-edit" aria-hidden="true"></span>
+                    </a>
+                    <a class="plone-btn plone-btn tileVisibilityLink"
+                       href="${context/absolute_url}/@@show_hide_tiles?tileId=${tile_id}">
+                      <span tal:condition="tile_hidden" i18n:translate="show_label" aria-hidden="true">Show</span>
+                      <span tal:condition="not:tile_hidden" i18n:translate="hide_label" aria-hidden="true">Hide</span>
+                    </a>
+                    <a class="plone-btn plone-btn-danger tileDeleteLink"
+                       href="${context/absolute_url}/@@delete-tile/${tile_type}/${tile_id}">
+                      <span class="icon-delete" aria-hidden="true">X</span>
+                    </a>
+                  </div>
                   <div tal:attributes="data-tile python:view.get_tile_url(tile)" />
                 </div>
               </tal:tile>

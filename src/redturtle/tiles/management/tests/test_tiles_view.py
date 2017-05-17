@@ -91,7 +91,7 @@ class TestTilesManagement(unittest.TestCase):
 
     def test_extract_tiles_list(self):
         tiles_list = {
-            'default': [
+            'defaultManager': [
                 {
                     'tile_id': 'firstTile',
                     'tile_type': 'my.tile',
@@ -103,11 +103,11 @@ class TestTilesManagement(unittest.TestCase):
             name="tiles_management",
             context=self.document,
             request=self.request)
-        self.assertEquals(tiles_view.get_tiles_list(), tiles_list['default'])
+        self.assertEquals(tiles_view.get_tiles_list(), tiles_list['defaultManager'])
 
     def test_extract_tiles_list_selected_manager(self):
         tiles_list = {
-            'default': [
+            'defaultManager': [
                 {
                     'tile_id': 'firstTile',
                     'tile_type': 'my.tile',
