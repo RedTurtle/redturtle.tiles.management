@@ -37,10 +37,12 @@ class TestTilesCreation(unittest.TestCase):
         notify(ObjectAddedEvent(tile, self.document, tile.id))
         resStructure = {
             'defaultManager': [
-                {'tile_type': 'my.tile',
-                'tile_id': 'firstTile',
-                'tile_hidden': False,
-                }]
+                {
+                    'tile_type': 'my.tile',
+                    'tile_id': 'firstTile',
+                    'tile_hidden': False,
+                }
+            ]
         }
         self.assertEqual(self.document.tiles_list, resStructure)
 

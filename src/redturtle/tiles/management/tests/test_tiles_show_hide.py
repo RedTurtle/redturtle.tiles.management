@@ -4,13 +4,11 @@ from redturtle.tiles.management.testing import REDTURTLE_TILES_MANAGEMENT_INTEGR
 from plone import api
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
-from plone.app.testing import login, logout
+from plone.app.testing import logout
 import unittest2 as unittest
-from plone.api.exc import InvalidParameterError
 from redturtle.tiles.management.tests.helpers import TestTile
 from zope.event import notify
 from zope.lifecycleevent import ObjectAddedEvent
-from zope.globalrequest import setRequest
 
 
 class TestTilesShowHide(unittest.TestCase):

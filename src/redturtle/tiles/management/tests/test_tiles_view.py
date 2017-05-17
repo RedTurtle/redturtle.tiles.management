@@ -103,7 +103,9 @@ class TestTilesManagement(unittest.TestCase):
             name="tiles_management",
             context=self.document,
             request=self.request)
-        self.assertEquals(tiles_view.get_tiles_list(), tiles_list['defaultManager'])
+        self.assertEquals(
+            tiles_view.get_tiles_list(),
+            tiles_list['defaultManager'])
 
     def test_extract_tiles_list_selected_manager(self):
         tiles_list = {

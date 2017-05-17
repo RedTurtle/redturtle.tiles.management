@@ -2,7 +2,7 @@
 from Acquisition import aq_base
 from plone import api
 from plone.app.blocks.interfaces import IBlocksTransformEnabled
-from plone.memoize import view
+# from plone.memoize import view
 from Products.Five import BrowserView
 from zope.interface import implementer, implements
 import json
@@ -24,7 +24,8 @@ class BaseView(BrowserView):
         managerId = self.request.form.get('managerId', 'defaultManager')
         # it's a PersistentList
         tiles = tiles_list.get(managerId, [])
-        return [x for x in tiles if (not x.get('tile_hidden') or self.canEditTiles())]
+        can_edit = self.canEditTiles()
+        return [x for x in tiles if (not x.get('tile_hidden') or can_edit)]
 
     def extractTileInfos(self, key):
         type, id = key.split('/')
@@ -107,9 +108,9 @@ class ShowHideTilesView(BrowserView):
             for i, tile in enumerate(tiles_list.get(managerId, [])):
                 if tile.get('tile_id') != tileId:
                     continue
-                new_conf = tile
-                new_conf['tile_hidden'] = not new_conf.get('tile_hidden', False)
-                tiles_list[i] = new_conf
+                new = tile
+                new['tile_hidden'] = not new.get('tile_hidden', False)
+                tiles_list[i] = new
             return ""
         except Exception as e:
             logger.exception(e)
