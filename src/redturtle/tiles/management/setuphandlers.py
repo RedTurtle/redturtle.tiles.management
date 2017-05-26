@@ -54,6 +54,10 @@ def to_1100(context):
     context.runImportStepFromProfile(
         'profile-redturtle.tiles.management:to_1100', 'plone.app.registry')
     context.runImportStepFromProfile(default_profile, 'plone.app.registry')
+    context.runImportStepFromProfile(
+        default_profile,
+        'typeinfo',
+        run_dependencies=True)
     logger.info('Reinstalled registry')
     portal = api.portal.get()
     for brain in portal.portal_catalog():
