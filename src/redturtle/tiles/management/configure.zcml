@@ -17,6 +17,7 @@
      />
 
   <include package=".browser" />
+  <include file="upgrades.zcml" />
 
   <!-- Plone 5 profiles -->
   <configure zcml:condition="have plone-5">
@@ -43,7 +44,13 @@
       description="Uninstalls the redturtle.tiles.management add-on."
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
-
+  <genericsetup:registerProfile
+      name="to_1100"
+      title="RedTurtle: Tiles management upgrade profile to 1100"
+      directory="profiles/to_1100"
+      description="Upgrades the redturtle.tiles.management add-on."
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      />
   <genericsetup:importStep
       name="redturtle.tiles.management-uninstall"
       title="redturtle.tiles.management uninstall import step"
