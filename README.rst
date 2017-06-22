@@ -38,6 +38,28 @@ Installing this product, a new pattern will be available: "*pat-tiles-management
 
 You need to provide a **managerId** attribute, because multiple managers can be instantiated in a view, and with this, the pattern can handle the tiles stored in each manager.
 
+JS Development and bundling
+---------------------------
+
+If you need to develop this product's javascripts or styles, you need to compile the code
+for the resource registry bundle. To do this, there are two grunt tasks.
+
+First of all, you need to install grunt dependencies listed in package.json file in the root of this package:
+
+.. code::
+
+  npm install
+
+or if you prefer yarn:
+
+.. code::
+  yarn
+
+After that, you can use two different grunt tasks:
+
+- `grunt`: the default task, that listen files changes with `watch` and re-build resources and bundles automatically
+- `grunt compile`: to manually compile all resources and bundles
+
 
 Translations
 ------------

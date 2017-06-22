@@ -11,6 +11,7 @@
 bin/
 buildout-cache/
 develop-eggs/
+node_modules/
 parts/
 src/*
 !src/redturtle

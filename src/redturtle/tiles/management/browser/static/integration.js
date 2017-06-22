@@ -1,9 +1,10 @@
-define([
+define('tiles-management-pattern', [
   'jquery',
-  'mockup-patterns-base',
-  'mockup-patterns-sortable',
+  'pat-base',
+  'pat-registry',
   'mockup-patterns-modal',
-], function ($, Base, Sortable, Modal) {
+  'mockup-patterns-sortable',
+], function ($, Base, registry, Modal, Sortable) {
   'use strict';
   var Pattern = Base.extend({
     name: 'tiles-management',
@@ -131,7 +132,7 @@ define([
                     managerId: managerId,
                   })
                   .done(function (data) {
-                    if (data !== '') {
+                    if (data && data !== '') {
                       const result = JSON.parse(data);
                       console.error(result.message);
                     }
@@ -145,10 +146,37 @@ define([
         });
       };
 
+      const enablePatterns = function (container) {
+        // we need to manually enable patterns of tiles loaded with ajax because
+        // sometimes these are loaded after pattern inits
+        const tags = container.find('[class*="pat-"]');
+        if (tags.length === 0) {
+          return;
+        }
+
+        tags.each(function () {
+          const _this = this;
+          this.className.split(' ').map(function (cssClass) {
+            if (cssClass.indexOf('pat-') !== -1) {
+              const pattern = cssClass.substring(4);
+              try {
+                registry.initPattern(pattern, _this, cssClass);
+              } catch (e) {
+                if (e instanceof TypeError) {
+                  //pattern already registered
+                  return;
+                }
+              }
+            }
+          });
+        });
+      };
+
       const loadManager = function (container) {
         const contentlUrl = $('body').data('baseUrl');
         const tilesInfosUrl = contentlUrl + '/tiles_management?managerId=' + managerId + '&ajax_load=true .tilesWrapper';
         container.load(tilesInfosUrl, function () {
+          enablePatterns(container);
           const addButton = container.find('.add-tile-btn');
           if (addButton.length > 0) {
             container.find('.tilesList .tileWrapper').each(function () {
@@ -165,7 +193,6 @@ define([
             });
           }
         });
-
       };
 
       if (!managerId) {
@@ -176,5 +203,6 @@ define([
 
     },
   });
+
   return Pattern;
 });
