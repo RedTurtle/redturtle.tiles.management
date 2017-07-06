@@ -1,5 +1,8 @@
 <?xml version="1.0"?>
 <registry>
+
+  <records interface="redturtle.tiles.management.interfaces.IRedturtleTilesManagementSettings" />
+
   <!-- PATTERN -->
   <records prefix="plone.resources/tiles-management-pattern"
            interface='Products.CMFPlone.interfaces.IResourceRegistry'>

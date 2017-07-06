@@ -23,6 +23,7 @@ Features
 - Tile manager is a pattern that can be included in every custom page
 - **plone.layoutaware** behavior enabled for Documents
 - Example *tiles_view* view available for all objects with "plone.layoutaware" behavior enabled
+- Customizable available tiles list from control panel
 
 Usage
 -----
@@ -37,6 +38,16 @@ Installing this product, a new pattern will be available: "*pat-tiles-management
   <div class="pat-tiles-management" data-pat-tiles-management="managerId:myManager" />
 
 You need to provide a **managerId** attribute, because multiple managers can be instantiated in a view, and with this, the pattern can handle the tiles stored in each manager.
+
+
+Available tiles list
+--------------------
+
+You can configure a list of addable tiles for this manager in Plone's control panel:
+http://yoursite/@@tiles-management-settings
+
+In the "Add new tile" menu you'll see this list filtered also by single tiles permission.
+
 
 JS Development and bundling
 ---------------------------

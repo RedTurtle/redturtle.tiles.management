@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<registry>
+
+  <records interface="redturtle.tiles.management.interfaces.IRedturtleTilesManagementSettings"
+           remove="True"/>
+
+  <!-- PATTERN -->
+  <records prefix="plone.resources/tiles-management-pattern"
+           interface='Products.CMFPlone.interfaces.IResourceRegistry'
+           remove="True">
+  </records>
+
+  <!-- BUNDLE REGISTRATION AS RESOURCE -->
+  <records prefix="plone.resources/tiles-management-bundle"
+        interface='Products.CMFPlone.interfaces.IResourceRegistry'
+        remove="True">
+  </records>
+
+  <!-- BUNDLE -->
+  <records prefix="plone.bundles/redturtle-tiles-management"
+            interface='Products.CMFPlone.interfaces.IBundleRegistry'
+            remove="True">
+  </records>
+
+</registry>

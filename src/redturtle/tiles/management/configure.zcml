@@ -15,7 +15,10 @@
      id="tiles.management.ManageTiles"
      title="tiles management: Manage Tiles"
      />
-
+  <permission
+    id="tiles.management.ManageSettings"
+    title="tiles management: Manage Settings"
+  />
   <include package=".browser" />
   <include file="upgrades.zcml" />
 
@@ -74,4 +77,10 @@
          zope.lifecycleevent.interfaces.IObjectRemovedEvent"
     handler=".event_handler.tileDeleted"
     />
+
+    <!-- Vocabularies -->
+    <utility factory=".vocabularies.RegisteredTilesIdsVocabulary"
+             name="tiles.management.vocabularies.RegisteredTiles" />
+    <utility factory=".vocabularies.FilteredTilesVocabulary"
+             name="tiles.management.vocabularies.FilteredTiles" />
 </configure>

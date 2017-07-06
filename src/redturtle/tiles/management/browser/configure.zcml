@@ -16,6 +16,15 @@
       directory="static"
       />
 
+
+  <browser:page
+      name="tiles-management-settings"
+      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+      class=".controlpanel.RedturtleTilesManagementSettingsControlPanel"
+      permission="tiles.management.ManageSettings"
+      layer="redturtle.tiles.management.interfaces.IRedturtleTilesManagementLayer"
+      />
+
   <browser:page
       name="tiles_view"
       for="plone.app.blocks.layoutbehavior.ILayoutBehaviorAdaptable"
@@ -47,4 +56,16 @@
       permission="tiles.management.ManageTiles"
       layer="redturtle.tiles.management.interfaces.IRedturtleTilesManagementLayer"
       />
+
+  <!-- Custom Traversal views -->
+  <configure package="plone.app.tiles.browser">
+    <browser:page
+      name="add-tile"
+      for="zope.annotation.interfaces.IAnnotatable"
+      permission="cmf.ModifyPortalContent"
+      class="redturtle.tiles.management.browser.traversal.AddTile"
+      template="add.pt"
+      layer="redturtle.tiles.management.interfaces.IRedturtleTilesManagementLayer"
+      />
+  </configure>
 </configure>

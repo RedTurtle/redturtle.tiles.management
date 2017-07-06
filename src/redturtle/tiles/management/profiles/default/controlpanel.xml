@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<object name="portal_controlpanel"
+        xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+        i18n:domain="rer.ader.policy">
+
+    <configlet
+        title="Tiles Management Settings"
+        action_id="tiles-management-settings"
+        appId="redturtle.tiles.management"
+        category="Products"
+        condition_expr=""
+        icon_expr=""
+        url_expr="string:${portal_url}/@@tiles-management-settings"
+        visible="True"
+        i18n:attributes="title">
+            <permission>tiles.management.ManageSettings</permission>
+    </configlet>
+
+</object>

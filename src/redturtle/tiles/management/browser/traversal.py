@@ -1,0 +1,44 @@
+# -*- coding: utf-8 -*-
+from plone.app.tiles import _ as _
+from plone.app.tiles.browser.traversal import AddTile as BaseView
+from plone.memoize.view import memoize
+from zope.component import getUtility
+from zope.schema.interfaces import IVocabularyFactory
+from zope.security import checkPermission
+
+
+class AddTile(BaseView):
+
+    @memoize
+    def tileTypes(self):
+        """Get a list of addable ITileType objects representing tiles
+        which are addable in the current context and selected in
+        the registry configuration
+        """
+        tiles = []
+
+        factory = getUtility(
+            IVocabularyFactory,
+            name='tiles.management.vocabularies.FilteredTiles')
+        vocabulary = factory(self.context)
+
+        for item in vocabulary:
+            tiletype = item.value
+            # check if we have permission to add this tile
+            if tiletype and checkPermission(
+                    tiletype.add_permission, self.context):
+                # tile actions
+                # TODO: read from registry
+                tiletype.actions = [{
+                    'name': 'edit',
+                    'url': '@@edit-tile',
+                    'title': _('Edit'),
+                }, {
+                    'name': 'remove',
+                    'url': '@@delete-tile',
+                    'title': _('Remove'),
+                }]
+                tiles.append(tiletype)
+
+        tiles.sort(self.tileSortKey)
+        return tiles
