@@ -45,8 +45,9 @@ class FilteredTilesVocabulary(AllowedTilesVocabulary):
         enabled_tiles = api.portal.get_registry_record(
             'enabled_tiles', IRedturtleTilesManagementSettings)
         for item in vocabulary:
-            if checkPermission(item.value.add_permission, context) and \
-                (not enabled_tiles or item.token in enabled_tiles):
-                    items.append(item)
+            is_selected = not enabled_tiles or item.token in enabled_tiles
+            can_add = checkPermission(item.value.add_permission, context)
+            if can_add and is_selected:
+                items.append(item)
 
         return SimpleVocabulary(items)

@@ -9,6 +9,8 @@ Changelog
   and in tiles management: now it's a pattern that can be instantiated several
   times in the view
   [cekk]
+- Add controlpanel to configure a list of addable tiles from registered ones.
+  [cekk]
 
 
 0.2.1 (2017-04-12)
