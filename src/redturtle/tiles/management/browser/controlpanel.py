@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from plone.app.registry.browser import controlpanel
-from redturtle.tiles.management.interfaces import IRedturtleTilesManagementSettings
+from redturtle.tiles.management.interfaces import IRedturtleTilesManagementSettings  # noqa
 from redturtle.tiles.management import _
 
 
@@ -12,7 +12,7 @@ class RedturtleTilesManagementEditForm(controlpanel.RegistryEditForm):
     description = u""
 
 
-class RedturtleTilesManagementSettingsControlPanel(controlpanel.ControlPanelFormWrapper):
+class RedturtleTilesManagementSettingsControlPanel(controlpanel.ControlPanelFormWrapper):  # noqa
     """Analytics settings control panel.
     """
     form = RedturtleTilesManagementEditForm
