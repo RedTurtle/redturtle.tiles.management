@@ -1,5 +1,11 @@
 # -*- coding: utf-8 -*-
-from plone.app.tiles import _ as _
+try:
+    # plone.app.tiles >= 3.* 
+    from plone.app.tiles import _
+except ImportError:
+    # plone.app.tiles < 3.*
+    from plone.app.tiles import MessageFactory as _
+
 from plone.app.tiles.browser.traversal import AddTile as BaseView
 from plone.memoize.view import memoize
 from zope.component import getUtility
