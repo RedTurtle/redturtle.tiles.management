@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 try:
-    # plone.app.tiles >= 3.* 
+    # plone.app.tiles >= 3.*
     from plone.app.tiles import _
 except ImportError:
     # plone.app.tiles < 3.*
