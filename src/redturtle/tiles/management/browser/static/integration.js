@@ -176,7 +176,7 @@ define('tiles-management-pattern', [
         const contentlUrl = $('body').data('baseUrl');
         const tilesInfosUrl = contentlUrl + '/tiles_management?managerId=' + managerId + '&ajax_load=true .tilesWrapper';
         $.get(tilesInfosUrl, function (data) {
-          container.html(data);
+          container.html($(data).find('#content-core'));
           enablePatterns(container);
           const addButton = container.find('.add-tile-btn');
           if (addButton.length > 0) {
