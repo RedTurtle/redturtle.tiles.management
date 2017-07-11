@@ -55,6 +55,7 @@ def to_1100(context):
         'profile-redturtle.tiles.management:to_1100', 'plone.app.registry')
     context.runImportStepFromProfile(default_profile, 'plone.app.registry')
     context.runImportStepFromProfile(default_profile, 'controlpanel')
+    context.runImportStepFromProfile(default_profile, 'rolemap')
     context.runImportStepFromProfile(
         default_profile,
         'typeinfo',

@@ -62,7 +62,7 @@
     <browser:page
       name="add-tile"
       for="zope.annotation.interfaces.IAnnotatable"
-      permission="cmf.ModifyPortalContent"
+      permission="tiles.management.ManageTiles"
       class="redturtle.tiles.management.browser.traversal.AddTile"
       template="add.pt"
       layer="redturtle.tiles.management.interfaces.IRedturtleTilesManagementLayer"

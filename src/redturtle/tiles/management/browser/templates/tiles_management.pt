@@ -18,11 +18,11 @@
     <metal:content-core fill-slot="content-core">
       <metal:block define-macro="content-core">
         <metal:block define-macro="tiles-macro">
-          <div tal:attributes="class python:canEditTiles and 'editableTiles tilesWrapper' or 'tilesWrapper'"
+          <div tal:attributes="class python:canManageTiles and 'editableTiles tilesWrapper' or 'tilesWrapper'"
                i18n:domain="redturtle.tiles.management"
-               tal:define="canEditTiles view/canEditTiles">
+               tal:define="canManageTiles view/canManageTiles;">
             <div class="actionsTiles"
-                 tal:condition="canEditTiles">
+                 tal:condition="canManageTiles">
               <a tal:attributes="href string:${context/absolute_url}/@@add-tile"
                  class="plone-btn plone-btn-primary add-tile-btn">
                 <tal:label i18n:translate="add_new_tile_label">Add new tile</tal:label>
@@ -35,12 +35,12 @@
                 <div tal:define="tile_hidden python:tile.get('tile_hidden', False);
                                  tile_type python:tile.get('tile_type', '');
                                  tile_id python:tile.get('tile_id', '')"
-                     tal:attributes="data-tileid python:canEditTiles and tile_id or '';
-                                     data-tiletype python:canEditTiles and tile_type or '';
-                                     data-tilehidden python:canEditTiles and tile_hidden or '';
+                     tal:attributes="data-tileid python:canManageTiles and tile_id or '';
+                                     data-tiletype python:canManageTiles and tile_type or '';
+                                     data-tilehidden python:canManageTiles and tile_hidden or '';
                                      class python:tile_hidden and 'tileWrapper hiddenTile' or 'tileWrapper'"
                      class="tileWrapper">
-                  <div class="tileEditButtons" tal:condition="canEditTiles">
+                  <div class="tileEditButtons" tal:condition="canManageTiles">
                     <a class="plone-btn plone-btn-info tileEditLink"
                        href="${context/absolute_url}/@@edit-tile/${tile_type}/${tile_id}">
                       <span class="icon-edit" aria-hidden="true"></span>

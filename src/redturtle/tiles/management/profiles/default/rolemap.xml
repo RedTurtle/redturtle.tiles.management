@@ -7,5 +7,10 @@
       <role name="Editor"/>
       <role name="Site Administrator"/>
     </permission>
+    <permission name="tiles management: Manage Settings"
+                acquire="True">
+      <role name="Manager"/>
+      <role name="Site Administrator"/>
+    </permission>
   </permissions>
 </rolemap>

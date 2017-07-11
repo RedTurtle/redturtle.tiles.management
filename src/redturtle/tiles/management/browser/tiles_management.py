@@ -24,8 +24,8 @@ class BaseView(BrowserView):
         managerId = self.request.form.get('managerId', 'defaultManager')
         # it's a PersistentList
         tiles = tiles_list.get(managerId, [])
-        can_edit = self.canEditTiles()
-        return [x for x in tiles if (not x.get('tile_hidden') or can_edit)]
+        can_manage = self.canManageTiles()
+        return [x for x in tiles if (not x.get('tile_hidden') or can_manage)]
 
     def extractTileInfos(self, key):
         type, id = key.split('/')
@@ -34,22 +34,12 @@ class BaseView(BrowserView):
             'tile_type': type
         }
 
-    # @view.memoize
-    def canEditTiles(self):
+    def canManageTiles(self):
         if api.user.is_anonymous():
             return False
         current = api.user.get_current()
         return api.user.has_permission(
-            'Modify portal content',
-            user=current,
-            obj=self.context)
-
-    def canAddTiles(self):
-        if api.user.is_anonymous():
-            return False
-        current = api.user.get_current()
-        return api.user.has_permission(
-            'Modify portal content',
+            'tiles management: Manage Tiles',
             user=current,
             obj=self.context)
 
