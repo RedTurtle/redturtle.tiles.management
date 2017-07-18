@@ -11,6 +11,7 @@ Changelog
   [cekk]
 - Add controlpanel to configure a list of addable tiles from registered ones.
   [cekk]
+  - Add icon and button color for action hide tile [nekorin]
 
 
 0.2.1 (2017-04-12)

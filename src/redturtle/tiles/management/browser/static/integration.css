@@ -3,12 +3,11 @@
 }
 
 .editableTiles .tileEditButtons {
-    float: right;
     position: absolute;
     z-index: 9999;
     background: #FFF5CD;
-    top: 5px;
-    right: 5px;
+    top: 15px;
+    right: 15px;
 }
 
 .editableTiles .tilesList > *:hover {
