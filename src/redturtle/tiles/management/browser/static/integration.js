@@ -88,15 +88,18 @@ define('tiles-management-pattern', [
                 }
 
                 const contentlUrl = $('body').data('baseUrl');
-                const tilesInfosUrl = contentlUrl + '/tiles_management?managerId=' + managerId + '&ajax_load=true .tilesWrapper';
-                $.get(tilesInfosUrl)
+                const tilesInfosUrl = contentlUrl + '/tiles_management';
+                $.get(tilesInfosUrl, { managerId: managerId, ajax_load: true })
                   .done(function (data) {
                     const tileId = $tile.data('tileid');
                     const html = $('<div></div>').html(data);
                     const newTile = html.find('.tilesList .tileWrapper[data-tileid="' + tileId + '"]');
                     $tile.replaceWith(newTile);
                     enableEditButtons(newTile);
-                    enableSorting(newTile.parent());
+                    const container = newTile.parents('.tilesWrapper');
+                    if (container.length === 1) {
+                      enableSorting($(container[0]));
+                    }
                   });
               })
               .fail(function (error) {
@@ -174,26 +177,27 @@ define('tiles-management-pattern', [
 
       const loadManager = function (container) {
         const contentlUrl = $('body').data('baseUrl');
-        const tilesInfosUrl = contentlUrl + '/tiles_management?managerId=' + managerId + '&ajax_load=true .tilesWrapper';
-        $.get(tilesInfosUrl, function (data) {
-          container.html($(data).find('#content-core'));
-          enablePatterns(container);
-          const addButton = container.find('.add-tile-btn');
-          if (addButton.length > 0) {
-            container.find('.tilesList .tileWrapper').each(function () {
-              container.find('.tileEditButtons').hide();
-              enableEditButtons(this);
-            });
-
-            enableSorting(container);
-            addButton.each(function () {
-              $(this).click(function (e) {
-                e.preventDefault();
-                initializeAddButton($(this), e.target.href);
+        const tilesInfosUrl = contentlUrl + '/tiles_management';
+        $.get(tilesInfosUrl, { managerId: managerId, ajax_load: true })
+          .done(function (data) {
+            container.html($(data).find('.tilesWrapper'));
+            enablePatterns(container);
+            const addButton = container.find('.add-tile-btn');
+            if (addButton.length > 0) {
+              container.find('.tilesList .tileWrapper').each(function () {
+                container.find('.tileEditButtons').hide();
+                enableEditButtons(this);
               });
-            });
-          }
-        });
+
+              enableSorting(container);
+              addButton.each(function () {
+                $(this).click(function (e) {
+                  e.preventDefault();
+                  initializeAddButton($(this), e.target.href);
+                });
+              });
+            }
+          });
       };
 
       if (!managerId) {
