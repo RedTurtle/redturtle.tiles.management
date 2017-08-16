@@ -62,7 +62,7 @@ class TestTilesManagement(unittest.TestCase):
             name="tiles_management",
             context=self.document,
             request=self.request)
-        self.assertFalse(tiles_view.canAddTiles())
+        self.assertFalse(tiles_view.canManageTiles())
         login(self.portal, 'editor')
 
     def test_editor_can_add_new_tiles(self):
@@ -71,7 +71,7 @@ class TestTilesManagement(unittest.TestCase):
             name="tiles_management",
             context=self.document,
             request=self.request)
-        self.assertTrue(tiles_view.canAddTiles())
+        self.assertTrue(tiles_view.canManageTiles())
 
     def test_anonymous_cant_edit_tiles(self):
         logout()
@@ -79,7 +79,7 @@ class TestTilesManagement(unittest.TestCase):
             name="tiles_management",
             context=self.document,
             request=self.request)
-        self.assertFalse(tiles_view.canEditTiles())
+        self.assertFalse(tiles_view.canManageTiles())
 
     def test_editor_can_edit_tiles(self):
         login(self.portal, 'editor')
@@ -87,7 +87,7 @@ class TestTilesManagement(unittest.TestCase):
             name="tiles_management",
             context=self.document,
             request=self.request)
-        self.assertTrue(tiles_view.canEditTiles())
+        self.assertTrue(tiles_view.canManageTiles())
 
     def test_extract_tiles_list(self):
         tiles_list = {
