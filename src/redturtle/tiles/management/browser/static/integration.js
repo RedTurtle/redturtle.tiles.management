@@ -181,6 +181,8 @@ define('tiles-management-pattern', [
         $.get(tilesInfosUrl, { managerId: managerId, ajax_load: true })
           .done(function (data) {
             container.html($(data).find('.tilesWrapper'));
+            let event = new Event('rtTilesLoaded');
+            container[0].dispatchEvent(event);
             enablePatterns(container);
             const addButton = container.find('.add-tile-btn');
             if (addButton.length > 0) {
