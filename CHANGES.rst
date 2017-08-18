@@ -14,6 +14,7 @@ Changelog
 - Add icon and button color for action hide tile [nekorin]
 - Handle error message when there are problems fetching tiles
   [cekk]
+- Added an event dispatched when tiles are added to the DOM [nzambello]
 
 0.2.1 (2017-04-12)
 ------------------
