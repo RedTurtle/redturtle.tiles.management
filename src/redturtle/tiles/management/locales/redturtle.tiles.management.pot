@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2016-12-09 14:30+0000\n"
+"POT-Creation-Date: 2017-08-16 09:43+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,36 +17,49 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: redturtle.tiles.management\n"
 
-#: ../browser/tiles_forms.py:67
-msgid "Cancel"
+#: ../browser/traversal.py:41
+msgid "Edit"
 msgstr ""
 
-#: ../browser/tiles_forms.py:141
-msgid "Delete"
+#: ../browser/traversal.py:45
+msgid "Remove"
 msgstr ""
 
-#: ../browser/tiles_forms.py:29
-msgid "Save"
-msgstr ""
-
-#: ../browser/tiles_forms.py:70
-msgid "Tile add cancelled"
-msgstr ""
-
-#: ../browser/tiles_forms.py:63
-msgid "Tile added"
-msgstr ""
-
-#: ../browser/tiles_forms.py:124
-msgid "Tile edit cancelled"
-msgstr ""
-
-#: ../browser/tiles_forms.py:117
-msgid "Tile edited"
+#: ../browser/configure.zcml
+msgid "View with tiles"
 msgstr ""
 
 #. Default: "Add new tile"
-#: ../browser/tiles_view.pt:29
+#: ../browser/templates/tiles_management.pt:28
 msgid "add_new_tile_label"
+msgstr ""
+
+#. Default: "Select a list of tiles to add."
+#: ../interfaces.py:27
+msgid "enabled_tiles_help"
+msgstr ""
+
+#. Default: "Enabled tiles"
+#: ../interfaces.py:25
+msgid "enabled_tiles_label"
+msgstr ""
+
+#: ../browser/static/integration.js
+msgid "error_loading_manager"
+msgstr ""
+
+#. Default: "<span class=\"sr-only\">Hide</span>"
+#: ../browser/templates/tiles_management.pt:51
+msgid "hide_label"
+msgstr ""
+
+#. Default: "<span class=\"sr-only\">Show</span>"
+#: ../browser/templates/tiles_management.pt:50
+msgid "show_label"
+msgstr ""
+
+#. Default: "Tiles Management Settings"
+#: ../browser/controlpanel.py:11
+msgid "tiles_management_settings_label"
 msgstr ""
 

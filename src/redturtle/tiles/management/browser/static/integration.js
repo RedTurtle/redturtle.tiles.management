@@ -4,7 +4,8 @@ define('tiles-management-pattern', [
   'pat-registry',
   'mockup-patterns-modal',
   'mockup-patterns-sortable',
-], function ($, Base, registry, Modal, Sortable) {
+  'mockup-i18n',
+], function ($, Base, registry, Modal, Sortable, I18n) {
   'use strict';
   var Pattern = Base.extend({
     name: 'tiles-management',
@@ -199,6 +200,14 @@ define('tiles-management-pattern', [
                 });
               });
             }
+          })
+          .fail(function (err) {
+            console.trace(err);
+            var i18n = new I18n();
+            const domain = 'redturtle.tiles.management';
+            i18n.loadCatalog(domain);
+            var _ = i18n.MessageFactory(domain);
+            container.html('<p class="error-manager">' + _('error_loading_manager') + '</p>');
           });
       };
 
