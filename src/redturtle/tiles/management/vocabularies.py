@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from AccessControl.security import checkPermission
 from plone import api
-from plone.app.tiles.vocabularies import AllowedTilesVocabulary
+from plone.app.tiles.vocabularies import AvailableTilesVocabulary
 from plone.tiles.interfaces import ITileType
 from redturtle.tiles.management.interfaces import IRedturtleTilesManagementSettings  # noqa
 from zope.component import getUtilitiesFor
@@ -28,7 +28,7 @@ class RegisteredTilesIdsVocabulary(object):
 
 
 @implementer(IVocabularyFactory)
-class FilteredTilesVocabulary(AllowedTilesVocabulary):
+class FilteredTilesVocabulary(AvailableTilesVocabulary):
     """
     Return vocabulary of all tiles with allowed add permission
     and enabled in controlpanel
@@ -45,9 +45,10 @@ class FilteredTilesVocabulary(AllowedTilesVocabulary):
         enabled_tiles = api.portal.get_registry_record(
             'enabled_tiles', IRedturtleTilesManagementSettings)
         for item in vocabulary:
-            is_selected = not enabled_tiles or item.token in enabled_tiles
-            can_add = checkPermission(item.value.add_permission, context)
-            if can_add and is_selected:
+            if enabled_tiles and item.token not in enabled_tiles:
+                # there is a list of selected tiles, and this one isn't
+                # in the list
+                continue
+            if checkPermission(item.value.add_permission, context):
                 items.append(item)
-
         return SimpleVocabulary(items)

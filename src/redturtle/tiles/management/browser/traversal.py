@@ -27,7 +27,6 @@ class AddTile(BaseView):
             IVocabularyFactory,
             name='tiles.management.vocabularies.FilteredTiles')
         vocabulary = factory(self.context)
-
         for item in vocabulary:
             tiletype = item.value
             # check if we have permission to add this tile

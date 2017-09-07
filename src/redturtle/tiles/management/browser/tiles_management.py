@@ -95,12 +95,10 @@ class ShowHideTilesView(BrowserView):
         if not tiles_list:
             return ""
         try:
-            for i, tile in enumerate(tiles_list.get(managerId, [])):
-                if tile.get('tile_id') != tileId:
-                    continue
-                new = tile
-                new['tile_hidden'] = not new.get('tile_hidden', False)
-                tiles_list[i] = new
+            for tile in tiles_list.get(managerId, []):
+                if tile.get('tile_id') == tileId:
+                    # toggle hidden mode
+                    tile['tile_hidden'] = not tile.get('tile_hidden', False)
             return ""
         except Exception as e:
             logger.exception(e)
