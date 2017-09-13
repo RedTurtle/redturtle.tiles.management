@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.0.1 (unreleased)
+1.0.1 (2017-09-13)
 ------------------
 
 - Fix README code syntax
