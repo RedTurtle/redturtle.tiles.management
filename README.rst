@@ -33,7 +33,7 @@ only on Content Types with this behavior enabled.
 
 Installing this product, a new pattern will be available: "*pat-tiles-management*", and you only need to insert a pattern-style tag into your view like this:
 
-.. code::
+.. code-block:: html
 
   <div class="pat-tiles-management" data-pat-tiles-management="managerId:myManager" />
 
@@ -57,13 +57,14 @@ for the resource registry bundle. To do this, there are two grunt tasks.
 
 First of all, you need to install grunt dependencies listed in package.json file in the root of this package:
 
-.. code::
+.. code-block:: shell
 
   npm install
 
 or if you prefer yarn:
 
-.. code::
+.. code-block:: shell
+
   yarn
 
 After that, you can use two different grunt tasks:

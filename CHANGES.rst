@@ -5,8 +5,8 @@ Changelog
 1.0.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Fix README code syntax
+  [cekk]
 
 1.0.0 (2017-09-13)
 ------------------
