@@ -12,3 +12,6 @@ include .gitattributes
 include *.js
 include *.json
 include *.lock
+exclude .installed.cfg
+exclude .mr.developer.cfg
+exclude pip-selfcheck.json
