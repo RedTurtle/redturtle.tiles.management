@@ -9,3 +9,6 @@ global-exclude *pyc
 global-exclude .DS_Store
 include .editorconfig
 include .gitattributes
+include *.js
+include *.json
+include *.lock
