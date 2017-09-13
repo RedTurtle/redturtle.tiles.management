@@ -2,13 +2,7 @@ Changelog
 =========
 
 
-0.3.1 (unreleased)
-------------------
-
-- Nothing changed yet.
-
-
-0.3.0 (2017-09-13)
+1.0.0 (2017-09-13)
 ------------------
 
 - Massive changes in tiles storing (with p.a.blocks plone.layoutaware behavior)
@@ -21,6 +15,8 @@ Changelog
 - Handle error message when there are problems fetching tiles
   [cekk]
 - Added an event dispatched when tiles are added to the DOM [nzambello]
+- Drop support for Plone4. Use branch 0.x for Plone 4
+  [cekk]
 
 0.2.1 (2017-04-12)
 ------------------
