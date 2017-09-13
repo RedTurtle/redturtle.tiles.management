@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-0.3.0 (unreleased)
+0.3.0 (2017-09-13)
 ------------------
 
 - Massive changes in tiles storing (with p.a.blocks plone.layoutaware behavior)
