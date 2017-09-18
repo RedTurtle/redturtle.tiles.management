@@ -1,5 +1,4 @@
-
-module.exports = function (grunt) {
+module.exports = function(grunt) {
   'use strict';
 
   require('load-grunt-tasks')(grunt);
@@ -8,12 +7,14 @@ module.exports = function (grunt) {
     cssmin: {
       target: {
         files: {
-          './src/redturtle/tiles/management/browser/static/tiles-management-compiled.css': [`${productRoot}/integration.css`],
-        },
+          './src/redturtle/tiles/management/browser/static/tiles-management-compiled.css': [
+            `${productRoot}/integration.css`
+          ]
+        }
       },
       options: {
-        sourceMap: true,
-      },
+        sourceMap: true
+      }
     },
     requirejs: {
       'redturtle-tiles-management': {
@@ -27,26 +28,29 @@ module.exports = function (grunt) {
             'pat-registry': 'empty:',
             'mockup-patterns-modal': 'empty:',
             'mockup-patterns-sortable': 'empty:',
+            'mockup-i18n': 'empty:',
+            'babel-polyfill': `./node_modules/babel-polyfill/dist/polyfill.min`,
             'tiles-management-pattern': `${productRoot}/integration`
           },
           wrapShim: true,
           name: `${productRoot}/bundle.js`,
           exclude: ['jquery'],
           out: `${productRoot}/tiles-management-compiled.js`,
-          optimize: 'none',
-        },
-      },
+          optimize: 'none'
+        }
+      }
     },
     babel: {
       options: {
         sourceMap: true,
-        presets: ['es2015'],
+        presets: ['es2015']
       },
       dist: {
         files: {
-          './src/redturtle/tiles/management/browser/static/tiles-management-compiled.js': './src/redturtle/tiles/management/browser/static/tiles-management-compiled.js',
-        },
-      },
+          './src/redturtle/tiles/management/browser/static/tiles-management-compiled.js':
+            './src/redturtle/tiles/management/browser/static/tiles-management-compiled.js'
+        }
+      }
     },
 
     uglify: {
@@ -54,33 +58,36 @@ module.exports = function (grunt) {
         options: {
           sourceMap: true,
           sourceMapName: `./${productRoot}/redturtle-tiles-management-compiled.js.map`,
-          sourceMapIncludeSources: false,
+          sourceMapIncludeSources: false
         },
         files: {
-          './src/redturtle/tiles/management/browser/static/tiles-management-compiled.js': ['./src/redturtle/tiles/management/browser/static/tiles-management-compiled.js'],
-        },
-      },
+          './src/redturtle/tiles/management/browser/static/tiles-management-compiled.js': [
+            './src/redturtle/tiles/management/browser/static/tiles-management-compiled.js'
+          ]
+        }
+      }
     },
     watch: {
       scripts: {
-        files: [`${productRoot}/static/integration.js`, `${productRoot}/static/bundle.js`],
+        files: [
+          `${productRoot}/static/integration.js`,
+          `${productRoot}/static/bundle.js`
+        ],
         tasks: ['requirejs', 'uglify'],
         options: {
-          livereload: true,
-        },
+          livereload: true
+        }
       },
       css: {
         files: `${productRoot}/static/integration.css`,
         tasks: ['cssmin'],
         options: {
-          livereload: true,
-        },
-      },
-    },
-
+          livereload: true
+        }
+      }
+    }
   });
 
   grunt.registerTask('default', ['watch']);
   grunt.registerTask('compile', ['cssmin', 'requirejs', 'babel', 'uglify']);
-
 };

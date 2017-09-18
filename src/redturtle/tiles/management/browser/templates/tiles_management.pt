@@ -29,7 +29,8 @@
               </a>
             </div>
             <div class="tilesList"
-                 tal:define="tiles view/get_tiles_list;"
+                 tal:define="tiles view/get_tiles_list;
+                             token view/getToken"
                  tal:condition="tiles">
               <tal:tile repeat="tile tiles">
                 <div tal:define="tile_hidden python:tile.get('tile_hidden', False);
@@ -38,6 +39,7 @@
                      tal:attributes="data-tileid python:canManageTiles and tile_id or '';
                                      data-tiletype python:canManageTiles and tile_type or '';
                                      data-tilehidden python:canManageTiles and tile_hidden or '';
+                                     data-token python:canManageTiles and token or '';
                                      class python:tile_hidden and 'tileWrapper hiddenTile' or 'tileWrapper'"
                      class="tileWrapper">
                   <div class="tileEditButtons" tal:condition="canManageTiles">
@@ -46,12 +48,12 @@
                       <span class="icon-edit" aria-hidden="true"></span>
                     </a>
                     <a class="plone-btn plone-btn-warning tileVisibilityLink" tal:attributes="class python:tile_hidden and 'plone-btn plone-btn-warning tileVisibilityLink show-tile' or 'plone-btn plone-btn-warning tileVisibilityLink hide-tile'"
-                       href="${context/absolute_url}/@@show_hide_tiles?tileId=${tile_id}">
+                       href="${context/absolute_url}/@@show_hide_tiles?tileId=${tile_id}&_authenticator=${token}">
                       <span class="icon-view" tal:condition="tile_hidden" i18n:translate="show_label" aria-hidden="true"><span class="sr-only">Show</span></span>
                       <span class="glyphicon glyphicon-eye-close" tal:condition="not:tile_hidden" i18n:translate="hide_label" aria-hidden="true"><span class="sr-only">Hide</span></span>
                     </a>
                     <a class="plone-btn plone-btn-danger tileDeleteLink"
-                       href="${context/absolute_url}/@@delete-tile/${tile_type}/${tile_id}">
+                       href="${context/absolute_url}/@@delete-tile/${tile_type}/${tile_id}&_authenticator=${token}">
                       <span class="icon-delete" aria-hidden="true">X</span>
                     </a>
                   </div>

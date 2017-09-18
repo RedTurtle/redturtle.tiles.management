@@ -5,7 +5,8 @@ Changelog
 1.0.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fix IE11 compatibility: add babel-polyfill to correctyl handle CustomEvent raise
+  [cekk]
 
 
 1.0.1 (2017-09-13)

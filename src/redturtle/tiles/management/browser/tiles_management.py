@@ -7,6 +7,7 @@ from Products.Five import BrowserView
 from zope.interface import implementer, implements
 import json
 from redturtle.tiles.management.interfaces import IRedturtleTilesManagementView
+from plone.protect.authenticator import createToken
 
 import logging
 logger = logging.getLogger(__name__)
@@ -48,6 +49,9 @@ class BaseView(BrowserView):
             self.context.absolute_url(),
             tile.get('tile_type'),
             tile.get('tile_id'))
+
+    def getToken(self):
+        return createToken()
 
 
 class ReorderTilesView(BrowserView):
