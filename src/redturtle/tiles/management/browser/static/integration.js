@@ -232,9 +232,8 @@ define(
             .done(function(data) {
               container.html($(data).find('.tilesWrapper'));
               container.html($(data).find('.tilesWrapper'));
-              $(container[0]).on('rtTilesLoaded', () => {
-                console.log('Intercettato!!!!');
-              });
+
+              //throw custom event to notify when tiles are loaded
               var event = new CustomEvent('rtTilesLoaded');
               container[0].dispatchEvent(event);
               enablePatterns(container);
