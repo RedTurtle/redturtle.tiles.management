@@ -19,5 +19,3 @@ script:
 after_success:
   - test-coverage
   - travis_wait createcoverage
-  - pip install coverage==3.7.1 coveralls
-  - coveralls
