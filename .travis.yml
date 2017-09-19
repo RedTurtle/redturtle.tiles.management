@@ -17,7 +17,7 @@ script:
   - bin/code-analysis
   - bin/test
 after_success:
-  - bin/test-coverage
-  - bin/createcoverage
+  - test-coverage
+  - travis_wait createcoverage
   - pip install coverage==3.7.1 coveralls
   - coveralls
