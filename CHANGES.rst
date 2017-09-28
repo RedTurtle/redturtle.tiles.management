@@ -5,7 +5,7 @@ Changelog
 1.0.2 (unreleased)
 ------------------
 
-- Fix IE11 compatibility: add babel-polyfill to correctyl handle CustomEvent raise
+- Fix IE11 compatibility: add babel-polyfill to correctly handle CustomEvent raise
   [cekk]
 
 
