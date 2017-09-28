@@ -53,7 +53,7 @@
                       <span class="glyphicon glyphicon-eye-close" tal:condition="not:tile_hidden" i18n:translate="hide_label" aria-hidden="true"><span class="sr-only">Hide</span></span>
                     </a>
                     <a class="plone-btn plone-btn-danger tileDeleteLink"
-                       href="${context/absolute_url}/@@delete-tile/${tile_type}/${tile_id}&_authenticator=${token}">
+                       href="${context/absolute_url}/@@delete-tile/${tile_type}/${tile_id}">
                       <span class="icon-delete" aria-hidden="true">X</span>
                     </a>
                   </div>
