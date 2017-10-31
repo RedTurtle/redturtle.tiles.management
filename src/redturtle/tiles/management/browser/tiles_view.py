@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
+from plone import api
 from plone.app.blocks.interfaces import IBlocksTransformEnabled
+from plone.memoize import view
+from plone.protect.authenticator import createToken
 from Products.Five import BrowserView
 from zope.annotation.interfaces import IAnnotations
 from zope.interface import implementer
+
 import json
-from plone import api
-from plone.memoize import view
 
 
 @implementer(IBlocksTransformEnabled)
@@ -29,7 +31,7 @@ class BaseView(BrowserView):
             return json.dumps(self.get_tiles_list())
         return ""
 
-    def can_add_tiles(self):
+    def canManageTiles(self):
         if api.user.is_anonymous():
             return False
         current = api.user.get_current()
@@ -43,6 +45,9 @@ class BaseView(BrowserView):
             self.context.absolute_url(),
             tile.get('tile_type'),
             tile.get('tile_id'))
+
+    def getToken(self):
+        return createToken()
 
 
 class ReorderTilesView(BrowserView):

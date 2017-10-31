@@ -19,46 +19,31 @@ require([
       });
 
       //edit buttons
-      var tiles = $('.tilesList').attr('data-jsontiles');
-      if (!tiles) {
+      var editable_tiles = $('.tilesList .tileWrapper .tileEditButtons');
+      if (editable_tiles.length === 0) {
         //the user can't manage tiles
         return;
       }
       var absolute_url = $("body").data().baseUrl || $('base').attr('href');
-      var tiles_obj = JSON.parse(tiles);
 
-      tiles_obj.forEach(function(tile_obj) {
-        var tile_wrapper = $('[data-tileid=' + tile_obj.tile_id + ']');
-        if (tile_wrapper === undefined) {
-          return;
-        }
-        var edit_url = absolute_url + '/@@edit-tile/' + tile_obj.tile_type + '/' + tile_obj.tile_id;
-        var delete_url = absolute_url + '/@@delete-tile/' + tile_obj.tile_type + '/' + tile_obj.tile_id;
-        var html = '<div class="tileEditButtons">';
-          html += '<a class="plone-btn plone-btn-info tileEditLink" href="' + edit_url + '">';
-          html += '<span class="icon-edit" aria-hidden="true"></span>';
-          html += '</a>';
-          html += '<a class="pat-plone-modal plone-btn plone-btn-danger tileDeleteLink" href="' + delete_url + '">';
-          html += '<span class="icon-delete" aria-hidden="true">X</span>';
-          html += '</a>';
-        $(html).hide().prependTo($(tile_wrapper));
-        $('.tileDeleteLink').each(function() {
-          var delete_modal = new Modal($(this), {
-            templateOptions: {
-              classModal: 'plone-modal-content delete-tile-modal',
-            },
-            actionOptions: {
-              redirectOnResponse: false,
-              onSuccess: function(self, response, state, xhr, form) {
-                if (state === "success") {
-                  self.hide();
-                  self.reloadWindow();
-                }
+      $('.tileDeleteLink').each(function() {
+        var delete_modal = new Modal($(this), {
+          templateOptions: {
+            classModal: 'plone-modal-content delete-tile-modal',
+          },
+          actionOptions: {
+            redirectOnResponse: false,
+            onSuccess: function(self, response, state, xhr, form) {
+              if (state === "success") {
+                self.hide();
+                self.reloadWindow();
               }
             }
-          });
+          }
         });
-        $(tile_wrapper).mouseenter(function() {
+      });
+      $('.tilesList .tileWrapper').each(function() {
+        $(this).mouseenter(function() {
           $(this).addClass('editableTile');
           $( this ).find( ".tileEditButtons" ).show();
         }).mouseleave(function() {
@@ -67,7 +52,7 @@ require([
         });
       });
       //sortable tiles
-      var sortable = new Sortable($('.tilesWrapper'), {
+      var sortable = new Sortable($('.tilesList'), {
         selector: 'div.tileWrapper',
         drop: function($el, delta) {
           if (delta !== 0){
@@ -77,7 +62,7 @@ require([
             if (absolute_url !== undefined) {
               $.get( absolute_url + "/reorder_tiles", {tile_ids: JSON.stringify(tile_ids.get())})
                 .done(function(data) {
-                  if (data !== "") {
+                  if (data !== "" && data !== undefined) {
                     result = JSON.parse(data);
                     console.error(data.message);
                   }

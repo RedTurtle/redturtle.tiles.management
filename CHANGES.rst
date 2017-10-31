@@ -5,7 +5,10 @@ Changelog
 0.2.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Tiles no more need to expose tile_id. Now is handled in the template.
+  [cekk]
+- Fix integration.js code
+  [cekk]
 
 
 0.2.1 (2017-04-12)
