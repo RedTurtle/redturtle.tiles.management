@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.0.2 (unreleased)
+1.0.2 (2017-12-21)
 ------------------
 
 - Fix IE11 compatibility: add babel-polyfill to correctly handle CustomEvent raise
