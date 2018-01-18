@@ -231,7 +231,6 @@ define(
           $.get(tilesInfosUrl, { managerId: managerId, ajax_load: true })
             .done(function(data) {
               container.html($(data).find('.tilesWrapper'));
-              container.html($(data).find('.tilesWrapper'));
 
               //throw custom event to notify when tiles are loaded
               var event = new CustomEvent('rtTilesLoaded');
