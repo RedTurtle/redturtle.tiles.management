@@ -18,6 +18,11 @@
     </value>
   </records>
 
+  <records prefix="plone.resources/babel-polyfill"
+        interface='Products.CMFPlone.interfaces.IResourceRegistry'>
+    <value key="js">++resource++redturtle.tiles.management/polyfill.min.js</value>
+  </records>
+
   <!-- BUNDLE -->
   <records prefix="plone.bundles/redturtle-tiles-management"
             interface='Products.CMFPlone.interfaces.IBundleRegistry'>

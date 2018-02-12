@@ -66,3 +66,10 @@ def to_1100(context):
         update_tiles_list(brain)
 
     logger.info('migrated tiles')
+
+
+def to_1200(context):
+    """
+    """
+    logger.info('Upgrading redturtle.tiles.management to version 1200')
+    context.runImportStepFromProfile(default_profile, 'plone.app.registry')

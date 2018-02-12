@@ -5,8 +5,13 @@ Changelog
 1.0.3 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Add a loader when tiles are fetched
+  [cekk]
+- Remove empty managers when user can't add tiles
+  [cekk]
+- Refactor manager render view. Now is lighter (no more unused Plone body macros)
+  and can be used also in static renders
+  [cekk]
 
 1.0.2 (2017-12-21)
 ------------------

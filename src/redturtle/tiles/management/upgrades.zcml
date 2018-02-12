@@ -12,4 +12,11 @@
         handler=".setuphandlers.to_1100"
         profile="redturtle.tiles.management:default" />
 
+  <gs:upgradeStep
+        title="Upgrade redturtle.tiles.management 1200"
+        description="redturtle.tiles.management upgrade step"
+        source="1100"
+        destination="1200"
+        handler=".setuphandlers.to_1200"
+        profile="redturtle.tiles.management:default" />
 </configure>

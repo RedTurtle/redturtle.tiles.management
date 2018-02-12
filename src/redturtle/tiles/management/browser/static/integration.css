@@ -2,6 +2,11 @@
     margin: 1em 0;
 }
 
+div.loading-tiles {
+  text-align: center;
+  margin: 2em;
+}
+
 .editableTiles .tileEditButtons {
     position: absolute;
     z-index: 9999;
