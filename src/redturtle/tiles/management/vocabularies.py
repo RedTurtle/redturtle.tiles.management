@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from AccessControl.security import checkPermission
 from plone import api
 from plone.app.tiles.vocabularies import AvailableTilesVocabulary
 from plone.tiles.interfaces import ITileType
@@ -49,6 +48,6 @@ class FilteredTilesVocabulary(AvailableTilesVocabulary):
                 # there is a list of selected tiles, and this one isn't
                 # in the list
                 continue
-            if checkPermission(item.value.add_permission, context):
+            if api.user.has_permission(item.value.add_permission, obj=context):
                 items.append(item)
         return SimpleVocabulary(items)

@@ -6,11 +6,11 @@ except ImportError:
     # plone.app.tiles < 3.*
     from plone.app.tiles import MessageFactory as _
 
+from plone import api
 from plone.app.tiles.browser.traversal import AddTile as BaseView
 from plone.memoize.view import memoize
 from zope.component import getUtility
 from zope.schema.interfaces import IVocabularyFactory
-from zope.security import checkPermission
 
 
 class AddTile(BaseView):
@@ -30,10 +30,10 @@ class AddTile(BaseView):
         for item in vocabulary:
             tiletype = item.value
             # check if we have permission to add this tile
-            if tiletype and checkPermission(
-                    tiletype.add_permission, self.context):
+            if tiletype and api.user.has_permission(
+                    tiletype.add_permission, obj=self.context):
                 # tile actions
-                # TODO: read from registry
+                # TODO: read from registry  # noqa
                 tiletype.actions = [{
                     'name': 'edit',
                     'url': '@@edit-tile',

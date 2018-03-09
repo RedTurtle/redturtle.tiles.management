@@ -2,23 +2,22 @@
 from Acquisition import aq_base
 from plone import api
 from plone.app.blocks.interfaces import IBlocksTransformEnabled
-# from plone.memoize import view
-from Products.Five import BrowserView
-from zope.interface import implementer, implements
-import json
-from redturtle.tiles.management.interfaces import IRedturtleTilesManagementView
 from plone.protect.authenticator import createToken
+from Products.Five import BrowserView
+from redturtle.tiles.management.interfaces import IRedturtleTilesManagementView
+from zope.interface import implementer
 
+import json
 import logging
+
+
 logger = logging.getLogger(__name__)
 
 
-@implementer(IBlocksTransformEnabled)
+@implementer(IBlocksTransformEnabled, IRedturtleTilesManagementView)
 class BaseView(BrowserView):
-    '''
-    '''
-
-    implements(IRedturtleTilesManagementView)
+    """
+    """
 
     def get_tiles_list(self):
         tiles_list = getattr(self.context, 'tiles_list', {})
@@ -45,7 +44,7 @@ class BaseView(BrowserView):
             obj=self.context)
 
     def get_tile_url(self, tile):
-        return "%s/@@%s/%s" % (
+        return '{0}/@@{1}/{2}'.format(
             self.context.absolute_url(),
             tile.get('tile_type'),
             tile.get('tile_id'))
@@ -55,55 +54,55 @@ class BaseView(BrowserView):
 
 
 class ReorderTilesView(BrowserView):
-    '''
-    '''
+    """
+    """
 
     def __call__(self):
         tileIds = self.request.form.get('tileIds')
         managerId = self.request.form.get('managerId', 'defaultManager')
         if not tileIds:
-            return ""
+            return ''
 
         context = aq_base(self.context)
         tiles_list = getattr(context, 'tiles_list', None)
         if not tiles_list:
-            return ""
+            return ''
         tilesForManager = tiles_list.get(managerId)
         if not tilesForManager:
-            return ""
+            return ''
         try:
             sorted_ids = json.loads(tileIds)
             order_dict = {
                 tile_id: index for index, tile_id in enumerate(sorted_ids)
             }
-            tilesForManager.sort(key=lambda x: order_dict[x["tile_id"]])
+            tilesForManager.sort(key=lambda x: order_dict[x['tile_id']])
             # tilesForManager = tiles_list
-            return ""
+            return ''
         except ValueError as e:
             logger.trace(e)
             return json.dumps({'error': e.message})
 
 
 class ShowHideTilesView(BrowserView):
-    '''
-    '''
+    """
+    """
 
     def __call__(self):
         tileId = self.request.form.get('tileId')
         managerId = self.request.form.get('managerId', 'defaultManager')
         if not tileId:
-            return ""
+            return ''
 
         context = aq_base(self.context)
         tiles_list = getattr(context, 'tiles_list', None)
         if not tiles_list:
-            return ""
+            return ''
         try:
             for tile in tiles_list.get(managerId, []):
                 if tile.get('tile_id') == tileId:
                     # toggle hidden mode
                     tile['tile_hidden'] = not tile.get('tile_hidden', False)
-            return ""
+            return ''
         except Exception as e:
             logger.exception(e)
             return json.dumps({'error': e.message})

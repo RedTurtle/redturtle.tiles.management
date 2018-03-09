@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
+from persistent.list import PersistentList
+from persistent.mapping import PersistentMapping
 from plone import api
 from zope.annotation.interfaces import IAnnotations
-from persistent.mapping import PersistentMapping
-from persistent.list import PersistentList
 
 import logging
+
+
 logger = logging.getLogger(__name__)
-
-
 default_profile = 'profile-redturtle.tiles.management:default'
 uninstall_profile = 'profile-redturtle.tiles.management:uninstall'
 

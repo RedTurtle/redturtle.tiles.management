@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
-"""Setup tests for this package."""
-from redturtle.tiles.management.testing import REDTURTLE_TILES_MANAGEMENT_INTEGRATION_TESTING  # noqa
 from plone import api
+from plone.app.testing import logout
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
-from plone.app.testing import logout
-import unittest2 as unittest
+from redturtle.tiles.management.testing import REDTURTLE_TILES_MANAGEMENT_INTEGRATION_TESTING  # noqa
 from redturtle.tiles.management.tests.helpers import TestTile
 from zope.event import notify
 from zope.lifecycleevent import ObjectAddedEvent
+
+import unittest2 as unittest
 
 
 class TestTilesShowHide(unittest.TestCase):
@@ -56,7 +56,7 @@ class TestTilesShowHide(unittest.TestCase):
     def test_anonymous_can_view_both(self):
         logout()
         tiles_view = api.content.get_view(
-            name="tiles_management",
+            name='tiles_management',
             context=self.document,
             request=self.request)
         self.assertEqual(len(tiles_view.get_tiles_list()), 2)
@@ -68,11 +68,11 @@ class TestTilesShowHide(unittest.TestCase):
         }
 
         tiles_view = api.content.get_view(
-            name="tiles_management",
+            name='tiles_management',
             context=self.document,
             request=self.request)
         show_hide_view = api.content.get_view(
-            name="show_hide_tiles",
+            name='show_hide_tiles',
             context=self.document,
             request=self.request)
         # first hide a tile

@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-"""Setup tests for this package."""
 from plone import api
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
@@ -8,6 +7,7 @@ from redturtle.tiles.management.tests.helpers import TestTile
 from zope.event import notify
 from zope.lifecycleevent import ObjectAddedEvent
 from zope.lifecycleevent import ObjectRemovedEvent
+
 import unittest2 as unittest
 
 

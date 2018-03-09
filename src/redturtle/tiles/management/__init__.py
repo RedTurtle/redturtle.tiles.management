@@ -3,7 +3,8 @@
 
 from zope.i18nmessageid import MessageFactory
 
-_ = MessageFactory('redturtle.tiles.management')
-
 import logging
+
+
+_ = MessageFactory('redturtle.tiles.management')
 logger = logging.getLogger('redturtle.tiles.management')
