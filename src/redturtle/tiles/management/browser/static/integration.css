@@ -55,6 +55,8 @@ div.loading-tiles {
     display: -webkit-flex;
     display: flex;
     -webkit-flex-flow: row wrap;
+    -ms-flex-flow: row wrap;
+    flex-flow: row wrap;
     justify-content: flex-start;
 }
 
