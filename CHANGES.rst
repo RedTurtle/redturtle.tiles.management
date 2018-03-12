@@ -2,6 +2,12 @@ Changelog
 =========
 
 
+1.1.1 (unreleased)
+------------------
+
+- Fix pypi brown bag release
+  [cekk]
+
 1.1.0 (2018-03-12)
 ------------------
 
