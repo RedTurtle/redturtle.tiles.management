@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.1.1 (unreleased)
+1.1.1 (2018-03-12)
 ------------------
 
 - Fix pypi brown bag release
