@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
+from persistent.list import PersistentList
+from persistent.mapping import PersistentMapping
 from plone import api
 from zope.annotation.interfaces import IAnnotations
-from persistent.mapping import PersistentMapping
-from persistent.list import PersistentList
 
 import logging
+
+
 logger = logging.getLogger(__name__)
-
-
 default_profile = 'profile-redturtle.tiles.management:default'
 uninstall_profile = 'profile-redturtle.tiles.management:uninstall'
 
@@ -66,3 +66,10 @@ def to_1100(context):
         update_tiles_list(brain)
 
     logger.info('migrated tiles')
+
+
+def to_1200(context):
+    """
+    """
+    logger.info('Upgrading redturtle.tiles.management to version 1200')
+    context.runImportStepFromProfile(default_profile, 'plone.app.registry')

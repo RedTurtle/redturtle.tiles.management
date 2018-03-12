@@ -1,69 +1,48 @@
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
-    xmlns:tal="http://xml.zope.org/namespaces/tal"
-    xmlns:metal="http://xml.zope.org/namespaces/metal"
-    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-    lang="en"
-    metal:use-macro="context/main_template/macros/master"
-    i18n:domain="plone">
 
-  <body>
-    <metal:content-title fill-slot="content-title">
-      <metal:content-title define-macro="content-title">
-      </metal:content-title>
-    </metal:content-title>
-    <metal:content-description fill-slot="content-description">
-      <metal:content-description define-macro="content-description">
-      </metal:content-description>
-    </metal:content-description>
-    <metal:content-core fill-slot="content-core">
-      <metal:block define-macro="content-core">
-        <metal:block define-macro="tiles-macro">
-          <div tal:attributes="class python:canManageTiles and 'editableTiles tilesWrapper' or 'tilesWrapper'"
-               i18n:domain="redturtle.tiles.management"
-               tal:define="canManageTiles view/canManageTiles;">
-            <div class="actionsTiles"
-                 tal:condition="canManageTiles">
-              <a tal:attributes="href string:${context/absolute_url}/@@add-tile"
-                 class="plone-btn plone-btn-primary add-tile-btn">
-                <tal:label i18n:translate="add_new_tile_label">Add new tile</tal:label>
-              </a>
-            </div>
-            <div class="tilesList"
-                 tal:define="tiles view/get_tiles_list;
-                             token view/getToken"
-                 tal:condition="tiles">
-              <tal:tile repeat="tile tiles">
-                <div tal:define="tile_hidden python:tile.get('tile_hidden', False);
-                                 tile_type python:tile.get('tile_type', '');
-                                 tile_id python:tile.get('tile_id', '')"
-                     tal:attributes="data-tileid python:canManageTiles and tile_id or '';
-                                     data-tiletype python:canManageTiles and tile_type or '';
-                                     data-tilehidden python:canManageTiles and tile_hidden or '';
-                                     data-token python:canManageTiles and token or '';
-                                     class python:tile_hidden and 'tileWrapper hiddenTile' or 'tileWrapper'"
-                     class="tileWrapper">
-                  <div class="tileEditButtons" tal:condition="canManageTiles">
-                    <a class="plone-btn plone-btn-info tileEditLink"
-                       href="${context/absolute_url}/@@edit-tile/${tile_type}/${tile_id}">
-                      <span class="icon-edit" aria-hidden="true"></span>
-                    </a>
-                    <a class="plone-btn plone-btn-warning tileVisibilityLink" tal:attributes="class python:tile_hidden and 'plone-btn plone-btn-warning tileVisibilityLink show-tile' or 'plone-btn plone-btn-warning tileVisibilityLink hide-tile'"
-                       href="${context/absolute_url}/@@show_hide_tiles?tileId=${tile_id}&_authenticator=${token}">
-                      <span class="icon-view" tal:condition="tile_hidden" i18n:translate="show_label" aria-hidden="true"><span class="sr-only">Show</span></span>
-                      <span class="glyphicon glyphicon-eye-close" tal:condition="not:tile_hidden" i18n:translate="hide_label" aria-hidden="true"><span class="sr-only">Hide</span></span>
-                    </a>
-                    <a class="plone-btn plone-btn-danger tileDeleteLink"
-                       href="${context/absolute_url}/@@delete-tile/${tile_type}/${tile_id}">
-                      <span class="icon-delete" aria-hidden="true">X</span>
-                    </a>
-                  </div>
-                  <div tal:attributes="data-tile python:view.get_tile_url(tile)" />
-                </div>
-              </tal:tile>
-            </div>
+<metal:block define-macro="tiles-macro">
+  <div tal:attributes="class python:canManageTiles and 'editableTiles tilesWrapper' or 'tilesWrapper'"
+       i18n:domain="redturtle.tiles.management"
+       tal:condition="python:canManageTiles or tiles"
+       tal:define="canManageTiles view/canManageTiles;
+                   tiles view/get_tiles_list;">
+    <div class="actionsTiles"
+         tal:condition="canManageTiles">
+      <a tal:attributes="href string:${context/absolute_url}/@@add-tile"
+         class="plone-btn plone-btn-primary add-tile-btn">
+        <tal:label i18n:translate="add_new_tile_label">Add new tile</tal:label>
+      </a>
+    </div>
+    <div class="tilesList"
+         tal:define="token view/getToken"
+         tal:condition="tiles">
+      <tal:tile repeat="tile tiles">
+        <div tal:define="tile_hidden python:tile.get('tile_hidden', False);
+                         tile_type python:tile.get('tile_type', '');
+                         tile_id python:tile.get('tile_id', '')"
+             tal:attributes="data-tileid python:canManageTiles and tile_id or '';
+                             data-tiletype python:canManageTiles and tile_type or '';
+                             data-tilehidden python:canManageTiles and tile_hidden or '';
+                             data-token python:canManageTiles and token or '';
+                             class python:tile_hidden and 'tileWrapper hiddenTile' or 'tileWrapper'"
+             class="tileWrapper">
+          <div class="tileEditButtons" tal:condition="canManageTiles">
+            <a class="plone-btn plone-btn-info tileEditLink"
+               href="${context/absolute_url}/@@edit-tile/${tile_type}/${tile_id}">
+              <span class="icon-edit" aria-hidden="true"></span>
+            </a>
+            <a class="plone-btn plone-btn-warning tileVisibilityLink" tal:attributes="class python:tile_hidden and 'plone-btn plone-btn-warning tileVisibilityLink show-tile' or 'plone-btn plone-btn-warning tileVisibilityLink hide-tile'"
+               href="${context/absolute_url}/@@show_hide_tiles?tileId=${tile_id}&_authenticator=${token}">
+              <span class="icon-view" tal:condition="tile_hidden" i18n:translate="show_label" aria-hidden="true"><span class="sr-only">Show</span></span>
+              <span class="glyphicon glyphicon-eye-close" tal:condition="not:tile_hidden" i18n:translate="hide_label" aria-hidden="true"><span class="sr-only">Hide</span></span>
+            </a>
+            <a class="plone-btn plone-btn-danger tileDeleteLink"
+               href="${context/absolute_url}/@@delete-tile/${tile_type}/${tile_id}">
+              <span class="icon-delete" aria-hidden="true">X</span>
+            </a>
           </div>
-        </metal:block>
-      </metal:block>
-    </metal:content-core>
-  </body>
-</html>
+          <div tal:attributes="data-tile python:view.get_tile_url(tile)" />
+        </div>
+      </tal:tile>
+    </div>
+  </div>
+</metal:block>

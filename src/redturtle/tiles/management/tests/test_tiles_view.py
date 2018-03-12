@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
-"""Setup tests for this package."""
-from redturtle.tiles.management.testing import REDTURTLE_TILES_MANAGEMENT_INTEGRATION_TESTING  # noqa
 from plone import api
+from plone.api.exc import InvalidParameterError
+from plone.app.testing import login
+from plone.app.testing import logout
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
-from plone.app.testing import login, logout
+from redturtle.tiles.management.testing import REDTURTLE_TILES_MANAGEMENT_INTEGRATION_TESTING  # noqa
+
 import unittest2 as unittest
-from plone.api.exc import InvalidParameterError
 
 
 class TestTilesManagement(unittest.TestCase):
@@ -44,22 +45,22 @@ class TestTilesManagement(unittest.TestCase):
 
     def test_view_available_for_documents(self):
         doc_view = api.content.get_view(
-            name="tiles_management",
+            name='tiles_management',
             context=self.document,
             request=self.request)
-        self.assertEquals(doc_view.__name__, 'tiles_management')
+        self.assertEqual(doc_view.__name__, 'tiles_management')
 
     def test_view_not_available_for_news(self):
         with self.assertRaises(InvalidParameterError):
             api.content.get_view(
-                name="tiles_management",
+                name='tiles_management',
                 context=self.news,
                 request=self.request)
 
     def test_anonymous_cant_add_new_tiles(self):
         logout()
         tiles_view = api.content.get_view(
-            name="tiles_management",
+            name='tiles_management',
             context=self.document,
             request=self.request)
         self.assertFalse(tiles_view.canManageTiles())
@@ -68,7 +69,7 @@ class TestTilesManagement(unittest.TestCase):
     def test_editor_can_add_new_tiles(self):
         login(self.portal, 'editor')
         tiles_view = api.content.get_view(
-            name="tiles_management",
+            name='tiles_management',
             context=self.document,
             request=self.request)
         self.assertTrue(tiles_view.canManageTiles())
@@ -76,7 +77,7 @@ class TestTilesManagement(unittest.TestCase):
     def test_anonymous_cant_edit_tiles(self):
         logout()
         tiles_view = api.content.get_view(
-            name="tiles_management",
+            name='tiles_management',
             context=self.document,
             request=self.request)
         self.assertFalse(tiles_view.canManageTiles())
@@ -84,7 +85,7 @@ class TestTilesManagement(unittest.TestCase):
     def test_editor_can_edit_tiles(self):
         login(self.portal, 'editor')
         tiles_view = api.content.get_view(
-            name="tiles_management",
+            name='tiles_management',
             context=self.document,
             request=self.request)
         self.assertTrue(tiles_view.canManageTiles())
@@ -100,10 +101,10 @@ class TestTilesManagement(unittest.TestCase):
         }
         self.document.tiles_list = tiles_list
         tiles_view = api.content.get_view(
-            name="tiles_management",
+            name='tiles_management',
             context=self.document,
             request=self.request)
-        self.assertEquals(
+        self.assertEqual(
             tiles_view.get_tiles_list(),
             tiles_list['defaultManager'])
 
@@ -129,10 +130,10 @@ class TestTilesManagement(unittest.TestCase):
         self.document.tiles_list = tiles_list
         self.request.form['managerId'] = 'alternative'
         tiles_view = api.content.get_view(
-            name="tiles_management",
+            name='tiles_management',
             context=self.document,
             request=self.request)
-        self.assertEquals(
+        self.assertEqual(
             tiles_view.get_tiles_list(), tiles_list['alternative'])
 
     def test_extract_tile_url_from_infos(self):
@@ -141,9 +142,9 @@ class TestTilesManagement(unittest.TestCase):
             'tile_type': 'my.tile',
         }
         tiles_view = api.content.get_view(
-            name="tiles_management",
+            name='tiles_management',
             context=self.document,
             request=self.request)
-        self.assertEquals(
+        self.assertEqual(
             tiles_view.get_tile_url(tile),
             'http://nohost/plone/test-document/@@my.tile/firstTile')

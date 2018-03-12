@@ -118,7 +118,6 @@ define(
             .find('div.tileEditButtons a.tileVisibilityLink')
             .each(function() {
               $(this).click(function(e) {
-                debugger;
                 e.preventDefault();
                 $.get(e.currentTarget.href + '&managerId=' + managerId)
                   .done(function(data) {
@@ -225,14 +224,23 @@ define(
           });
         };
 
+        const addLoader = function(container) {
+          const portalUrl = $('body').data('portalUrl');
+          container.html('<div class="loading-tiles"><img src="' + portalUrl + '/++resource++redturtle.tiles.management/loader.svg" alt="loading"/></div>');
+        };
+
         const loadManager = function(container) {
           const contentlUrl = $('body').data('baseUrl');
           const tilesInfosUrl = contentlUrl + '/tiles_management';
+          addLoader(container);
           $.get(tilesInfosUrl, { managerId: managerId, ajax_load: true })
             .done(function(data) {
-              container.html($(data).find('.tilesWrapper'));
-              container.html($(data).find('.tilesWrapper'));
-
+              const html = $(data);
+              if (!html.length) {
+                container.remove();
+                return
+              }
+              container.html($(data));
               //throw custom event to notify when tiles are loaded
               var event = new CustomEvent('rtTilesLoaded');
               container[0].dispatchEvent(event);

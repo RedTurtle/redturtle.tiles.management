@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 from Acquisition import aq_base
-import re
-from persistent.mapping import PersistentMapping
 from persistent.list import PersistentList
+from persistent.mapping import PersistentMapping
+
+import re
 
 
 def getManagerId(tile):
@@ -26,9 +27,9 @@ def tileCreated(tile, event):
     new_tile['tile_hidden'] = False
 
     try:
-        tile_type = re.search("@@(.*?)/", tile.url).group(1)
+        tile_type = re.search('@@(.*?)/', tile.url).group(1)
     except AttributeError:
-        tile_type = ""
+        tile_type = ''
     if tile_type:
         new_tile['tile_type'] = tile_type
 

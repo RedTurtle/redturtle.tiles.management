@@ -29,7 +29,7 @@ module.exports = function(grunt) {
             'mockup-patterns-modal': 'empty:',
             'mockup-patterns-sortable': 'empty:',
             'mockup-i18n': 'empty:',
-            'babel-polyfill': `./node_modules/babel-polyfill/dist/polyfill.min`,
+            'babel-polyfill': 'empty:',
             'tiles-management-pattern': `${productRoot}/integration`
           },
           wrapShim: true,
