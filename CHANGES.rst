@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.0.3 (unreleased)
+1.1.0 (2018-03-12)
 ------------------
 
 - Add a loader when tiles are fetched
