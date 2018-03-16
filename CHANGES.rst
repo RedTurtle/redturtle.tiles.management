@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.1.2 (unreleased)
+1.1.2 (2018-03-16)
 ------------------
 
 - Fix permission checks in addable tiles vocabulary.
