@@ -5,7 +5,9 @@ Changelog
 1.1.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fix permission checks in addable tiles vocabulary.
+  Now use correct permission (name) and not the id.
+  [cekk]
 
 
 1.1.1 (2018-03-12)

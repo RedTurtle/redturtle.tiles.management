@@ -8,6 +8,8 @@ from zope.interface import implementer
 from zope.schema.interfaces import IVocabularyFactory
 from zope.schema.vocabulary import SimpleTerm
 from zope.schema.vocabulary import SimpleVocabulary
+from zope.component import getUtilitiesFor
+from zope.security.interfaces import IPermission
 
 
 @implementer(IVocabularyFactory)
@@ -39,7 +41,7 @@ class FilteredTilesVocabulary(AvailableTilesVocabulary):
         # first get all allowed tiles
         if context is None:
             return vocabulary
-
+        permissions_mapping = self.get_permissions()
         items = []
         enabled_tiles = api.portal.get_registry_record(
             'enabled_tiles', IRedturtleTilesManagementSettings)
@@ -48,6 +50,21 @@ class FilteredTilesVocabulary(AvailableTilesVocabulary):
                 # there is a list of selected tiles, and this one isn't
                 # in the list
                 continue
-            if api.user.has_permission(item.value.add_permission, obj=context):
+            can_add = api.user.has_permission(
+                permissions_mapping.get(item.value.add_permission, ''),
+                obj=context)
+            if can_add:
                 items.append(item)
         return SimpleVocabulary(items)
+
+    def get_permissions(self):
+        """
+        generate a dict with all registered permissions, mapping like this:
+        - key: permission id
+        - value: permission name
+        We need this because tiles add_permission is an id, but to check
+        user permission we need the name.
+        """
+        return {
+            x[0]: getattr(x[1], 'title', x[0])
+            for x in getUtilitiesFor(IPermission, self.context)}

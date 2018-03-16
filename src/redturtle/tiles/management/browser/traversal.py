@@ -29,21 +29,18 @@ class AddTile(BaseView):
         vocabulary = factory(self.context)
         for item in vocabulary:
             tiletype = item.value
-            # check if we have permission to add this tile
-            if tiletype and api.user.has_permission(
-                    tiletype.add_permission, obj=self.context):
-                # tile actions
-                # TODO: read from registry  # noqa
-                tiletype.actions = [{
-                    'name': 'edit',
-                    'url': '@@edit-tile',
-                    'title': _('Edit'),
-                }, {
-                    'name': 'remove',
-                    'url': '@@delete-tile',
-                    'title': _('Remove'),
-                }]
-                tiles.append(tiletype)
+            # tile actions
+            # TODO: read from registry  # noqa
+            tiletype.actions = [{
+                'name': 'edit',
+                'url': '@@edit-tile',
+                'title': _('Edit'),
+            }, {
+                'name': 'remove',
+                'url': '@@delete-tile',
+                'title': _('Remove'),
+            }]
+            tiles.append(tiletype)
 
         tiles.sort(self.tileSortKey)
         return tiles
