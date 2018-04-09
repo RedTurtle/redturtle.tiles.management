@@ -2,10 +2,13 @@ Changelog
 =========
 
 
-1.1.3 (unreleased)
-------------------
+2.0 (2018/04/09)
+----------------
 
-- Nothing changed yet.
+- Remove tileWrapper class from tiles_view.pt
+  right now it's the single tile to handle it;
+  this allow to use width class on tile
+  [lucabel]
 
 
 1.1.2 (2018-03-16)
