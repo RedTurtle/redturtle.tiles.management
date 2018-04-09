@@ -39,6 +39,7 @@ div.loading-tiles {
     height: 100%;
     width: 100%;
     background-color: rgba(239,239,239,0.5);
+    z-index:10000;
 }
 
 .available-tiles {

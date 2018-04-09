@@ -6,7 +6,7 @@ from plone.protect.authenticator import createToken
 from Products.Five import BrowserView
 from redturtle.tiles.management.interfaces import IRedturtleTilesManagementView
 from zope.interface import implementer
-
+from plone.memoize.view import memoize
 import json
 import logging
 
@@ -26,6 +26,18 @@ class BaseView(BrowserView):
         tiles = tiles_list.get(managerId, [])
         can_manage = self.canManageTiles()
         return [x for x in tiles if (not x.get('tile_hidden') or can_manage)]
+
+    def get_tiles_data(self, tiles):
+        # we get a list of persistent dict and return a dict with tileid as
+        # key and persistent dict transformed in standard dict. All in a JSON
+        # format
+        token = createToken()
+        tiles = {
+            x['tile_id']: dict(x) for x in tiles
+        }
+        for tile in tiles:
+            tiles[tile].update({'token': token})
+        return json.dumps(tiles)
 
     def extractTileInfos(self, key):
         type, id = key.split('/')
@@ -48,9 +60,6 @@ class BaseView(BrowserView):
             self.context.absolute_url(),
             tile.get('tile_type'),
             tile.get('tile_id'))
-
-    def getToken(self):
-        return createToken()
 
 
 class ReorderTilesView(BrowserView):

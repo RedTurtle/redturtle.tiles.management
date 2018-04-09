@@ -19,6 +19,7 @@ define(
       init: function() {
         const _this = this;
         const managerId = this.options.managerId;
+        const useModal = this.options.useModal !== "false";
 
         const customEventPolyfill = () => {
           if (typeof window.CustomEvent === 'function') return false;
@@ -79,72 +80,68 @@ define(
         const enableEditButtons = function(tile) {
           //edit buttons modals
           const $tile = $(tile);
-          $tile.find('div.tileEditButtons a.tileDeleteLink').each(function() {
-            const deleteModal = new Modal($(this), {
-              templateOptions: {
-                classModal: 'plone-modal-content delete-tile-modal'
-              },
-              actionOptions: {
-                redirectOnResponse: false,
-                onSuccess: function(self, response, state, xhr, form) {
-                  if (state === 'success') {
-                    self.hide();
-                    self.reloadWindow();
+          if (useModal){
+            $tile.find('div.tileEditButtons a.tileDeleteLink').each(function() {
+              const deleteModal = new Modal($(this), {
+                templateOptions: {
+                  classModal: 'plone-modal-content delete-tile-modal'
+                },
+                actionOptions: {
+                  redirectOnResponse: false,
+                  onSuccess: function(self, response, state, xhr, form) {
+                    if (state === 'success') {
+                      self.hide();
+                      self.reloadWindow();
+                    }
                   }
                 }
-              }
+              });
+              deleteModal.on('after-render', function() {
+                $('form#delete_tile').append(
+                  '<input type="hidden" name="managerId" value="' +
+                    managerId +
+                    '" />'
+                );
+              });
             });
-            deleteModal.on('after-render', function() {
-              $('form#delete_tile').append(
-                '<input type="hidden" name="managerId" value="' +
-                  managerId +
-                  '" />'
-              );
-            });
-          });
 
-          $tile.find('div.tileEditButtons a.tileEditLink').each(function() {
-            const editModal = new Modal($(this), {
-              templateOptions: {
-                classModal: 'plone-modal-content edit-tile-modal'
-              },
-              actionOptions: {
-                redirectOnResponse: true
-              }
+            $tile.find('div.tileEditButtons a.tileEditLink').each(function() {
+              const editModal = new Modal($(this), {
+                templateOptions: {
+                  classModal: 'plone-modal-content edit-tile-modal'
+                },
+                actionOptions: {
+                  redirectOnResponse: true
+                }
+              });
             });
-          });
+          }
 
           $tile
             .find('div.tileEditButtons a.tileVisibilityLink')
             .each(function() {
               $(this).click(function(e) {
                 e.preventDefault();
-                $.get(e.currentTarget.href + '&managerId=' + managerId)
+                let $element = $(e.currentTarget);
+                $.get($element.attr('href') + '&managerId=' + managerId)
                   .done(function(data) {
                     if (data !== undefined) {
                       const result = JSON.parse(data);
                       console.error(result.error);
                       return;
                     }
-
-                    const contentlUrl = $('body').data('baseUrl');
-                    const tilesInfosUrl = contentlUrl + '/tiles_management';
-                    $.get(tilesInfosUrl, {
-                      managerId: managerId,
-                      ajax_load: true
-                    }).done(function(data) {
-                      const tileId = $tile.data('tileid');
-                      const html = $('<div></div>').html(data);
-                      const newTile = html.find(
-                        '.tilesList .tileWrapper[data-tileid="' + tileId + '"]'
-                      );
-                      $tile.replaceWith(newTile);
-                      enableEditButtons(newTile);
-                      const container = newTile.parents('.tilesWrapper');
-                      if (container.length === 1) {
-                        enableSorting($(container[0]));
-                      }
-                    });
+                    // 1. cambia icona
+                    let $span = $element.find('>span');
+                    if ($span.hasClass('icon-view')){
+                      $span.removeClass('icon-view').addClass('glyphicon glyphicon-eye-close');
+                      $span.find('>span').html('Show');
+                    }
+                    else{
+                      $span.removeClass('glyphicon glyphicon-eye-close').addClass('icon-view');
+                      $span.find('>span').html('Hide');
+                    }
+                    // 2. cambia sfondo alla tile
+                    $tile.toggleClass('hiddenTile');
                   })
                   .fail(function(error) {
                     console.error(error);
@@ -229,7 +226,7 @@ define(
           container.html('<div class="loading-tiles"><img src="' + portalUrl + '/++resource++redturtle.tiles.management/loader.svg" alt="loading"/></div>');
         };
 
-        const loadManager = function(container) {
+        const loadManager = function(container, pattern) {
           const contentlUrl = $('body').data('baseUrl');
           const tilesInfosUrl = contentlUrl + '/tiles_management';
           addLoader(container);
@@ -247,7 +244,36 @@ define(
               enablePatterns(container);
               const addButton = container.find('.add-tile-btn');
               if (addButton.length > 0) {
+                const tiledata = JSON.parse(container.find('.tilesList').attr('data-tilesinfo'));
+                const $buttons = $('<div class="tileEditButtons" style="z-index:100000">' +
+                '    <a class="plone-btn plone-btn-info tileEditLink"' +
+                '      href="#">' +
+                '      <span class="icon-edit" aria-hidden="true"></span>' +
+                '    </a>' +
+                '    <a class="plone-btn plone-btn-warning tileVisibilityLink"' +
+                '      href="#">' +
+                '    </a>' +
+                '    <a class="plone-btn plone-btn-danger tileDeleteLink"' +
+                '      href="#">' +
+                '      <span class="icon-delete" aria-hidden="true">X</span>' +
+                '    </a>' +
+                '</div>');
+                const portal_url = $('body').data('baseUrl');
                 container.find('.tilesList .tileWrapper').each(function() {
+                  let $current_buttons = $buttons.clone();
+                  let tileid = $(this).data('tileid');
+                  this.setAttribute('data-token', tiledata[tileid].token);
+                  $current_buttons.find('.tileEditLink').attr('href', portal_url + '/@@edit-tile/' + tiledata[tileid].tile_type + '/' + tileid);
+                  $current_buttons.find('.tileVisibilityLink').attr('href', portal_url + '/@@show_hide_tiles?tileId=' + tileid + '&_authenticator=' + tiledata[tileid].token);
+                  if(tiledata[tileid].tile_hidden){
+                    $(this).addClass('hiddenTile');
+                    $current_buttons.find('.tileVisibilityLink').append($('<span class="icon-view" aria-hidden="true"><span class="sr-only">Show</span></span>'));
+                  }
+                  else{
+                    $current_buttons.find('.tileVisibilityLink').append($('<span class="glyphicon glyphicon-eye-close"  aria-hidden="true"><span class="sr-only">Hide</span></span>'));
+                  }
+                  $current_buttons.find('.tileDeleteLink').attr('href', portal_url + '/@@delete-tile/' + tiledata[tileid].tile_type + '/' + tileid);
+                  $(this).prepend($current_buttons);
                   container.find('.tileEditButtons').hide();
                   enableEditButtons(this);
                 });
