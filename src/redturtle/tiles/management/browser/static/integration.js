@@ -55,20 +55,22 @@ define(
             container = $button.next('.available-tiles');
             container.hide();
             container.load(url + ' #content .list-group', function() {
-              container.find('a.list-group-item').each(function() {
-                const addTileModal = new Modal($(this), {
-                  actionOptions: {
-                    redirectOnResponse: true
-                  }
+              if (useModal){
+                container.find('a.list-group-item').each(function() {
+                  const addTileModal = new Modal($(this), {
+                    actionOptions: {
+                      redirectOnResponse: true
+                    }
+                  });
+                  addTileModal.on('after-render', function() {
+                    $('form#add_tile').append(
+                      '<input type="hidden" name="managerId" value="' +
+                        managerId +
+                        '" />'
+                    );
+                  });
                 });
-                addTileModal.on('after-render', function() {
-                  $('form#add_tile').append(
-                    '<input type="hidden" name="managerId" value="' +
-                      managerId +
-                      '" />'
-                  );
-                });
-              });
+              }
 
               $(this).slideDown();
             });
