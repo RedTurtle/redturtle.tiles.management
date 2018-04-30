@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.1.3 (unreleased)
+1.1.3 (2018-04-30)
 ------------------
 
 - Fix data-tile urls generation to don't break subrequest rendering when there
