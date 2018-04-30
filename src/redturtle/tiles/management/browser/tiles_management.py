@@ -44,8 +44,7 @@ class BaseView(BrowserView):
             obj=self.context)
 
     def get_tile_url(self, tile):
-        return '{0}/@@{1}/{2}'.format(
-            self.context.absolute_url(),
+        return './@@{0}/{1}'.format(
             tile.get('tile_type'),
             tile.get('tile_id'))
 

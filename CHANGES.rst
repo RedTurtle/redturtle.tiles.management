@@ -5,7 +5,10 @@ Changelog
 1.1.3 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fix data-tile urls generation to don't break subrequest rendering when there
+  is a reverse proxy configuration with `_vh_ ` (https://github.com/plone/plone.subrequest/issues/17).
+  [cekk]
+
 
 
 1.1.2 (2018-03-16)
