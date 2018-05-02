@@ -5,7 +5,8 @@ Changelog
 1.1.4 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fix IE11 compatibility in js.
+  [cekk]
 
 
 1.1.3 (2018-04-30)

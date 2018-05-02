@@ -20,7 +20,7 @@ define(
         const _this = this;
         const managerId = this.options.managerId;
 
-        const customEventPolyfill = () => {
+        const customEventPolyfill = function() {
           if (typeof window.CustomEvent === 'function') return false;
 
           function CustomEvent(event, params) {
@@ -57,7 +57,8 @@ define(
               container.find('a.list-group-item').each(function() {
                 const addTileModal = new Modal($(this), {
                   actionOptions: {
-                    redirectOnResponse: true
+                    redirectOnResponse: true,
+                    redirectToUrl: window.location.href
                   }
                 });
                 addTileModal.on('after-render', function() {
