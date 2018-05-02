@@ -147,4 +147,4 @@ class TestTilesManagement(unittest.TestCase):
             request=self.request)
         self.assertEqual(
             tiles_view.get_tile_url(tile),
-            'http://nohost/plone/test-document/@@my.tile/firstTile')
+            './@@my.tile/firstTile')
