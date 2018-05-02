@@ -20,6 +20,30 @@ define(
         const _this = this;
         const managerId = this.options.managerId;
 
+        const isIE = function() {
+          var ua = window.navigator.userAgent;
+          var msie = ua.indexOf('MSIE ');
+          if (msie > 0) {
+              // IE 10 or older => return version number
+              return true;
+          }
+
+          var trident = ua.indexOf('Trident/');
+          if (trident > 0) {
+              // IE 11 => return version number
+              return true
+          }
+
+          var edge = ua.indexOf('Edge/');
+          if (edge > 0) {
+             // IE 12 (aka Edge) => return version number
+             return true
+          }
+
+          // other browser
+          return false;
+        }();
+
         const customEventPolyfill = function() {
           if (typeof window.CustomEvent === 'function') return false;
 
@@ -234,7 +258,12 @@ define(
           const contentlUrl = $('body').data('baseUrl');
           const tilesInfosUrl = contentlUrl + '/tiles_management';
           addLoader(container);
-          $.get(tilesInfosUrl, { managerId: managerId, ajax_load: true })
+          let options = {managerId: managerId, ajax_load: true };
+          console.log(isIE);
+          if (isIE) {
+            options.invalidIECache = new Date().getTime();
+          }
+          $.get(tilesInfosUrl, options)
             .done(function(data) {
               const html = $(data);
               if (!html.length) {
