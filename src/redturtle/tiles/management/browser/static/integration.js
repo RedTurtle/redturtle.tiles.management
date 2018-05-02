@@ -144,7 +144,11 @@ define(
             .each(function() {
               $(this).click(function(e) {
                 e.preventDefault();
-                $.get(e.currentTarget.href + '&managerId=' + managerId)
+                let options = {managerId: managerId, ajax_load: true };
+                if (isIE) {
+                  options.invalidIECache = new Date().getTime();
+                }
+                $.get(e.currentTarget.href, options)
                   .done(function(data) {
                     if (data !== undefined) {
                       const result = JSON.parse(data);
@@ -154,10 +158,11 @@ define(
 
                     const contentlUrl = $('body').data('baseUrl');
                     const tilesInfosUrl = contentlUrl + '/tiles_management';
-                    $.get(tilesInfosUrl, {
-                      managerId: managerId,
-                      ajax_load: true
-                    }).done(function(data) {
+                    let options = {managerId: managerId, ajax_load: true };
+                    if (isIE) {
+                      options.invalidIECache = new Date().getTime();
+                    }
+                    $.get(tilesInfosUrl, options).done(function(data) {
                       const tileId = $tile.data('tileid');
                       const html = $('<div></div>').html(data);
                       const newTile = html.find(
@@ -203,11 +208,16 @@ define(
                   return $(obj).data().tileid;
                 });
                 if (absoluteUrl !== undefined) {
-                  $.get(absoluteUrl + '/reorder_tiles', {
-                    tileIds: JSON.stringify(tileIds.get()),
-                    managerId: managerId,
-                    _authenticator: $el.data('token')
-                  })
+                  let options = {
+                      managerId: managerId,
+                      ajax_load: true,
+                      tileIds: JSON.stringify(tileIds.get()),
+                      _authenticator: $el.data('token')
+                  };
+                  if (isIE) {
+                    options.invalidIECache = new Date().getTime();
+                  }
+                  $.get(absoluteUrl + '/reorder_tiles', options)
                     .done(function(data) {
                       if (data && data !== '') {
                         const result = JSON.parse(data);
@@ -259,7 +269,6 @@ define(
           const tilesInfosUrl = contentlUrl + '/tiles_management';
           addLoader(container);
           let options = {managerId: managerId, ajax_load: true };
-          console.log(isIE);
           if (isIE) {
             options.invalidIECache = new Date().getTime();
           }
