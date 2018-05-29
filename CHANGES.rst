@@ -7,6 +7,7 @@ Changelog
 
 - Fix IE11 compatibility in js.
   [cekk]
+- Sorting not enabled on mobile [nzambello]
 
 
 1.1.3 (2018-04-30)
