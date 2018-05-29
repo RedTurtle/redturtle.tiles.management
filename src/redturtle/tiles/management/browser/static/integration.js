@@ -289,7 +289,7 @@ define('tiles-management-pattern', [
                 enableEditButtons(this);
               });
 
-              if (window.innerWidth >= 991) {
+              if (window.innerWidth > 991) {
                 enableSorting(container);
               }
 
