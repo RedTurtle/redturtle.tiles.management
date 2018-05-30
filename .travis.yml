@@ -9,7 +9,7 @@ env:
   - PLONE_VERSION=5.1.x
 before_install:
   - mkdir -p $HOME/buildout-cache/{eggs,downloads}
-  - pip install -r https://raw.githubusercontent.com/plone/buildout.coredev/5.1/requirements.txt
+  - pip install -r requirements.txt
 install:
   - sed -ie "s#plone-x.x.x.cfg#plone-$PLONE_VERSION.cfg#" buildout.cfg
   - buildout -N -t 3
