@@ -8,6 +8,7 @@ Changelog
 - Fix IE11 compatibility in js.
   [cekk]
 - Sorting not enabled on mobile [nzambello]
+- Removed container margin, it should be styled by themes, if needed [pnicolli]
 
 
 1.1.3 (2018-04-30)

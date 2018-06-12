@@ -1,10 +1,6 @@
-.pat-tiles-management {
-    margin: 1em 0;
-}
-
 div.loading-tiles {
-  text-align: center;
-  margin: 2em;
+    text-align: center;
+    margin: 2em;
 }
 
 .editableTiles .tileEditButtons {
