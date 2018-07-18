@@ -6,7 +6,7 @@ from plone.protect.authenticator import createToken
 from Products.Five import BrowserView
 from redturtle.tiles.management.interfaces import IRedturtleTilesManagementView
 from zope.interface import implementer
-from plone.memoize.view import memoize
+
 import json
 import logging
 
@@ -43,7 +43,7 @@ class BaseView(BrowserView):
         type, id = key.split('/')
         return {
             'tile_id': id,
-            'tile_type': type
+            'tile_type': type,
         }
 
     def canManageTiles(self):
