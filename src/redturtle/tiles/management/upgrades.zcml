@@ -17,13 +17,20 @@
         description="redturtle.tiles.management upgrade step"
         source="1100"
         destination="1200"
-        handler=".setuphandlers.to_1200"
+        handler=".setuphandlers.update_registry"
         profile="redturtle.tiles.management:default" />
   <gs:upgradeStep
         title="Upgrade redturtle.tiles.management 1300"
         description="redturtle.tiles.management upgrade step"
         source="1200"
         destination="1300"
-        handler=".setuphandlers.to_1300"
+        handler=".setuphandlers.update_registry"
+        profile="redturtle.tiles.management:default" />
+  <gs:upgradeStep
+        title="Upgrade redturtle.tiles.management 1400"
+        description="clean bundle compile date"
+        source="1300"
+        destination="1400"
+        handler=".setuphandlers.update_registry"
         profile="redturtle.tiles.management:default" />
 </configure>

@@ -32,7 +32,7 @@
     </value>
     <value key="jscompilation">++resource++redturtle.tiles.management/tiles-management-compiled.js</value>
     <value key="csscompilation">++resource++redturtle.tiles.management/tiles-management-compiled.css</value>
-    <value key="last_compilation">2018-05-14 00:00:00</value>
+    <value key="last_compilation">2018-04-14 00:00:00</value>
     <value key="compile">True</value>
     <value key="depends">plone</value>
     <value key="stub_js_modules">

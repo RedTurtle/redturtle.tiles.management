@@ -70,8 +70,8 @@ module.exports = function(grunt) {
     watch: {
       scripts: {
         files: [
-          `${productRoot}/static/integration.js`,
-          `${productRoot}/static/bundle.js`
+          `${productRoot}/integration.js`,
+          `${productRoot}/bundle.js`
         ],
         tasks: ['requirejs', 'uglify'],
         options: {
@@ -79,7 +79,7 @@ module.exports = function(grunt) {
         }
       },
       css: {
-        files: `${productRoot}/static/integration.css`,
+        files: `${productRoot}/integration.css`,
         tasks: ['cssmin'],
         options: {
           livereload: true

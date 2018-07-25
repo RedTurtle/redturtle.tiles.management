@@ -68,16 +68,8 @@ def to_1100(context):
     logger.info('migrated tiles')
 
 
-def to_1200(context):
+def update_registry(context):
     """
+    upgrade-step that updates registry
     """
-    logger.info('Upgrading redturtle.tiles.management to version 1200')
-    context.runImportStepFromProfile(default_profile, 'plone.app.registry')
-
-
-def to_1300(context):
-    """
-    Fix bundle compilation date
-    """
-    logger.info('Upgrading redturtle.tiles.management to version 1300')
     context.runImportStepFromProfile(default_profile, 'plone.app.registry')

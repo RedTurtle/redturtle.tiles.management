@@ -9,6 +9,23 @@ Changelog
   right now it's the single tile to handle it;
   this allow to use width class on tile
   [lucabel]
+1.1.4 (unreleased)
+------------------
+
+- Fix IE11 compatibility in js.
+  [cekk]
+- Sorting not enabled on mobile [nzambello]
+- Removed container margin, it should be styled by themes, if needed [pnicolli]
+- Fix z-index of tileEditButtons [fdelia]
+
+
+1.1.3 (2018-04-30)
+------------------
+
+- Fix data-tile urls generation to don't break subrequest rendering when there
+  is a reverse proxy configuration with `_vh_ ` (https://github.com/plone/plone.subrequest/issues/17).
+  [cekk]
+
 
 
 1.1.2 (2018-03-16)
