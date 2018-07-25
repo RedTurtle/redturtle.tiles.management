@@ -24,3 +24,4 @@ output.xml
 include/
 lib/
 pip-selfcheck.json
+package-lock.json
