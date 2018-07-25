@@ -56,7 +56,7 @@ define('tiles-management-pattern', [
             event,
             params.bubbles,
             params.cancelable,
-            params.detail
+            params.detail,
           );
           return evt;
         }
@@ -88,7 +88,7 @@ define('tiles-management-pattern', [
                   $('form#add_tile').append(
                     '<input type="hidden" name="managerId" value="' +
                       managerId +
-                      '" />'
+                      '" />',
                   );
                 });
               });
@@ -124,7 +124,7 @@ define('tiles-management-pattern', [
               $('form#delete_tile').append(
                 '<input type="hidden" name="managerId" value="' +
                   managerId +
-                  '" />'
+                  '" />',
               );
             });
           });
@@ -145,11 +145,11 @@ define('tiles-management-pattern', [
           $(this).click(function(e) {
             e.preventDefault();
             let $element = $(e.currentTarget);
-            let options = { managerId: managerId, ajax_load: true };
+            let options = {managerId: managerId, ajax_load: true};
             if (isIE) {
               options.invalidIECache = new Date().getTime();
             }
-            $.get(`${$element.attr('href')} &managerId=` + managerId, options)
+            $.get(`${$element.attr('href')}&managerId=${managerId}`, options)
               .done(function(data) {
                 if (data !== undefined) {
                   const result = JSON.parse(data);
@@ -261,7 +261,7 @@ define('tiles-management-pattern', [
         container.html(
           '<div class="loading-tiles"><img src="' +
             portalUrl +
-            '/++resource++redturtle.tiles.management/loader.svg" alt="loading"/></div>'
+            '/++resource++redturtle.tiles.management/loader.svg" alt="loading"/></div>',
         );
       };
 
@@ -269,7 +269,7 @@ define('tiles-management-pattern', [
         const contentlUrl = $('body').data('baseUrl');
         const tilesInfosUrl = contentlUrl + '/tiles_management';
         addLoader(container);
-        let options = { managerId: managerId, ajax_load: true };
+        let options = {managerId: managerId, ajax_load: true};
         if (isIE) {
           options.invalidIECache = new Date().getTime();
         }
@@ -288,7 +288,7 @@ define('tiles-management-pattern', [
             const addButton = container.find('.add-tile-btn');
             if (addButton.length > 0) {
               const tiledata = JSON.parse(
-                container.find('.tilesList').attr('data-tilesinfo')
+                container.find('.tilesList').attr('data-tilesinfo'),
               );
               const $buttons = $(
                 `<div class="tileEditButtons" style="z-index:100000">
@@ -300,7 +300,7 @@ define('tiles-management-pattern', [
                   <a class="plone-btn plone-btn-danger tileDeleteLink" href="#">
                     <span class="icon-delete" aria-hidden="true">&times;</span>
                   </a>
-                </div>`
+                </div>`,
               );
               const portal_url = $('body').data('baseUrl');
               container.find('.tilesList .tileWrapper').each(function() {
@@ -315,7 +315,7 @@ define('tiles-management-pattern', [
                       '/@@edit-tile/' +
                       tiledata[tileid].tile_type +
                       '/' +
-                      tileid
+                      tileid,
                   );
                 $current_buttons
                   .find('.tileVisibilityLink')
@@ -325,7 +325,7 @@ define('tiles-management-pattern', [
                       '/@@show_hide_tiles?tileId=' +
                       tileid +
                       '&_authenticator=' +
-                      tiledata[tileid].token
+                      tiledata[tileid].token,
                   );
                 if (tiledata[tileid].tile_hidden) {
                   $(this).addClass('hiddenTile');
@@ -333,16 +333,16 @@ define('tiles-management-pattern', [
                     .find('.tileVisibilityLink')
                     .append(
                       $(
-                        '<span class="icon-view" aria-hidden="true"><span class="sr-only">Show</span></span>'
-                      )
+                        '<span class="icon-view" aria-hidden="true"><span class="sr-only">Show</span></span>',
+                      ),
                     );
                 } else {
                   $current_buttons
                     .find('.tileVisibilityLink')
                     .append(
                       $(
-                        '<span class="glyphicon glyphicon-eye-close"  aria-hidden="true"><span class="sr-only">Hide</span></span>'
-                      )
+                        '<span class="glyphicon glyphicon-eye-close"  aria-hidden="true"><span class="sr-only">Hide</span></span>',
+                      ),
                     );
                 }
                 $current_buttons
@@ -353,7 +353,7 @@ define('tiles-management-pattern', [
                       '/@@delete-tile/' +
                       tiledata[tileid].tile_type +
                       '/' +
-                      tileid
+                      tileid,
                   );
                 $(this).prepend($current_buttons);
                 container.find('.tileEditButtons').hide();
@@ -379,14 +379,14 @@ define('tiles-management-pattern', [
             i18n.loadCatalog(domain);
             var _ = i18n.MessageFactory(domain);
             container.html(
-              '<p class="error-manager">' + _('error_loading_manager') + '</p>'
+              '<p class="error-manager">' + _('error_loading_manager') + '</p>',
             );
           });
       };
 
       if (!managerId) {
         _this.$el.append(
-          '<span>to use tiles manager, you need to provide a managerId attribute</span>'
+          '<span>to use tiles manager, you need to provide a managerId attribute</span>',
         );
       } else {
         loadManager(_this.$el);
