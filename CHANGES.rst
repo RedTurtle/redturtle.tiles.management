@@ -5,6 +5,13 @@ Changelog
 1.1.4 (unreleased)
 ------------------
 
+BREAKING CHANGES:
+
+- Handled tile sizing with a new button with styles given in controlpanel [nzambello]
+
+
+Other changes:
+
 - Fix IE11 compatibility in js.
   [cekk]
 - Sorting not enabled on mobile [nzambello]

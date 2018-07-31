@@ -25,6 +25,7 @@ def tileCreated(tile, event):
     new_tile = PersistentMapping()
     new_tile['tile_id'] = tile_id
     new_tile['tile_hidden'] = False
+    new_tile['tile_style'] = ''
 
     try:
         tile_type = re.search('@@(.*?)/', tile.url).group(1)

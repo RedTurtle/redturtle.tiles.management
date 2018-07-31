@@ -38,6 +38,7 @@ def update_tiles_list(brain):
         new_tile['tile_id'] = tile_infos['tile_id']
         new_tile['tile_type'] = tile_infos['tile_type']
         new_tile['tile_hidden'] = False
+        new_tile['tile_style'] = ''
         new_list.append(new_tile)
 
     # create new attribute and clear annotations

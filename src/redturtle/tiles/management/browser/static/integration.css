@@ -6,15 +6,36 @@ div.loading-tiles {
 .editableTiles .tileEditButtons {
     position: absolute;
     z-index: 100;
-    background: #FFF5CD;
+    /* background: #FFF5CD; */
     top: 15px;
     right: 15px;
+}
+
+.editableTiles .tileEditButtons .tileSizeLink {
+    display: inline-block;
+}
+
+.editableTiles .tileEditButtons .tileSizeLink a.btn-size {
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #2e6da4;
+}
+
+.editableTiles .tileEditButtons .tileSizeLink a.btn-size:hover,
+.editableTiles .tileEditButtons .tileSizeLink a.btn-size:focus {
+    color: #fff;
+    background-color: #286090;
+    border-color: #204d74;
+}
+
+.editableTiles .tileEditButtons .tileSizeLink a.btn-size:focus {
+    border-color: #122b40;
 }
 
 .editableTiles .tilesList > *:hover {
     cursor: move;
     cursor: -webkit-grab;
-    background: #FFF5CD;
+    background: #fff5cd;
 }
 
 .tilesList .tileWrapper {
@@ -27,14 +48,14 @@ div.loading-tiles {
 }
 
 .editableTiles .tileWrapper.hiddenTile:after {
-    content: "";
+    content: '';
     display: block;
     position: absolute;
     top: 0;
     left: 0;
     height: 100%;
     width: 100%;
-    background-color: rgba(239,239,239,0.5);
+    background-color: rgba(239, 239, 239, 0.5);
 }
 
 .available-tiles {

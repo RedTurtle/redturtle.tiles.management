@@ -136,46 +136,50 @@ define('tiles-management-pattern', [
           });
         });
 
-        $tile.find('div.tileEditButtons a.tileVisibilityLink').each(function() {
-          $(this).click(function(e) {
-            e.preventDefault();
-            let options = {managerId: managerId, ajax_load: true};
-            if (isIE) {
-              options.invalidIECache = new Date().getTime();
-            }
-            $.get(e.currentTarget.href, options)
-              .done(function(data) {
-                if (data !== undefined) {
-                  const result = JSON.parse(data);
-                  console.error(result.error);
-                  return;
-                }
-
-                const contentlUrl = $('body').data('baseUrl');
-                const tilesInfosUrl = contentlUrl + '/tiles_management';
-                let options = {managerId: managerId, ajax_load: true};
-                if (isIE) {
-                  options.invalidIECache = new Date().getTime();
-                }
-                $.get(tilesInfosUrl, options).done(function(data) {
-                  const tileId = $tile.data('tileid');
-                  const html = $('<div></div>').html(data);
-                  const newTile = html.find(
-                    '.tilesList .tileWrapper[data-tileid="' + tileId + '"]',
-                  );
-                  $tile.replaceWith(newTile);
-                  enableEditButtons(newTile);
-                  const container = newTile.parents('.tilesWrapper');
-                  if (container.length === 1) {
-                    enableSorting($(container[0]));
+        $tile
+          .find(
+            'div.tileEditButtons a.tileVisibilityLink, div.tileEditButtons .tileSizeLink a',
+          )
+          .each(function() {
+            $(this).click(function(e) {
+              e.preventDefault();
+              let options = {managerId: managerId, ajax_load: true};
+              if (isIE) {
+                options.invalidIECache = new Date().getTime();
+              }
+              $.get(e.currentTarget.href, options)
+                .done(function(data) {
+                  if (data !== undefined) {
+                    const result = JSON.parse(data);
+                    console.error(result.error);
+                    return;
                   }
+
+                  const contentlUrl = $('body').data('baseUrl');
+                  const tilesInfosUrl = contentlUrl + '/tiles_management';
+                  let options = {managerId: managerId, ajax_load: true};
+                  if (isIE) {
+                    options.invalidIECache = new Date().getTime();
+                  }
+                  $.get(tilesInfosUrl, options).done(function(data) {
+                    const tileId = $tile.data('tileid');
+                    const html = $('<div></div>').html(data);
+                    const newTile = html.find(
+                      '.tilesList .tileWrapper[data-tileid="' + tileId + '"]',
+                    );
+                    $tile.replaceWith(newTile);
+                    enableEditButtons(newTile);
+                    const container = newTile.parents('.tilesWrapper');
+                    if (container.length === 1) {
+                      enableSorting($(container[0]));
+                    }
+                  });
+                })
+                .fail(function(error) {
+                  console.error(error);
                 });
-              })
-              .fail(function(error) {
-                console.error(error);
-              });
+            });
           });
-        });
 
         $tile
           .mouseenter(function() {
@@ -278,10 +282,13 @@ define('tiles-management-pattern', [
               return;
             }
             container.html($(data));
+
             //throw custom event to notify when tiles are loaded
             var event = new CustomEvent('rtTilesLoaded');
             container[0].dispatchEvent(event);
+
             enablePatterns(container);
+
             const addButton = container.find('.add-tile-btn');
             if (addButton.length > 0) {
               container.find('.tilesList .tileWrapper').each(function() {

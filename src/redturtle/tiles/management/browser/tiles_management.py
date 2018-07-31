@@ -105,3 +105,33 @@ class ShowHideTilesView(BrowserView):
         except Exception as e:
             logger.exception(e)
             return json.dumps({'error': e.message})
+
+
+class ResizeTilesView(BrowserView):
+    """
+    Adds data to the wrapper to handle sizes (i.e.: in columns), which can be
+    defined in the control panel
+    """
+
+    def __call__(self):
+        tileId = self.request.form.get('tileId')
+        managerId = self.request.form.get('managerId', 'defaultManager')
+        style = self.request.form.get('style', '')
+
+        if not tileId:
+            return ''
+
+        context = aq_base(self.context)
+        tiles_list = getattr(context, 'tiles_list', None)
+
+        if not tiles_list:
+            return ''
+
+        try:
+            for tile in tiles_list.get(managerId, []):
+                if tile.get('tile_id') == tileId:
+                    tile['tile_style'] = style
+            return ''
+        except Exception as e:
+            logger.exception(e)
+            return json.dumps({'error': e.message})
