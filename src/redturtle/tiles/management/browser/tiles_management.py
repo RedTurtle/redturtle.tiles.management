@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 from Acquisition import aq_base
 from plone import api
+from plone.api.exc import InvalidParameterError
 from plone.app.blocks.interfaces import IBlocksTransformEnabled
 from plone.protect.authenticator import createToken
 from Products.Five import BrowserView
 from redturtle.tiles.management.interfaces import IRedturtleTilesManagementView
+from redturtle.tiles.management.interfaces import IRedturtleTilesManagementSettings # noqa
 from zope.interface import implementer
 
 import json
@@ -31,7 +33,7 @@ class BaseView(BrowserView):
         type, id = key.split('/')
         return {
             'tile_id': id,
-            'tile_type': type
+            'tile_type': type,
         }
 
     def canManageTiles(self):
@@ -47,6 +49,34 @@ class BaseView(BrowserView):
         return './@@{0}/{1}'.format(
             tile.get('tile_type'),
             tile.get('tile_id'))
+
+    def get_tile_size_settings(self):
+        try:
+            return api.portal.get_registry_record(
+                'tile_size_css_class',
+                interface=IRedturtleTilesManagementSettings,
+            )
+        except InvalidParameterError:
+            logger.info('ciao')
+            return []
+
+    def get_tile_size_classes(self):
+        sizes = self.get_tile_size_settings()
+        res = []
+        for size in sizes:
+            try:
+                display_name, css_class = size.split('|')
+                res.append({
+                    'display_name': display_name,
+                    'css_class': css_class,
+                })
+            except ValueError:
+                logger.warning(
+                        '[RedTurtle Tiles Management Tile Size Classes] '
+                        '- skipped entry "{0}"'
+                        ' because is malformed. Check it in control panel.')
+                continue
+        return res
 
     def getToken(self):
         return createToken()

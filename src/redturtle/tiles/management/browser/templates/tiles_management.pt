@@ -12,7 +12,8 @@
       </a>
     </div>
     <div class="tilesList"
-         tal:define="token view/getToken"
+         tal:define="token view/getToken;
+                     available_styles view/get_tile_size_classes"
          tal:condition="tiles">
       <tal:tile repeat="tile tiles">
         <div tal:define="tile_hidden python:tile.get('tile_hidden', False);
@@ -36,10 +37,9 @@
                 <i class="glyphicon glyphicon-resize-horizontal" aria-hidden="true"></i>
               </button>
               <ul class="dropdown-menu" aria-labelledby="tile-resize-${tile_id}">
-                <!-- TODO: da rendere dinamico -->
-                <li><a href="${context/absolute_url}/@@resize_tiles?tileId=${tile_id}&style=&_authenticator=${token}">reset</a></li>
-                <li><a href="${context/absolute_url}/@@resize_tiles?tileId=${tile_id}&style=colonna-1-di-2&_authenticator=${token}">colonna 1 di 2</a></li>
-                <li><a href="${context/absolute_url}/@@resize_tiles?tileId=${tile_id}&style=colonna-1-di-3&_authenticator=${token}">colonna 1 di 3</a></li>
+                <li tal:repeat="style available_styles">
+                  <a href="${context/absolute_url}/@@resize_tiles?tileId=${tile_id}&style=${style/css_class}&_authenticator=${token}">${style/display_name}</a>
+                </li>
               </ul>
             </div>
             <a class="plone-btn plone-btn-info tileEditLink"
