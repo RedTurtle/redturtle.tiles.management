@@ -20,6 +20,7 @@ Features
 
 - Simple UI to add/remove/edit registered tiles
 - Tiles sorting with drag-and-drop (thanks to mockup)
+- Tiles resizing (with default or custom CSS classes)
 - Tile manager is a pattern that can be included in every custom page
 - **plone.layoutaware** behavior enabled for Documents
 - Example *tiles_view* view available for all objects with "plone.layoutaware" behavior enabled
@@ -47,6 +48,18 @@ You can configure a list of addable tiles for this manager in Plone's control pa
 http://yoursite/@@tiles-management-settings
 
 In the "Add new tile" menu you'll see this list filtered also by single tiles permission.
+
+
+Tile resizing
+-------------
+
+If you want two tiles in a row, from tile control buttons select a style in the "resize" dropdown.
+There are two default styles:
+
+- reset (with no CSS classes)
+- two tiles in a row (`half-width` class)
+
+These CSS classes can be configured in control panel.
 
 
 JS Development and bundling
