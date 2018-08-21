@@ -50,6 +50,7 @@ class IRedturtleTilesManagementSettings(Interface):
         required=False,
         default=[
             'reset|',
+            'two tiles in a row|half-width',
         ],
         missing_value=[],
         value_type=schema.TextLine(),
