@@ -41,6 +41,7 @@ class TestTilesCreation(unittest.TestCase):
                     'tile_type': 'my.tile',
                     'tile_id': 'firstTile',
                     'tile_hidden': False,
+                    'tile_style': '',
                 }
             ]
         }
@@ -55,7 +56,8 @@ class TestTilesCreation(unittest.TestCase):
         resStructure['defaultManager'].append({
             'tile_type': 'alt.tile',
             'tile_id': 'secondTile',
-            'tile_hidden': False
+            'tile_hidden': False,
+            'tile_style': ''
         })
         self.assertEqual(self.document.tiles_list, resStructure)
 
@@ -79,11 +81,13 @@ class TestTilesCreation(unittest.TestCase):
                     'tile_type': 'my.tile',
                     'tile_id': 'firstTile',
                     'tile_hidden': False,
+                    'tile_style': '',
                 },
                 {
                     'tile_type': 'alt.tile',
                     'tile_id': 'secondTile',
                     'tile_hidden': False,
+                    'tile_style': '',
                 }
             ]
         }

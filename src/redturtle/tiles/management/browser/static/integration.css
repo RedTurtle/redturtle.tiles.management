@@ -6,20 +6,55 @@ div.loading-tiles {
 .editableTiles .tileEditButtons {
     position: absolute;
     z-index: 100;
-    background: #FFF5CD;
+    /* background: #FFF5CD; */
     top: 15px;
     right: 15px;
+}
+
+.editableTiles .tileEditButtons .tileSizeLink {
+    display: inline-block;
+}
+
+.editableTiles .tileEditButtons .tileSizeLink a.btn-size {
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #2e6da4;
+}
+
+.editableTiles .tileEditButtons .tileSizeLink a.btn-size:hover,
+.editableTiles .tileEditButtons .tileSizeLink a.btn-size:focus {
+    color: #fff;
+    background-color: #286090;
+    border-color: #204d74;
+}
+
+.editableTiles .tileEditButtons .tileSizeLink a.btn-size:focus {
+    border-color: #122b40;
 }
 
 .editableTiles .tilesList > *:hover {
     cursor: move;
     cursor: -webkit-grab;
-    background: #FFF5CD;
+    background: #fff5cd;
+}
+
+.tilesList {
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: (1fr)[12];
+        grid-template-columns: repeat(12, 1fr);
 }
 
 .tilesList .tileWrapper {
     clear: both;
     position: relative;
+    -ms-grid-column-span: 12;
+    grid-column: span 12;
+}
+
+.tilesList .tileWrapper.half-width {
+    -ms-grid-column-span: 6;
+    grid-column: span 6;
 }
 
 .editableTiles .tileWrapper.hiddenTile {
@@ -27,14 +62,14 @@ div.loading-tiles {
 }
 
 .editableTiles .tileWrapper.hiddenTile:after {
-    content: "";
+    content: '';
     display: block;
     position: absolute;
     top: 0;
     left: 0;
     height: 100%;
     width: 100%;
-    background-color: rgba(239,239,239,0.5);
+    background-color: rgba(239, 239, 239, 0.5);
 }
 
 .available-tiles {
@@ -46,14 +81,18 @@ div.loading-tiles {
     margin: 0;
     list-style: none;
     display: -webkit-box;
-    display: -moz-box;
     display: -ms-flexbox;
     display: -webkit-flex;
     display: flex;
     -webkit-flex-flow: row wrap;
     -ms-flex-flow: row wrap;
-    flex-flow: row wrap;
-    justify-content: flex-start;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+            flex-flow: row wrap;
+    -webkit-box-pack: start;
+    -webkit-justify-content: flex-start;
+        -ms-flex-pack: start;
+            justify-content: flex-start;
 }
 
 .available-tiles .list-group a.list-group-item {
@@ -68,3 +107,5 @@ div.loading-tiles {
 .available-tiles a.list-group-item small {
     display: block;
 }
+
+/*# sourceMappingURL=integration.css.map */

@@ -33,4 +33,11 @@
         destination="1400"
         handler=".setuphandlers.update_registry"
         profile="redturtle.tiles.management:default" />
+  <gs:upgradeStep
+        title="Upgrade redturtle.tiles.management 1500"
+        description="added field in controlpanel for tile sizes CSS classes"
+        source="1400"
+        destination="1500"
+        handler=".setuphandlers.update_registry"
+        profile="redturtle.tiles.management:default" />
 </configure>

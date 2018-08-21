@@ -68,6 +68,14 @@
       layer="redturtle.tiles.management.interfaces.IRedturtleTilesManagementLayer"
       />
 
+  <browser:page
+      name="resize_tiles"
+      for="plone.app.blocks.layoutbehavior.ILayoutBehaviorAdaptable"
+      class=".tiles_management.ResizeTilesView"
+      permission="tiles.management.ManageTiles"
+      layer="redturtle.tiles.management.interfaces.IRedturtleTilesManagementLayer"
+      />
+
   <!-- Custom Traversal views -->
   <configure package="plone.app.tiles.browser">
     <browser:page

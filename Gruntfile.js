@@ -67,6 +67,23 @@ module.exports = function(grunt) {
         }
       }
     },
+    postcss: {
+      options: {
+        map: {
+          inline: false,
+        },
+        processors: [
+          require('autoprefixer')({
+            grid: true,
+            browsers: ['last 2 versions', 'ie >= 11', 'iOS >= 6'],
+          }),
+          require('postcss-flexbugs-fixes')(),
+        ]
+      },
+      dist: {
+        src: [`${productRoot}/integration.css`],
+      },
+    },
     watch: {
       scripts: {
         files: [
@@ -80,7 +97,7 @@ module.exports = function(grunt) {
       },
       css: {
         files: `${productRoot}/integration.css`,
-        tasks: ['cssmin'],
+        tasks: ['postcss', 'cssmin'],
         options: {
           livereload: true
         }
@@ -89,5 +106,5 @@ module.exports = function(grunt) {
   });
 
   grunt.registerTask('default', ['watch']);
-  grunt.registerTask('compile', ['cssmin', 'requirejs', 'babel', 'uglify']);
+  grunt.registerTask('compile', ['postcss', 'cssmin', 'requirejs', 'babel', 'uglify']);
 };

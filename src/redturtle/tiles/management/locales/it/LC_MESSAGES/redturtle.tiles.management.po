@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2017-08-16 09:43+0000\n"
+"POT-Creation-Date: 2018-08-01 13:09+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,30 +17,54 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: redturtle.tiles.management\n"
 
-#: ../browser/traversal.py:41
+#: ../browser/traversal.py:36
 msgid "Edit"
 msgstr "Modifica"
 
-#: ../browser/traversal.py:45
+#: ../configure.zcml:33
+msgid "Installs the redturtle.tiles.management add-on."
+msgstr ""
+
+#: ../configure.zcml:33
+msgid "RedTurtle: Tiles management"
+msgstr ""
+
+#: ../configure.zcml:49
+msgid "RedTurtle: Tiles management uninstall"
+msgstr ""
+
+#: ../configure.zcml:56
+msgid "RedTurtle: Tiles management upgrade profile to 1100"
+msgstr ""
+
+#: ../browser/traversal.py:40
 msgid "Remove"
 msgstr "Rimuovi"
 
-#: ../browser/configure.zcml
+#: ../configure.zcml:49
+msgid "Uninstalls the redturtle.tiles.management add-on."
+msgstr ""
+
+#: ../configure.zcml:56
+msgid "Upgrades the redturtle.tiles.management add-on."
+msgstr ""
+
+#: ../browser/configure.zcml:45
 msgid "View with tiles"
 msgstr "Vista con tiles"
 
 #. Default: "Add new tile"
-#: ../browser/templates/tiles_management.pt:28
+#: ../browser/templates/tiles_management.pt:11
 msgid "add_new_tile_label"
 msgstr "Aggiungi nuova tile"
 
 #. Default: "Select a list of tiles to add."
-#: ../interfaces.py:27
+#: ../interfaces.py:25
 msgid "enabled_tiles_help"
 msgstr "Seleziona una lista di tile da aggiungere."
 
 #. Default: "Enabled tiles"
-#: ../interfaces.py:25
+#: ../interfaces.py:23
 msgid "enabled_tiles_label"
 msgstr "Tile abilitate"
 
@@ -49,14 +73,24 @@ msgid "error_loading_manager"
 msgstr "C'è stato un errore nel caricamento dei contenuti"
 
 #. Default: "<span class=\"sr-only\">Hide</span>"
-#: ../browser/templates/tiles_management.pt:51
+#: ../browser/templates/tiles_management.pt:52
 msgid "hide_label"
 msgstr "<span class=\"sr-only\">Nascondi</span>"
 
 #. Default: "<span class=\"sr-only\">Show</span>"
-#: ../browser/templates/tiles_management.pt:50
+#: ../browser/templates/tiles_management.pt:51
 msgid "show_label"
 msgstr "<span class=\"sr-only\">Mostra</span>"
+
+#. Default: "CSS Classes for tile sizes"
+#: ../interfaces.py:36
+msgid "size_css_classes"
+msgstr "Classi CSS per le dimensioni delle tile"
+
+#. Default: "List of CSS classes to resize the tile.These are used in the size button in tilemanagement.\nThe default style is \"reset\". It will add an empty string as CSS class and the tile will take the whole width.\nInsert a list of values (one per row) in the following form: display_name|css_class where display_name is the string to show to the user and css_class is the class will be applied to the tile"
+#: ../interfaces.py:38
+msgid "size_css_classes_descriptions"
+msgstr "Una lista di classi CSS per ridimensionare la tile. Queste verranno usate nel bottone delle dimensioni nella gestione delle tile.\nLo stile di default é `reset`. Aggiungerà una stringa vuota come classe CSS con l'effetto di lasciare alla tile tutta la larghezza.\nInserisci una lista di valori (uno per riga) nella seguente forma: display_name|css_class dove display_name è la stringa da mostrare all'utente e css_class è la classe da applicare alla tile."
 
 #. Default: "Tiles Management Settings"
 #: ../browser/controlpanel.py:11

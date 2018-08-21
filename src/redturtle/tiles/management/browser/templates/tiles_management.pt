@@ -1,4 +1,3 @@
-
 <metal:block define-macro="tiles-macro">
   <div tal:attributes="class python:canManageTiles and 'editableTiles tilesWrapper' or 'tilesWrapper'"
        i18n:domain="redturtle.tiles.management"
@@ -13,31 +12,48 @@
       </a>
     </div>
     <div class="tilesList"
-         tal:define="token view/getToken"
+         tal:define="token view/getToken;
+                     available_styles view/get_tile_size_classes"
          tal:condition="tiles">
       <tal:tile repeat="tile tiles">
         <div tal:define="tile_hidden python:tile.get('tile_hidden', False);
                          tile_type python:tile.get('tile_type', '');
-                         tile_id python:tile.get('tile_id', '')"
+                         tile_style python:tile.get('tile_style', '');
+                         tile_id python:tile.get('tile_id', '');
+                         tile_css_class python:(tile_hidden and 'hiddenTile' or '') + tile_style"
              tal:attributes="data-tileid python:canManageTiles and tile_id or '';
                              data-tiletype python:canManageTiles and tile_type or '';
                              data-tilehidden python:canManageTiles and tile_hidden or '';
-                             data-token python:canManageTiles and token or '';
-                             class python:tile_hidden and 'tileWrapper hiddenTile' or 'tileWrapper'"
-             class="tileWrapper">
+                             data-token python:canManageTiles and token or ''"
+             class="tileWrapper ${tile_css_class}">
           <div class="tileEditButtons" tal:condition="canManageTiles">
+            <div class="tileSizeLink">
+              <button class="plone-btn btn-size dropdown-toggle"
+                      type="button"
+                      data-toggle="dropdown"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                      id="tile-resize-${tile_id}">
+                <i class="glyphicon glyphicon-resize-horizontal" aria-hidden="true"></i>
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="tile-resize-${tile_id}">
+                <li tal:repeat="style available_styles">
+                  <a href="${context/absolute_url}/@@resize_tiles?tileId=${tile_id}&style=${style/css_class}&_authenticator=${token}">${style/display_name}</a>
+                </li>
+              </ul>
+            </div>
             <a class="plone-btn plone-btn-info tileEditLink"
                href="${context/absolute_url}/@@edit-tile/${tile_type}/${tile_id}">
-              <span class="icon-edit" aria-hidden="true"></span>
+              <i class="glyphicon glyphicon-pencil" aria-hidden="true"></i>
             </a>
             <a class="plone-btn plone-btn-warning tileVisibilityLink" tal:attributes="class python:tile_hidden and 'plone-btn plone-btn-warning tileVisibilityLink show-tile' or 'plone-btn plone-btn-warning tileVisibilityLink hide-tile'"
                href="${context/absolute_url}/@@show_hide_tiles?tileId=${tile_id}&_authenticator=${token}">
-              <span class="icon-view" tal:condition="tile_hidden" i18n:translate="show_label" aria-hidden="true"><span class="sr-only">Show</span></span>
-              <span class="glyphicon glyphicon-eye-close" tal:condition="not:tile_hidden" i18n:translate="hide_label" aria-hidden="true"><span class="sr-only">Hide</span></span>
+              <i class="glyphicon glyphicon-eye-open" tal:condition="tile_hidden" i18n:translate="show_label" aria-hidden="true"><span class="sr-only">Show</span></i>
+              <i class="glyphicon glyphicon-eye-close" tal:condition="not:tile_hidden" i18n:translate="hide_label" aria-hidden="true"><span class="sr-only">Hide</span></i>
             </a>
             <a class="plone-btn plone-btn-danger tileDeleteLink"
                href="${context/absolute_url}/@@delete-tile/${tile_type}/${tile_id}">
-              <span class="icon-delete" aria-hidden="true">X</span>
+              <i class="glyphicon glyphicon-remove" aria-hidden="true"></i>
             </a>
           </div>
           <div tal:attributes="data-tile python:view.get_tile_url(tile)" />
