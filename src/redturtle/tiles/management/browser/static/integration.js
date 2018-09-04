@@ -170,7 +170,7 @@ define('tiles-management-pattern', [
                     $tile.replaceWith(newTile);
                     enableEditButtons(newTile);
                     const container = newTile.parents('.tilesWrapper');
-                    if (container.length === 1) {
+                    if (container.length === 1 && window.innerWidth > 991) {
                       enableSorting($(container[0]));
                     }
                   });

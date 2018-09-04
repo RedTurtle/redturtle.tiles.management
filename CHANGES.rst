@@ -5,7 +5,7 @@ Changelog
 1.2.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Sorting not enabled on mobile while adding new tile, too [nzambello]
 
 
 1.2.0 (2018-08-21)
