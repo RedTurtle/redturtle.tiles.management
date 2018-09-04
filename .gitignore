@@ -24,3 +24,5 @@ output.xml
 include/
 lib/
 pip-selfcheck.json
+local/
+man/
