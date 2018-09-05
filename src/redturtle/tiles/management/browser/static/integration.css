@@ -43,12 +43,17 @@ div.loading-tiles {
     position: relative;
 }
 
+.tilesList .tileWrapper.half-width {
+    width: 50%;
+    float: left;
+}
+
 @supports (display: grid) {
     .tilesList {
         display: -ms-grid;
         display: grid;
         -ms-grid-columns: (1fr)[12];
-            grid-template-columns: repeat(12, 1fr);
+        grid-template-columns: repeat(12, 1fr);
     }
 
     .tilesList .tileWrapper {
@@ -59,13 +64,8 @@ div.loading-tiles {
     .tilesList .tileWrapper.half-width {
         -ms-grid-column-span: 6;
         grid-column: span 6;
-    }
-}
-
-@supports not (display: grid) {
-    .tilesList .tileWrapper.half-width {
-        width: 50%;
-        float: left;
+        width: 100%;
+        float: none;
     }
 }
 
