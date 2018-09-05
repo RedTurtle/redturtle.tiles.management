@@ -6,6 +6,7 @@ Changelog
 ------------------
 
 - Sorting not enabled on mobile while adding new tile, too [nzambello]
+- Fix for IE: used width/float instead of grid [nzambello]
 
 
 1.2.0 (2018-08-21)
