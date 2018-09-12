@@ -22,7 +22,7 @@ def test_suite():
         suite.addTests([
             layered(
                 robottestsuite,
-                layer=REDTURTLE_TILES_MANAGEMENT_ACCEPTANCE_TESTING
+                layer=REDTURTLE_TILES_MANAGEMENT_ACCEPTANCE_TESTING,
             ),
         ])
     return suite

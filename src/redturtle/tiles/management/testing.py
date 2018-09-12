@@ -26,13 +26,13 @@ REDTURTLE_TILES_MANAGEMENT_FIXTURE = RedturtleTilesManagementLayer()
 
 REDTURTLE_TILES_MANAGEMENT_INTEGRATION_TESTING = IntegrationTesting(
     bases=(REDTURTLE_TILES_MANAGEMENT_FIXTURE,),
-    name='RedturtleTilesManagementLayer:IntegrationTesting'
+    name='RedturtleTilesManagementLayer:IntegrationTesting',
 )
 
 
 REDTURTLE_TILES_MANAGEMENT_FUNCTIONAL_TESTING = FunctionalTesting(
     bases=(REDTURTLE_TILES_MANAGEMENT_FIXTURE,),
-    name='RedturtleTilesManagementLayer:FunctionalTesting'
+    name='RedturtleTilesManagementLayer:FunctionalTesting',
 )
 
 
@@ -40,7 +40,7 @@ REDTURTLE_TILES_MANAGEMENT_ACCEPTANCE_TESTING = FunctionalTesting(
     bases=(
         REDTURTLE_TILES_MANAGEMENT_FIXTURE,
         REMOTE_LIBRARY_BUNDLE_FIXTURE,
-        z2.ZSERVER_FIXTURE
+        z2.ZSERVER_FIXTURE,
     ),
-    name='RedturtleTilesManagementLayer:AcceptanceTesting'
+    name='RedturtleTilesManagementLayer:AcceptanceTesting',
 )

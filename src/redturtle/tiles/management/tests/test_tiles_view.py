@@ -96,8 +96,8 @@ class TestTilesManagement(unittest.TestCase):
                 {
                     'tile_id': 'firstTile',
                     'tile_type': 'my.tile',
-                }
-            ]
+                },
+            ],
         }
         self.document.tiles_list = tiles_list
         tiles_view = api.content.get_view(
@@ -114,7 +114,7 @@ class TestTilesManagement(unittest.TestCase):
                 {
                     'tile_id': 'firstTile',
                     'tile_type': 'my.tile',
-                }
+                },
             ],
             'alternative': [
                 {
@@ -124,8 +124,8 @@ class TestTilesManagement(unittest.TestCase):
                 {
                     'tile_id': 'secondAlternativeTile',
                     'tile_type': 'my.othertile.alternative',
-                }
-            ]
+                },
+            ],
         }
         self.document.tiles_list = tiles_list
         self.request.form['managerId'] = 'alternative'

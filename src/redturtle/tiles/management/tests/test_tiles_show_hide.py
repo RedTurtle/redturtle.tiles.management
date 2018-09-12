@@ -64,7 +64,7 @@ class TestTilesShowHide(unittest.TestCase):
     def test_hide_tile(self):
         self.request.form = {
             'tileId': 'firstTile',
-            'managerId': 'defaultManager'
+            'managerId': 'defaultManager',
         }
 
         tiles_view = api.content.get_view(
