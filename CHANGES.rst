@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.2.2 (unreleased)
+1.2.2 (2018-09-12)
 ------------------
 
 - Fix code-style
