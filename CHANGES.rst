@@ -5,8 +5,8 @@ Changelog
 1.2.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Fix code-style
+  [cekk]
 
 1.2.1 (2018-09-12)
 ------------------
@@ -36,9 +36,8 @@ Other changes:
 ------------------
 
 - Fix data-tile urls generation to don't break subrequest rendering when there
-  is a reverse proxy configuration with `_vh_ ` (https://github.com/plone/plone.subrequest/issues/17).
+  is a reverse proxy configuration with _vh_ (https://github.com/plone/plone.subrequest/issues/17).
   [cekk]
-
 
 
 1.1.2 (2018-03-16)
