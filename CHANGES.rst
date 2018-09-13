@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.2.3 (unreleased)
+1.2.3 (2018-09-13)
 ------------------
 
 - Added styles for tile size button dropdown [nzambello]
