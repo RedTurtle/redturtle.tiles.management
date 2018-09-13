@@ -5,7 +5,7 @@ Changelog
 1.2.3 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Added styles for tile size button dropdown [nzambello]
 
 
 1.2.2 (2018-09-12)
