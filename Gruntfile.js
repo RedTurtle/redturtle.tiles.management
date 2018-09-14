@@ -90,7 +90,7 @@ module.exports = function(grunt) {
           `${productRoot}/integration.js`,
           `${productRoot}/bundle.js`
         ],
-        tasks: ['requirejs', 'uglify'],
+        tasks: ['requirejs', 'babel', 'uglify'],
         options: {
           livereload: true
         }

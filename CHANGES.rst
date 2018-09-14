@@ -5,7 +5,8 @@ Changelog
 1.2.4 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Increase modal timeout.
+  [cekk]
 
 
 1.2.3 (2018-09-13)
