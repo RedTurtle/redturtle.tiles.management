@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.2.4 (unreleased)
+1.2.4 (2018-09-14)
 ------------------
 
 - Increase modal timeout.
