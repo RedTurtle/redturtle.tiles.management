@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-0.2.2 (unreleased)
+0.2.2 (2018-10-12)
 ------------------
 
 - Tiles no more need to expose tile_id. Now is handled in the template.
