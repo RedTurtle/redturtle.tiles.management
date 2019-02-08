@@ -13,6 +13,9 @@ from zope.schema.interfaces import IVocabularyFactory
 
 
 class AddTile(BaseView):
+    def keyfunction(self, tile):
+        """Key for comparison by last name"""
+        return tile.title
 
     @memoize
     def tileTypes(self):
@@ -24,22 +27,20 @@ class AddTile(BaseView):
 
         factory = getUtility(
             IVocabularyFactory,
-            name='tiles.management.vocabularies.FilteredTiles')
+            name='tiles.management.vocabularies.FilteredTiles',
+        )
         vocabulary = factory(self.context)
         for item in vocabulary:
             tiletype = item.value
             # tile actions
             # TODO: read from registry  # noqa
-            tiletype.actions = [{
-                'name': 'edit',
-                'url': '@@edit-tile',
-                'title': _('Edit'),
-            }, {
-                'name': 'remove',
-                'url': '@@delete-tile',
-                'title': _('Remove'),
-            }]
+            tiletype.actions = [
+                {'name': 'edit', 'url': '@@edit-tile', 'title': _('Edit')},
+                {
+                    'name': 'remove',
+                    'url': '@@delete-tile',
+                    'title': _('Remove'),
+                },
+            ]
             tiles.append(tiletype)
-
-        tiles.sort(self.tileSortKey)
-        return tiles
+        return sorted(tiles, key=self.keyfunction)
