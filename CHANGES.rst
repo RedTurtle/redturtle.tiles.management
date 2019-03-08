@@ -5,7 +5,8 @@ Changelog
 1.2.5 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Added server side rendering of tiles when not logged in
+  [pnicolli]
 
 
 1.2.4 (2018-09-14)

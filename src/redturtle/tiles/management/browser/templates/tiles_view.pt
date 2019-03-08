@@ -8,12 +8,18 @@
 
   <body>
     <metal:content-core fill-slot="content-core">
-      <metal:content-core define-macro="content-core">
+      <metal:content-core define-macro="content-core"
+                          tal:define="isAnon context/@@plone_portal_state/anonymous;">
         <div class="content-text"
           tal:condition="context/text"
           tal:content="structure python:context.text.output_relative_to(view.context)"/>
-        <div class="pat-tiles-management"
-             data-pat-tiles-management="managerId:defaultManager" />
+        <tal:anon condition="isAnon">
+          <div class="tiles-management" tal:content="structure context/@@tiles_management"></div>
+        </tal:anon>
+        <tal:auth condition="not:isAnon">
+          <div class="pat-tiles-management tiles-management"
+               data-pat-tiles-management="managerId:defaultManager" />
+        </tal:auth>
       </metal:content-core>
     </metal:content-core>
   </body>

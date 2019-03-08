@@ -29,7 +29,7 @@
   <browser:page
       name="tiles_view"
       for="plone.app.blocks.layoutbehavior.ILayoutBehaviorAdaptable"
-      template="templates/tiles_view.pt"
+      class=".tiles_view.TilesView"
       permission="zope2.View"
       layer="redturtle.tiles.management.interfaces.IRedturtleTilesManagementLayer"
       />
