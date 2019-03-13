@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.2.5 (unreleased)
+1.2.5 (2019-03-13)
 ------------------
 
 - Added server side rendering of tiles when not logged in
