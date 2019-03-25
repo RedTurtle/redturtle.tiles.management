@@ -2,10 +2,17 @@ Changelog
 =========
 
 
-1.2.5 (unreleased)
+1.2.6 (unreleased)
 ------------------
 
 - Nothing changed yet.
+
+
+1.2.5 (2019-03-13)
+------------------
+
+- Added server side rendering of tiles when not logged in
+  [pnicolli]
 
 
 1.2.4 (2018-09-14)
