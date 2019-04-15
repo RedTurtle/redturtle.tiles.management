@@ -2,10 +2,11 @@ Changelog
 =========
 
 
-1.2.6 (unreleased)
+1.3.0 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Add Python3 compatibility.
+  [cekk]
 
 
 1.2.5 (2019-03-13)
