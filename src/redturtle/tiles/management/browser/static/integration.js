@@ -281,7 +281,7 @@ define('tiles-management-pattern', [
         addLoader(container);
         let options = {
           managerId: managerId,
-          ajax_load: true,
+          ajax_load: true
         };
         if (isIE) {
             options.invalidIECache = new Date().getTime();
