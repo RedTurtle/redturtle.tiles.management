@@ -6,7 +6,9 @@ from plone.app.blocks.interfaces import IBlocksTransformEnabled
 from plone.protect.authenticator import createToken
 from Products.Five import BrowserView
 from redturtle.tiles.management.interfaces import IRedturtleTilesManagementView
-from redturtle.tiles.management.interfaces import IRedturtleTilesManagementSettings # noqa
+from redturtle.tiles.management.interfaces import (
+    IRedturtleTilesManagementSettings,
+)  # noqa
 from zope.interface import implementer
 
 import json
@@ -31,24 +33,18 @@ class BaseView(BrowserView):
 
     def extractTileInfos(self, key):
         type, id = key.split('/')
-        return {
-            'tile_id': id,
-            'tile_type': type,
-        }
+        return {'tile_id': id, 'tile_type': type}
 
     def canManageTiles(self):
         if api.user.is_anonymous():
             return False
         current = api.user.get_current()
         return api.user.has_permission(
-            'tiles management: Manage Tiles',
-            user=current,
-            obj=self.context)
+            'tiles management: Manage Tiles', user=current, obj=self.context
+        )
 
     def get_tile_url(self, tile):
-        return './@@{0}/{1}'.format(
-            tile.get('tile_type'),
-            tile.get('tile_id'))
+        return './@@{0}/{1}'.format(tile.get('tile_type'), tile.get('tile_id'))
 
     def get_tile_size_settings(self):
         try:
@@ -66,15 +62,15 @@ class BaseView(BrowserView):
         for size in sizes:
             try:
                 display_name, css_class = size.split('|')
-                res.append({
-                    'display_name': display_name,
-                    'css_class': css_class,
-                })
+                res.append(
+                    {'display_name': display_name, 'css_class': css_class}
+                )
             except ValueError:
                 logger.warning(
-                        '[RedTurtle Tiles Management Tile Size Classes] '
-                        '- skipped entry "{0}"'
-                        ' because is malformed. Check it in control panel.')
+                    '[RedTurtle Tiles Management Tile Size Classes] '
+                    '- skipped entry "{0}"'
+                    ' because is malformed. Check it in control panel.'
+                )
                 continue
         return res
 
