@@ -23,11 +23,20 @@ class BaseView(BrowserView):
     """
     """
 
+    def __call__(self, managerId=''):
+        self.managerId = managerId
+        return super(BaseView, self).__call__()
+
+    @property
+    def tilesManager(self):
+        if getattr(self, 'managerId', ''):
+            return self.managerId
+        return self.request.form.get('managerId', 'defaultManager')
+
     def get_tiles_list(self):
         tiles_list = getattr(self.context, 'tiles_list', {})
-        managerId = self.request.form.get('managerId', 'defaultManager')
         # it's a PersistentList
-        tiles = tiles_list.get(managerId, [])
+        tiles = tiles_list.get(self.tilesManager, [])
         can_manage = self.canManageTiles()
         return [x for x in tiles if (not x.get('tile_hidden') or can_manage)]
 
@@ -53,7 +62,6 @@ class BaseView(BrowserView):
                 interface=IRedturtleTilesManagementSettings,
             )
         except InvalidParameterError:
-            logger.info('ciao')
             return []
 
     def get_tile_size_classes(self):
@@ -84,7 +92,6 @@ class ReorderTilesView(BrowserView):
 
     def __call__(self):
         tileIds = self.request.form.get('tileIds')
-        managerId = self.request.form.get('managerId', 'defaultManager')
         if not tileIds:
             return ''
 
@@ -92,7 +99,9 @@ class ReorderTilesView(BrowserView):
         tiles_list = getattr(context, 'tiles_list', None)
         if not tiles_list:
             return ''
-        tilesForManager = tiles_list.get(managerId)
+
+        tilesManager = self.request.form.get('managerId', 'defaultManager')
+        tilesForManager = tiles_list.get(tilesManager)
         if not tilesForManager:
             return ''
         try:
@@ -114,16 +123,15 @@ class ShowHideTilesView(BrowserView):
 
     def __call__(self):
         tileId = self.request.form.get('tileId')
-        managerId = self.request.form.get('managerId', 'defaultManager')
         if not tileId:
             return ''
-
         context = aq_base(self.context)
         tiles_list = getattr(context, 'tiles_list', None)
         if not tiles_list:
             return ''
+        tilesManager = self.request.form.get('managerId', 'defaultManager')
         try:
-            for tile in tiles_list.get(managerId, []):
+            for tile in tiles_list.get(tilesManager, []):
                 if tile.get('tile_id') == tileId:
                     # toggle hidden mode
                     tile['tile_hidden'] = not tile.get('tile_hidden', False)
@@ -141,7 +149,6 @@ class ResizeTilesView(BrowserView):
 
     def __call__(self):
         tileId = self.request.form.get('tileId')
-        managerId = self.request.form.get('managerId', 'defaultManager')
         style = self.request.form.get('style', '')
 
         if not tileId:
@@ -153,8 +160,9 @@ class ResizeTilesView(BrowserView):
         if not tiles_list:
             return ''
 
+        tilesManager = self.request.form.get('managerId', 'defaultManager')
         try:
-            for tile in tiles_list.get(managerId, []):
+            for tile in tiles_list.get(tilesManager, []):
                 if tile.get('tile_id') == tileId:
                     tile['tile_style'] = style
             return ''

@@ -7,7 +7,8 @@ Changelog
 
 - Add Python3 compatibility.
   [cekk]
-
+- Add support for custom managerId passed in view call.
+  [cekk]
 
 1.2.5 (2019-03-13)
 ------------------
