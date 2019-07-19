@@ -2,12 +2,14 @@ Changelog
 =========
 
 
-1.2.6 (2019-05-29)
+1.2.6 (unreleased)
 ------------------
 
-- Avoid to cache tiles_management ajax call if we are anonymous. In this way 
+- Avoid to cache tiles_management ajax call if we are anonymous. In this way
   an HTTP acceletator like varnish could cache calls if caller is anonymous
   [lucabel]
+- Fix tileWrapper class when the tile is hidden
+  [pnicolli]
 
 
 1.2.5 (2019-03-13)
