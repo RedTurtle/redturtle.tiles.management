@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.2.6 (unreleased)
+1.2.6 (2019-09-03)
 ------------------
 
 - Avoid to cache tiles_management ajax call if we are anonymous. In this way
