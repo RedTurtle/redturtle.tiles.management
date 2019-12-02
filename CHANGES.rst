@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-0.3.0 (unreleased)
+0.3.0 (2019-12-02)
 ------------------
 
 - Store tiles_list into a PersistentList to persist order between instances and restarts.
