@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-0.3.1 (unreleased)
+0.3.1 (2019-12-02)
 ------------------
 
 - New release. Previous one was a brownbag.
