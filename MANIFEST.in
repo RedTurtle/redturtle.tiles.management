@@ -11,3 +11,4 @@ include .editorconfig
 include .gitattributes
 include *.txt
 include *.yml
+include *.cfg
