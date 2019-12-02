@@ -9,3 +9,5 @@ global-exclude *pyc
 global-exclude .DS_Store
 include .editorconfig
 include .gitattributes
+include *.txt
+include *.yml
