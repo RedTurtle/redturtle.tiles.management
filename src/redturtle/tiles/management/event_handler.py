@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
+from persistent.list import PersistentList
+from persistent.mapping import PersistentMapping
 from zope.annotation.interfaces import IAnnotations
-from plone import api
+
 import re
 
 
@@ -11,11 +13,11 @@ def tileCreated(tile, event):
         return
     annotations = IAnnotations(context)
     if "tiles_list" not in annotations:
-        annotations['tiles_list'] = []
+        annotations['tiles_list'] = PersistentList()
 
-    new_tile = {
-        'tile_id': tile_id,
-        }
+    new_tile = PersistentMapping()
+    new_tile['tile_id'] = tile_id
+
     try:
         tile_type = re.search("@@(.*?)/", tile.url).group(1)
     except AttributeError:

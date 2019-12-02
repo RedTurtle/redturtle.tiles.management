@@ -1,0 +1,13 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:gs="http://namespaces.zope.org/genericsetup"
+    i18n_domain="redturtle.tiles.management">
+  <!-- Upgrade steps -->
+  <gs:upgradeStep
+        title="Upgrade redturtle.tiles.management 1000"
+        description="redturtle.tiles.management upgrade step"
+        source="1000"
+        destination="1100"
+        handler=".upgrades.to_1100"
+        profile="redturtle.tiles.management:plone4" />
+</configure>

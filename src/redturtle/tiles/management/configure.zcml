@@ -17,6 +17,7 @@
      />
 
   <include package=".browser" />
+  <include file="upgrades.zcml" />
 
   <!-- Plone 5 profiles -->
   <configure zcml:condition="have plone-5">
