@@ -5,7 +5,8 @@ Changelog
 0.3.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- New release. Previous one was a brownbag.
+  [cekk]
 
 
 0.3.0 (2019-12-02)
