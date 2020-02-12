@@ -82,6 +82,16 @@ div.loading-tiles {
     background: #fff5cd;
 }
 
+.tilesList::before,
+.tilesList::after {
+    content: ' ';
+    display: table;
+}
+
+.tilesList::after {
+    clear: both;
+}
+
 .tilesList .tileWrapper {
     clear: both;
     position: relative;
