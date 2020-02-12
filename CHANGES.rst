@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.2.7 (unreleased)
+2.0.0 (2020-02-12)
 ------------------
 
 - Removed use of grids to avoid Chrome 80 bug
