@@ -92,27 +92,6 @@ div.loading-tiles {
     float: left;
 }
 
-@supports (display: grid) {
-    .tilesList {
-        display: -ms-grid;
-        display: grid;
-        -ms-grid-columns: (1fr)[12];
-        grid-template-columns: repeat(12, 1fr);
-    }
-
-    .tilesList .tileWrapper {
-        -ms-grid-column-span: 12;
-        grid-column: span 12;
-    }
-
-    .tilesList .tileWrapper.half-width {
-        -ms-grid-column-span: 6;
-        grid-column: span 6;
-        width: 100%;
-        float: none;
-    }
-}
-
 .editableTiles .tileWrapper.hiddenTile {
     position: relative;
 }
@@ -163,4 +142,5 @@ div.loading-tiles {
 .available-tiles a.list-group-item small {
     display: block;
 }
+
 /*# sourceMappingURL=integration.css.map */
