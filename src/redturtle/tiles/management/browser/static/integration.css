@@ -90,6 +90,7 @@ div.loading-tiles {
 .tilesList .tileWrapper.half-width {
     width: 50%;
     float: left;
+    clear: none;
 }
 
 .editableTiles .tileWrapper.hiddenTile {
