@@ -82,6 +82,16 @@ div.loading-tiles {
     background: #fff5cd;
 }
 
+.tilesList::before,
+.tilesList::after {
+    content: ' ';
+    display: table;
+}
+
+.tilesList::after {
+    clear: both;
+}
+
 .tilesList .tileWrapper {
     clear: both;
     position: relative;
@@ -90,27 +100,7 @@ div.loading-tiles {
 .tilesList .tileWrapper.half-width {
     width: 50%;
     float: left;
-}
-
-@supports (display: grid) {
-    .tilesList {
-        display: -ms-grid;
-        display: grid;
-        -ms-grid-columns: (1fr)[12];
-        grid-template-columns: repeat(12, 1fr);
-    }
-
-    .tilesList .tileWrapper {
-        -ms-grid-column-span: 12;
-        grid-column: span 12;
-    }
-
-    .tilesList .tileWrapper.half-width {
-        -ms-grid-column-span: 6;
-        grid-column: span 6;
-        width: 100%;
-        float: none;
-    }
+    clear: none;
 }
 
 .editableTiles .tileWrapper.hiddenTile {
@@ -163,4 +153,5 @@ div.loading-tiles {
 .available-tiles a.list-group-item small {
     display: block;
 }
+
 /*# sourceMappingURL=integration.css.map */

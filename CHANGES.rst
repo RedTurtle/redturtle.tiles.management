@@ -5,7 +5,8 @@ Changelog
 1.2.7 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Removed use of grids to avoid Chrome 80 bug
+  [nzambello]
 
 
 1.2.6 (2019-09-03)
