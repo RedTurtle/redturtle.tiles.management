@@ -14,7 +14,7 @@ from zope.schema.interfaces import IVocabularyFactory
 
 class AddTile(BaseView):
     def keyfunction(self, tile):
-        """Key for comparison by last name"""
+        """Key for comparison by title"""
         return tile.title
 
     @memoize
