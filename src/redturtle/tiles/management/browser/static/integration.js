@@ -284,10 +284,16 @@ define('tiles-management-pattern', [
           ajax_load: true
         };
         if (isIE) {
-          options.invalidIECache = new Date().getTime();
+            options.invalidIECache = new Date().getTime();
+        }
+        if ($('body').hasClass('userrole-anonymous')){
+            $.ajaxSetup({cache: true});
         }
         $.get(tilesInfosUrl, options)
           .done(function (data) {
+            // All subsequent Ajax calls using any function will use the new settings, 
+            // unless overridden by the individual calls, until the next invocation of $.ajaxSetup().
+            $.ajaxSetup({cache: false});
             const html = $(data);
             if (!html.length) {
               container.remove();
@@ -321,6 +327,9 @@ define('tiles-management-pattern', [
             }
           })
           .fail(function (err) {
+            // All subsequent Ajax calls using any function will use the new settings, 
+            // unless overridden by the individual calls, until the next invocation of $.ajaxSetup().
+            $.ajaxSetup({cache: false});
             console.trace(err);
             var i18n = new I18n();
             const domain = 'redturtle.tiles.management';

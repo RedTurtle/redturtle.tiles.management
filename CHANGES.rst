@@ -2,13 +2,31 @@ Changelog
 =========
 
 
-1.3.0 (unreleased)
+2.0.1 (unreleased)
 ------------------
 
 - Add Python3 compatibility.
   [cekk]
 - Add support for custom managerId passed in view call.
   [cekk]
+
+
+2.0.0 (2020-02-12)
+------------------
+
+- Removed use of grids to avoid Chrome 80 bug
+  [nzambello]
+
+
+1.2.6 (2019-09-03)
+------------------
+
+- Avoid to cache tiles_management ajax call if we are anonymous. In this way
+  an HTTP acceletator like varnish could cache calls if caller is anonymous
+  [lucabel]
+- Fix tileWrapper class when the tile is hidden
+  [pnicolli]
+
 
 1.2.5 (2019-03-13)
 ------------------

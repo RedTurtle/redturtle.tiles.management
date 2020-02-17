@@ -20,7 +20,7 @@
                          tile_type python:tile.get('tile_type', '');
                          tile_style python:tile.get('tile_style', '');
                          tile_id python:tile.get('tile_id', '');
-                         tile_css_class python:(tile_hidden and 'hiddenTile' or '') + tile_style"
+                         tile_css_class python:(tile_hidden and 'hiddenTile ' or '') + tile_style"
              tal:attributes="data-tileid python:canManageTiles and tile_id or '';
                              data-tiletype python:canManageTiles and tile_type or '';
                              data-tilehidden python:canManageTiles and tile_hidden or '';
