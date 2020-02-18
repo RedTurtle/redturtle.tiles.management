@@ -5,7 +5,10 @@ Changelog
 2.0.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Add Python3 compatibility.
+  [cekk]
+- Add support for custom managerId passed in view call.
+  [cekk]
 
 
 2.0.0 (2020-02-12)

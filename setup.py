@@ -6,15 +6,14 @@ from setuptools import setup
 
 
 long_description = (
-    open('README.rst').read()
-    + '\n' +
-    'Contributors\n'
+    open('README.rst').read() + '\n' + 'Contributors\n'
     '============\n'
-    + '\n' +
-    open('CONTRIBUTORS.rst').read()
-    + '\n' +
-    open('CHANGES.rst').read()
-    + '\n')
+    + '\n'
+    + open('CONTRIBUTORS.rst').read()
+    + '\n'
+    + open('CHANGES.rst').read()
+    + '\n'
+)
 
 
 setup(
@@ -48,7 +47,6 @@ setup(
         'plone.api',
         'plone.app.blocks>=4.0.0',
         'plone.app.tiles',
-        'plone.formwidget.contenttree',
         'setuptools',
         'z3c.jbot',
     ],
