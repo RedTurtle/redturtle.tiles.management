@@ -1,6 +1,11 @@
 Changelog
 =========
 
+1.9.9 (2020/02/19)
+------------------
+- Restore old version of this package to not make version collinion
+  with 2.0.0
+  [lucabel]
 
 2.0 (2018/04/09)
 ----------------
