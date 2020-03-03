@@ -1,6 +1,12 @@
 Changelog
 =========
 
+1.9.10 (unreleased)
+-------------------
+
+- Added franch translation
+  [eikichi18]
+
 1.9.9 (2020/02/19)
 ------------------
 - Restore old version of this package to not make version collinion
