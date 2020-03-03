@@ -19,7 +19,7 @@ msgstr ""
 
 #: ../browser/traversal.py:36
 msgid "Edit"
-msgstr "Modifica"
+msgstr "Éditer"
 
 #: ../configure.zcml:33
 msgid "Installs the redturtle.tiles.management add-on."
@@ -39,7 +39,7 @@ msgstr ""
 
 #: ../browser/traversal.py:40
 msgid "Remove"
-msgstr "Rimuovi"
+msgstr "Retirer"
 
 #: ../configure.zcml:49
 msgid "Uninstalls the redturtle.tiles.management add-on."
@@ -51,28 +51,28 @@ msgstr ""
 
 #: ../browser/configure.zcml:45
 msgid "View with tiles"
-msgstr "Vista con tiles"
+msgstr "Voir avec des tuiles"
 
 #. Default: "Add new tile"
 #: ../browser/templates/tiles_management.pt:12
 msgid "add_new_tile_label"
-msgstr "Aggiungi nuova tile"
+msgstr "Ajouter une nouvelle tuile"
 
 #. Default: "Select a list of tiles to add."
 #: ../interfaces.py:25
 msgid "enabled_tiles_help"
-msgstr "Seleziona una lista di tile da aggiungere."
+msgstr "Sélectionnez une liste de tuiles à ajouter."
 
 #. Default: "Enabled tiles"
 #: ../interfaces.py:23
 msgid "enabled_tiles_label"
-msgstr "Tile abilitate"
+msgstr "Mosaïque activée"
 
 #: ../browser/static/integration.js
 msgid "error_loading_manager"
-msgstr "C'è stato un errore nel caricamento dei contenuti"
+msgstr "Une erreur s'est produite lors du chargement du contenu"
 
 #. Default: "Tiles Management Settings"
 #: ../browser/controlpanel.py:11
 msgid "tiles_management_settings_label"
-msgstr "Impostazioni Tiles Management"
+msgstr "Paramètres de gestion des tuiles"
