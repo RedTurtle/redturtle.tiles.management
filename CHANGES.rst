@@ -1,7 +1,11 @@
 Changelog
 =========
 
-1.9.10 (unreleased)
+1.9.11 (unreleased)
+-------------------
+
+
+1.9.10 (2020/03/05)
 -------------------
 
 - Added franch translation
