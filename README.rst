@@ -61,6 +61,12 @@ There are two default styles:
 
 These CSS classes can be configured in control panel.
 
+Patch for pattern settings
+--------------------------
+
+There is a patch for `get_relateditems_options` method to get the right context
+for related items widgets (in Tiny and relation fields).
+
 
 JS Development and bundling
 ---------------------------

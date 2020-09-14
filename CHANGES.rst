@@ -5,7 +5,9 @@ Changelog
 2.1.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Add `get_relateditems_options` patch to get the right context in patterns
+  that need relations (Tiny and related contents).
+  [cekk]
 
 
 2.1.0 (2020-02-18)
