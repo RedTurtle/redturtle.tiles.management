@@ -5,7 +5,8 @@ Changelog
 2.1.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fix patched method parameters.
+  [cekk]
 
 
 2.1.1 (2020-09-14)

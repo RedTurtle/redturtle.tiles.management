@@ -13,14 +13,30 @@ logger = logging.getLogger("redturtle.tiles.management")
 
 
 # patch to fix relateditems widgets (tiny and relation fields) start folder
-def custom_get_relateditems_options(**kwargs):
+def custom_get_relateditems_options(
+    context,
+    value,
+    separator,
+    vocabulary_name,
+    vocabulary_view,
+    field_name=None,
+    include_recently_added=True,
+):
 
-    if isinstance(kwargs.get("context", None), AcquirableDictionary):
-        kwargs["context"] = kwargs["context"].aq_parent
+    if isinstance(context, AcquirableDictionary):
+        context = context.aq_parent
     else:
         # cleanup tiles acquisition on context
-        kwargs["context"] = aq_inner(kwargs["context"])
-    return widget_utils._old_get_relateditems_options(**kwargs)
+        context = aq_inner(context)
+    return widget_utils._old_get_relateditems_options(
+        context,
+        value,
+        separator,
+        vocabulary_name,
+        vocabulary_view,
+        field_name,
+        include_recently_added,
+    )
 
 
 logger.info("[PATCH] Applied get_relateditems_options patch")
