@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-2.1.3 (unreleased)
+2.1.3 (2020-10-29)
 ------------------
 
 - Patch @getSource view for relatedItems widget to get the correct context
