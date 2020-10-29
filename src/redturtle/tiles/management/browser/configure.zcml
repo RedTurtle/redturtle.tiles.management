@@ -87,4 +87,13 @@
       layer="redturtle.tiles.management.interfaces.IRedturtleTilesManagementLayer"
       />
   </configure>
+
+  <!-- custom getSource view -->
+  <browser:page
+    name="getSource"
+    for="z3c.form.interfaces.IWidget"
+    class=".vocabulary.SourceView"
+    permission="zope.Public"
+    layer="redturtle.tiles.management.interfaces.IRedturtleTilesManagementLayer"
+    />
 </configure>

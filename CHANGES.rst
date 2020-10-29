@@ -5,7 +5,9 @@ Changelog
 2.1.3 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Patch @getSource view for relatedItems widget to get the correct context
+  also with multilingual sites.
+  [cekk]
 
 
 2.1.2 (2020-09-17)
