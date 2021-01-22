@@ -87,7 +87,28 @@
       layer="redturtle.tiles.management.interfaces.IRedturtleTilesManagementLayer"
       />
   </configure>
-
+    <adapter
+        for="zope.annotation.interfaces.IAnnotatable
+             redturtle.tiles.management.interfaces.IRedturtleTilesManagementLayer
+             plone.tiles.interfaces.ITileType"
+        provides="plone.app.tiles.interfaces.ITileAddView"
+        factory=".add.AddView"
+        />
+        
+    <adapter
+        for="zope.annotation.interfaces.IAnnotatable
+             redturtle.tiles.management.interfaces.IRedturtleTilesManagementLayer
+             plone.tiles.interfaces.ITileType"
+        provides="plone.app.tiles.interfaces.ITileDeleteView"
+        factory=".delete.DeleteView"
+        />
+    <adapter
+        for="zope.annotation.interfaces.IAnnotatable
+             redturtle.tiles.management.interfaces.IRedturtleTilesManagementLayer
+             plone.tiles.interfaces.ITileType"
+        provides="plone.app.tiles.interfaces.ITileEditView"
+        factory=".edit.EditView"
+        />
   <!-- custom getSource view -->
   <browser:page
     name="getSource"
