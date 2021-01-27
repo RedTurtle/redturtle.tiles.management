@@ -8,6 +8,7 @@
 .settings/
 .DS_Store
 .Python
+.vscode/
 bin/
 buildout-cache/
 develop-eggs/
