@@ -6,13 +6,13 @@ except ImportError:
     # plone.app.tiles < 3.*
     from plone.app.tiles import MessageFactory as _
 
-from plone.app.tiles.browser.traversal import AddTile as BaseView
+from plone.app.tiles.browser.traversal import AddTile as BaseAddView
 from plone.memoize.view import memoize
 from zope.component import getUtility
 from zope.schema.interfaces import IVocabularyFactory
 
 
-class AddTile(BaseView):
+class AddTile(BaseAddView):
     def keyfunction(self, tile):
         """Key for comparison by title"""
         return tile.title
@@ -27,7 +27,7 @@ class AddTile(BaseView):
 
         factory = getUtility(
             IVocabularyFactory,
-            name='tiles.management.vocabularies.FilteredTiles',
+            name="tiles.management.vocabularies.FilteredTiles",
         )
         vocabulary = factory(self.context)
         for item in vocabulary:
@@ -35,11 +35,11 @@ class AddTile(BaseView):
             # tile actions
             # TODO: read from registry  # noqa
             tiletype.actions = [
-                {'name': 'edit', 'url': '@@edit-tile', 'title': _('Edit')},
+                {"name": "edit", "url": "@@edit-tile", "title": _("Edit")},
                 {
-                    'name': 'remove',
-                    'url': '@@delete-tile',
-                    'title': _('Remove'),
+                    "name": "remove",
+                    "url": "@@delete-tile",
+                    "title": _("Remove"),
                 },
             ]
             tiles.append(tiletype)

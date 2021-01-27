@@ -2,10 +2,12 @@ Changelog
 =========
 
 
-2.1.4 (unreleased)
+2.2.0 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Customize add, edit and delete forms to handle BIG data in non persistent tiles:
+  do not add all the data in querystring because GET calls have a character limit.
+  [cekk]
 
 
 2.1.3 (2020-10-29)
