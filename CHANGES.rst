@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-2.2.0 (unreleased)
+2.2.0 (2021-01-27)
 ------------------
 
 - Customize add, edit and delete forms to handle BIG data in non persistent tiles:
