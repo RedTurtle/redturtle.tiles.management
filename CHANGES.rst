@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-2.2.1 (unreleased)
+3.0.0 (2022-09-16)
 ------------------
 
 - Prepare package for pip.
