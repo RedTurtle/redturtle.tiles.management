@@ -5,7 +5,8 @@ Changelog
 2.2.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Prepare package for pip.
+  [eikichi18]
 
 
 2.2.0 (2021-01-27)
