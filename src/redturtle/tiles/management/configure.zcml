@@ -6,8 +6,6 @@
     xmlns:zcml="http://namespaces.zope.org/zcml"
     i18n_domain="redturtle.tiles.management">
 
-  <includeDependencies package="." />
-
   <i18n:registerTranslations directory="locales" />
 
   <!--Register permission id-->
