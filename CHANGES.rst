@@ -11,13 +11,13 @@ Changelog
 1.9.10 (2020/03/05)
 -------------------
 
-- Added franch translation
+- Added french translation
   [eikichi18]
 
 
 1.9.9 (2020/02/19)
 ------------------
-- Restore old version of this package to not make version collinion
+- Restore old version of this package to not make version collision
   with 2.0.0.
   This is based on remove_wrapper branch of product
   [lucabel]
