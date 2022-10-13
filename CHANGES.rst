@@ -1,8 +1,8 @@
 Changelog
 =========
 
-2.0.1 (unreleased)
--------------------
+2.0.1 (2022-10-13)
+------------------
 
 - Versione specifica per Qubica AMF. Questa versione specifica viene dal branch `remove_wrapper`.
   [arsenico13]
