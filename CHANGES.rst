@@ -1,8 +1,11 @@
 Changelog
 =========
 
-1.9.11 (unreleased)
+2.0.1 (unreleased)
 -------------------
+
+- Versione specifica per Qubica AMF.
+  [arsenico13]
 
 
 1.9.10 (2020/03/05)
@@ -11,12 +14,14 @@ Changelog
 - Added franch translation
   [eikichi18]
 
+
 1.9.9 (2020/02/19)
 ------------------
 - Restore old version of this package to not make version collinion
   with 2.0.0.
   This is based on remove_wrapper branch of product
   [lucabel]
+
 
 2.0 (2018/04/09)
 ----------------
@@ -25,6 +30,8 @@ Changelog
   right now it's the single tile to handle it;
   this allow to use width class on tile
   [lucabel]
+
+
 1.1.4 (unreleased)
 ------------------
 
@@ -43,7 +50,6 @@ Changelog
   [cekk]
 
 
-
 1.1.2 (2018-03-16)
 ------------------
 
@@ -58,6 +64,7 @@ Changelog
 - Fix pypi brown bag release
   [cekk]
 
+
 1.1.0 (2018-03-12)
 ------------------
 
@@ -68,6 +75,7 @@ Changelog
 - Refactor manager render view. Now is lighter (no more unused Plone body macros)
   and can be used also in static renders
   [cekk]
+
 
 1.0.2 (2017-12-21)
 ------------------
@@ -81,6 +89,7 @@ Changelog
 
 - Fix README code syntax
   [cekk]
+
 
 1.0.0 (2017-09-13)
 ------------------
@@ -97,6 +106,7 @@ Changelog
 - Added an event dispatched when tiles are added to the DOM [nzambello]
 - Drop support for Plone4. Use branch 0.x for Plone 4
   [cekk]
+
 
 0.2.1 (2017-04-12)
 ------------------
