@@ -4,7 +4,7 @@ Changelog
 2.0.1 (unreleased)
 -------------------
 
-- Versione specifica per Qubica AMF.
+- Versione specifica per Qubica AMF. Questa versione specifica viene dal branch `remove_wrapper`.
   [arsenico13]
 
 
