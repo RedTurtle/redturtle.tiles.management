@@ -5,7 +5,8 @@ Changelog
 3.0.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fix context where to check permission in vocabulary.py customization.
+  [cekk]
 
 
 3.0.0 (2022-09-16)
