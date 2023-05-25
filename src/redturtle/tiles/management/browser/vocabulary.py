@@ -12,6 +12,7 @@ from zope.component import queryUtility
 from zope.schema.interfaces import ICollection
 from zope.security.interfaces import IPermission
 
+
 class SourceView(BaseView):
     def get_context(self):
         if isinstance(self.context.form, DefaultAddForm) or isinstance(
@@ -28,18 +29,15 @@ class SourceView(BaseView):
 
         # check field's write permission
         info = mergedTaggedValueDict(field.interface, WRITE_PERMISSIONS_KEY)
-        permission_name = info.get(field.__name__, 'cmf.ModifyPortalContent')
+        permission_name = info.get(field.__name__, "cmf.ModifyPortalContent")
         permission = queryUtility(IPermission, name=permission_name)
         if permission is None:
-            permission = getUtility(
-                IPermission,
-                name='cmf.ModifyPortalContent'
-            )
+            permission = getUtility(IPermission, name="cmf.ModifyPortalContent")
         if not getSecurityManager().checkPermission(
             permission.title,
-            self.context.context  # this is the customization
+            self.context.context,  # this is the patch
         ):
-            raise VocabLookupException('Vocabulary lookup not allowed.')
+            raise VocabLookupException("Vocabulary lookup not allowed.")
 
         if ICollection.providedBy(field):
             return field.value_type.vocabulary
