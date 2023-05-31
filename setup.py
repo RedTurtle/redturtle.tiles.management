@@ -18,7 +18,7 @@ long_description = (
 
 setup(
     name="redturtle.tiles.management",
-    version="3.0.1",
+    version="3.0.2.dev0",
     description="An alternative method for handling and showing tiles",
     long_description=long_description,
     # Get more from http://pypi.python.org/pypi?%3Aaction=list_classifiers
