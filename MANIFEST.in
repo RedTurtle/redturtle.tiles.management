@@ -23,3 +23,4 @@ exclude pip-selfcheck.json
 exclude .prettierignore
 exclude .python-version
 exclude .tox/.pkg/file.lock
+exclude DEVELOPMENT.rst

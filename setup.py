@@ -22,13 +22,14 @@ setup(
     long_description=long_description,
     # Get more from http://pypi.python.org/pypi?%3Aaction=list_classifiers
     classifiers=[
+        "Development Status :: 5 - Production/Stable",
         "Environment :: Web Environment",
         "Framework :: Plone",
-        "Framework :: Plone :: 4.3",
-        "Framework :: Plone :: 5.0",
-        "Framework :: Plone :: 5.1",
+        "Framework :: Plone :: 6.1",
         "Programming Language :: Python",
-        "Programming Language :: Python :: 2.7",
+        "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.11",
+        "Programming Language :: Python :: 3.12",
         "Operating System :: OS Independent",
         "License :: OSI Approved :: GNU General Public License v2 (GPLv2)",
     ],
@@ -40,6 +41,7 @@ setup(
     packages=find_packages("src", exclude=["ez_setup"]),
     namespace_packages=["redturtle", "redturtle.tiles"],
     package_dir={"": "src"},
+    python_requires=">=3.11",
     include_package_data=True,
     zip_safe=False,
     install_requires=[
