@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<registry>
+
+  <!-- PATTERN -->
+  <records interface="Products.CMFPlone.interfaces.IResourceRegistry"
+           prefix="plone.resources/tiles-management-pattern"
+           remove="True"
+  />
+
+  <!-- BUNDLE REGISTRATION AS RESOURCE -->
+  <records interface="Products.CMFPlone.interfaces.IResourceRegistry"
+           prefix="plone.resources/tiles-management-bundle"
+           remove="True"
+  />
+
+  <records interface="Products.CMFPlone.interfaces.IResourceRegistry"
+           prefix="plone.resources/babel-polyfill"
+           remove="True"
+  />
+
+  <!-- BUNDLE -->
+  <records interface="Products.CMFPlone.interfaces.IBundleRegistry"
+           prefix="plone.bundles/redturtle-tiles-management"
+           remove="True"
+  />
+
+</registry>

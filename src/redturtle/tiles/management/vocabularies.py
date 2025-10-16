@@ -1,8 +1,9 @@
-# -*- coding: utf-8 -*-
 from plone import api
 from plone.app.tiles.vocabularies import AvailableTilesVocabulary
 from plone.tiles.interfaces import ITileType
-from redturtle.tiles.management.interfaces import IRedturtleTilesManagementSettings  # noqa
+from redturtle.tiles.management.interfaces import (  # noqa
+    IRedturtleTilesManagementSettings,
+)
 from zope.component import getUtilitiesFor
 from zope.interface import implementer
 from zope.schema.interfaces import IVocabularyFactory
@@ -12,7 +13,7 @@ from zope.security.interfaces import IPermission
 
 
 @implementer(IVocabularyFactory)
-class RegisteredTilesIdsVocabulary(object):
+class RegisteredTilesIdsVocabulary:
     """
     Return vocabulary with all enabled tiles
     """
@@ -36,22 +37,23 @@ class FilteredTilesVocabulary(AvailableTilesVocabulary):
 
     def __call__(self, context=None):
         context = self.context or context
-        vocabulary = super(FilteredTilesVocabulary, self).__call__(context)
+        vocabulary = super().__call__(context)
         # first get all allowed tiles
         if context is None:
             return vocabulary
         permissions_mapping = self.get_permissions()
         items = []
         enabled_tiles = api.portal.get_registry_record(
-            'enabled_tiles', IRedturtleTilesManagementSettings)
+            "enabled_tiles", IRedturtleTilesManagementSettings
+        )
         for item in vocabulary:
             if enabled_tiles and item.token not in enabled_tiles:
                 # there is a list of selected tiles, and this one isn't
                 # in the list
                 continue
             can_add = api.user.has_permission(
-                permissions_mapping.get(item.value.add_permission, ''),
-                obj=context)
+                permissions_mapping.get(item.value.add_permission, ""), obj=context
+            )
             if can_add:
                 items.append(item)
         return SimpleVocabulary(items)
@@ -65,5 +67,6 @@ class FilteredTilesVocabulary(AvailableTilesVocabulary):
         user permission we need the name.
         """
         return {
-            x[0]: getattr(x[1], 'title', x[0])
-            for x in getUtilitiesFor(IPermission, self.context)}
+            x[0]: getattr(x[1], "title", x[0])
+            for x in getUtilitiesFor(IPermission, self.context)
+        }

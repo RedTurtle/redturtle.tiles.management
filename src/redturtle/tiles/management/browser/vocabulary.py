@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from AccessControl import getSecurityManager
 from plone import api
 from plone.app.content.browser.vocabulary import SourceView as BaseView
@@ -21,7 +20,7 @@ class SourceView(BaseView):
             # we are in a tile and the view is called in widget context and
             #  not in the portal root, so we need to set the context as root.
             return api.portal.get()
-        return super(SourceView, self).get_context()
+        return super().get_context()
 
     def get_vocabulary(self):
         widget = self.context

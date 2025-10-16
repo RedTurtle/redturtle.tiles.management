@@ -1,16 +1,18 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="utf-8"?>
 <rolemap>
   <permissions>
-    <permission name="tiles management: Manage Tiles"
-                acquire="True">
-      <role name="Manager"/>
-      <role name="Editor"/>
-      <role name="Site Administrator"/>
+    <permission acquire="True"
+                name="tiles management: Manage Tiles"
+    >
+      <role name="Manager" />
+      <role name="Editor" />
+      <role name="Site Administrator" />
     </permission>
-    <permission name="tiles management: Manage Settings"
-                acquire="True">
-      <role name="Manager"/>
-      <role name="Site Administrator"/>
+    <permission acquire="True"
+                name="tiles management: Manage Settings"
+    >
+      <role name="Manager" />
+      <role name="Site Administrator" />
     </permission>
   </permissions>
 </rolemap>

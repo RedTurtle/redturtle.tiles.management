@@ -1,23 +1,22 @@
-# -*- coding: utf-8 -*-
 from plone.app.registry.browser import controlpanel
 from redturtle.tiles.management import _
-from redturtle.tiles.management.interfaces import (
+from redturtle.tiles.management.interfaces import (  # noqa
     IRedturtleTilesManagementSettings,
-)  # noqa
+)
 
 
 class RedturtleTilesManagementEditForm(controlpanel.RegistryEditForm):
     """settings form."""
 
     schema = IRedturtleTilesManagementSettings
-    id = 'TilesManagementSettingsEditForm'
-    label = _('tiles_management_settings_label', u'Tiles Management Settings')
-    description = u''
+    id = "TilesManagementSettingsEditForm"
+    label = _("tiles_management_settings_label", "Tiles Management Settings")
+    description = ""
 
 
 class RedturtleTilesManagementSettingsControlPanel(
     controlpanel.ControlPanelFormWrapper
 ):  # noqa
-    """ control panel """
+    """control panel"""
 
     form = RedturtleTilesManagementEditForm

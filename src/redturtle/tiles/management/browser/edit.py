@@ -1,6 +1,5 @@
-# -*- coding: utf-8 -*-
-from plone.app.tiles.browser.edit import DefaultEditView
 from plone.app.tiles.browser.edit import DefaultEditForm
+from plone.app.tiles.browser.edit import DefaultEditView
 
 
 class EditForm(DefaultEditForm):
@@ -21,7 +20,9 @@ class EditForm(DefaultEditForm):
 
     def nextURL(self, tile):
         return "{url}/{type}/{id}".format(
-            url=self.context.absolute_url(), type=tile.__name__, id=tile.id,
+            url=self.context.absolute_url(),
+            type=tile.__name__,
+            id=tile.id,
         )
 
 

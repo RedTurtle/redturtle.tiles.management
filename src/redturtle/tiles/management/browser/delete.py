@@ -1,15 +1,15 @@
-# -*- coding: utf-8 -*-
-from plone.app.tiles.browser.delete import DefaultDeleteView
-from plone.app.tiles.browser.delete import DefaultDeleteForm
 from plone.app.tiles import _
+from plone.app.tiles.browser.delete import DefaultDeleteForm
+from plone.app.tiles.browser.delete import DefaultDeleteView
 from plone.tiles.interfaces import ITileDataManager
 from Products.statusmessages.interfaces import IStatusMessage
+from z3c.form import button
 from zope.event import notify
 from zope.lifecycleevent import ObjectRemovedEvent
 from zope.traversing.browser import absoluteURL
-from z3c.form import button
 
 import logging
+
 
 logger = logging.getLogger(__name__)
 
@@ -40,7 +40,11 @@ class DeleteForm(DefaultDeleteForm):
 
         # Traverse to the tile about to be removed
         tile = self.context.restrictedTraverse(
-            "@@%s/%s" % (typeName, self.tileId,)
+            "@@%s/%s"
+            % (
+                typeName,
+                self.tileId,
+            )
         )
         # Look up the URL - we need to do this before we've deleted the data to
         # correctly account for transient tiles
@@ -50,22 +54,22 @@ class DeleteForm(DefaultDeleteForm):
         dataManager.delete()
 
         # PATCH #
-        key = "{}/{}".format(typeName, self.tileId)
+        key = f"{typeName}/{self.tileId}"
         if key in dataManager.storage.keys():
             # this is a not persistent tile and we need to force deletion
             dataManager.storage[key] = {}
         # END OF PATCH #
 
         notify(ObjectRemovedEvent(tile, self.context, self.tileId))
-        logger.debug(u"Tile deleted at {0}".format(tileURL))
+        logger.debug(f"Tile deleted at {tileURL}")
 
         # Skip form rendering for AJAX requests
         if self.request.get("HTTP_X_REQUESTED_WITH") == "XMLHttpRequest":
             IStatusMessage(self.request).addStatusMessage(
-                _(u"Tile deleted at ${url}", mapping={"url": tileURL}),
-                type=u"info",
+                _("Tile deleted at ${url}", mapping={"url": tileURL}),
+                type="info",
             )
-            self.template = lambda: u""
+            self.template = lambda: ""
             return
 
         try:
@@ -75,9 +79,9 @@ class DeleteForm(DefaultDeleteForm):
 
         self.request.response.redirect(url)
 
-    @button.buttonAndHandler(_(u"Cancel"), name="cancel")
+    @button.buttonAndHandler(_("Cancel"), name="cancel")
     def handleCancel(self, action):
-        super(DeleteForm, self).handleCancel(action)
+        super().handleCancel(action)
 
 
 class DeleteView(DefaultDeleteView):

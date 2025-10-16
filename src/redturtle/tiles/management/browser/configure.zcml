@@ -1,12 +1,16 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
-    xmlns:plone="http://namespaces.plone.org/plone"
     xmlns:browser="http://namespaces.zope.org/browser"
     xmlns:i18n="http://namespaces.zope.org/i18n"
-    i18n_domain="redturtle.tiles.management">
+    xmlns:plone="http://namespaces.plone.org/plone"
+    i18n_domain="redturtle.tiles.management"
+    >
 
   <!-- Set overrides folder for Just-a-Bunch-Of-Templates product -->
-  <include package="z3c.jbot" file="meta.zcml" />
+  <include
+      package="z3c.jbot"
+      file="meta.zcml"
+      />
   <browser:jbot
       directory="overrides"
       layer="redturtle.tiles.management.interfaces.IRedturtleTilesManagementLayer"
@@ -36,8 +40,9 @@
 
   <include package="plone.app.contentmenu" />
   <browser:menuItems
+      menu="plone_displayviews"
       for="plone.app.blocks.layoutbehavior.ILayoutBehaviorAdaptable"
-      menu="plone_displayviews">
+      >
     <browser:menuItem
         title="View with tiles"
         action="tiles_view"
@@ -47,8 +52,8 @@
   <browser:page
       name="tiles_management"
       for="plone.app.blocks.layoutbehavior.ILayoutBehaviorAdaptable"
-      template="templates/tiles_management.pt"
       class=".tiles_management.BaseView"
+      template="templates/tiles_management.pt"
       permission="zope2.View"
       layer="redturtle.tiles.management.interfaces.IRedturtleTilesManagementLayer"
       />
@@ -79,42 +84,51 @@
   <!-- Custom Traversal views -->
   <configure package="plone.app.tiles.browser">
     <browser:page
-      name="add-tile"
-      for="zope.annotation.interfaces.IAnnotatable"
-      permission="tiles.management.ManageTiles"
-      class="redturtle.tiles.management.browser.traversal.AddTile"
-      template="add.pt"
-      layer="redturtle.tiles.management.interfaces.IRedturtleTilesManagementLayer"
-      />
+        name="add-tile"
+        for="zope.annotation.interfaces.IAnnotatable"
+        class="redturtle.tiles.management.browser.traversal.AddTile"
+        template="add.pt"
+        permission="tiles.management.ManageTiles"
+        layer="redturtle.tiles.management.interfaces.IRedturtleTilesManagementLayer"
+        />
   </configure>
-    <adapter
-        for="zope.annotation.interfaces.IAnnotatable
-             redturtle.tiles.management.interfaces.IRedturtleTilesManagementLayer
-             plone.tiles.interfaces.ITileType"
-        provides="plone.app.tiles.interfaces.ITileAddView"
-        factory=".add.AddView"
-        />
-        
-    <adapter
-        for="zope.annotation.interfaces.IAnnotatable
-             redturtle.tiles.management.interfaces.IRedturtleTilesManagementLayer
-             plone.tiles.interfaces.ITileType"
-        provides="plone.app.tiles.interfaces.ITileDeleteView"
-        factory=".delete.DeleteView"
-        />
-    <adapter
-        for="zope.annotation.interfaces.IAnnotatable
-             redturtle.tiles.management.interfaces.IRedturtleTilesManagementLayer
-             plone.tiles.interfaces.ITileType"
-        provides="plone.app.tiles.interfaces.ITileEditView"
-        factory=".edit.EditView"
-        />
+  <adapter
+      factory=".add.AddView"
+      provides="plone.app.tiles.interfaces.ITileAddView"
+      for="zope.annotation.interfaces.IAnnotatable
+           redturtle.tiles.management.interfaces.IRedturtleTilesManagementLayer
+           plone.tiles.interfaces.ITileType"
+      />
+
+  <adapter
+      factory=".delete.DeleteView"
+      provides="plone.app.tiles.interfaces.ITileDeleteView"
+      for="zope.annotation.interfaces.IAnnotatable
+           redturtle.tiles.management.interfaces.IRedturtleTilesManagementLayer
+           plone.tiles.interfaces.ITileType"
+      />
+  <adapter
+      factory=".edit.EditView"
+      provides="plone.app.tiles.interfaces.ITileEditView"
+      for="zope.annotation.interfaces.IAnnotatable
+           redturtle.tiles.management.interfaces.IRedturtleTilesManagementLayer
+           plone.tiles.interfaces.ITileType"
+      />
   <!-- custom getSource view -->
   <browser:page
-    name="getSource"
-    for="z3c.form.interfaces.IWidget"
-    class=".vocabulary.SourceView"
-    permission="zope.Public"
-    layer="redturtle.tiles.management.interfaces.IRedturtleTilesManagementLayer"
-    />
+      name="getSource"
+      for="z3c.form.interfaces.IWidget"
+      class=".vocabulary.SourceView"
+      permission="zope.Public"
+      layer="redturtle.tiles.management.interfaces.IRedturtleTilesManagementLayer"
+      />
+
+
+  <browser:page
+      name="management-pattern-demo"
+      for="*"
+      template="templates/pattern-demo.pt"
+      permission="zope2.View"
+      />
+
 </configure>
