@@ -9,7 +9,7 @@ from redturtle.tiles.management.tests.helpers import TestTile
 from zope.event import notify
 from zope.lifecycleevent import ObjectAddedEvent
 
-import unittest2 as unittest
+import unittest
 
 
 class TestTilesShowHide(unittest.TestCase):
@@ -21,17 +21,16 @@ class TestTilesShowHide(unittest.TestCase):
         """Custom shared utility setup for tests."""
         self.portal = self.layer["portal"]
         self.request = self.layer["request"]
-        self.installer = api.portal.get_tool("portal_quickinstaller")
         setRoles(self.portal, TEST_USER_ID, ["Manager"])
         api.user.create(
             username="editor",
             email="foo@bar.org",
-            password="secret",
+            password="secret$$",
         )
         api.user.create(
             username="member",
             email="foo@bar.org",
-            password="secret",
+            password="secret$$",
         )
         setRoles(self.portal, "editor", ["Editor", "Contributor"])
         setRoles(self.portal, "member", ["Member"])

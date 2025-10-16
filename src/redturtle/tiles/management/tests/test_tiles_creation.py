@@ -9,7 +9,7 @@ from zope.event import notify
 from zope.lifecycleevent import ObjectAddedEvent
 from zope.lifecycleevent import ObjectRemovedEvent
 
-import unittest2 as unittest
+import unittest
 
 
 class TestTilesCreation(unittest.TestCase):

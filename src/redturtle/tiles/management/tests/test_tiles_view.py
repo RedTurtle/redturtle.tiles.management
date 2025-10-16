@@ -8,7 +8,7 @@ from redturtle.tiles.management.testing import (  # noqa
     REDTURTLE_TILES_MANAGEMENT_INTEGRATION_TESTING,
 )
 
-import unittest2 as unittest
+import unittest
 
 
 class TestTilesManagement(unittest.TestCase):
@@ -20,17 +20,16 @@ class TestTilesManagement(unittest.TestCase):
         """Custom shared utility setup for tests."""
         self.portal = self.layer["portal"]
         self.request = self.layer["request"]
-        self.installer = api.portal.get_tool("portal_quickinstaller")
         setRoles(self.portal, TEST_USER_ID, ["Manager"])
         api.user.create(
             username="editor",
             email="foo@bar.org",
-            password="secret",
+            password="secret$$",
         )
         api.user.create(
             username="member",
             email="foo@bar.org",
-            password="secret",
+            password="secret$$",
         )
         setRoles(self.portal, "editor", ["Editor", "Contributor"])
         setRoles(self.portal, "member", ["Member"])
