@@ -49,7 +49,6 @@ class Pattern extends BasePattern {
                 this.el.remove();
                 return;
             }
-
             this.el.innerHTML = html;
             this.el.dispatchEvent(new CustomEvent("rtTilesLoaded", { bubbles: true }));
             this._enableInteractions();
@@ -162,38 +161,40 @@ class Pattern extends BasePattern {
     }
 
     _enableSorting() {
-        Sortable.create(this.el.querySelector(".tilesList"), {
-            draggable: "div.tileWrapper",
-            animation: 200,
-            onUpdate: async (data) => {
-                const tileIds = Array.from(data.to.children).map(
-                    (el) => el.dataset.tileid
-                );
-                const absoluteUrl = document.body.dataset.baseUrl || "";
-                const url = new URL(`${absoluteUrl}/reorder_tiles`);
-                url.searchParams.append("managerId", this.managerId);
-                url.searchParams.append("ajax_load", "1");
-                url.searchParams.append("tileIds", JSON.stringify(tileIds));
-                try {
-                    const response = await fetch(url);
-                    if (response.status === 204) {
-                        return;
+        if (this.el.querySelector(".tilesList")) {
+            Sortable.create(this.el.querySelector(".tilesList"), {
+                draggable: "div.tileWrapper",
+                animation: 200,
+                onUpdate: async (data) => {
+                    const tileIds = Array.from(data.to.children).map(
+                        (el) => el.dataset.tileid
+                    );
+                    const absoluteUrl = document.body.dataset.baseUrl || "";
+                    const url = new URL(`${absoluteUrl}/reorder_tiles`);
+                    url.searchParams.append("managerId", this.managerId);
+                    url.searchParams.append("ajax_load", "1");
+                    url.searchParams.append("tileIds", JSON.stringify(tileIds));
+                    try {
+                        const response = await fetch(url);
+                        if (response.status === 204) {
+                            return;
+                        }
+                        if (!response.ok) {
+                            const errorData = await response.json().catch(() => null);
+                            const errorMessage =
+                                errorData?.message || `Errore HTTP: ${response.status}`;
+                            throw new Error(errorMessage);
+                        }
+                        const data = await response.json();
+                        if (data && data.message) {
+                            console.error(data.message);
+                        }
+                    } catch (err) {
+                        console.error("Errore durante il riordino dei tile:", err);
                     }
-                    if (!response.ok) {
-                        const errorData = await response.json().catch(() => null);
-                        const errorMessage =
-                            errorData?.message || `Errore HTTP: ${response.status}`;
-                        throw new Error(errorMessage);
-                    }
-                    const data = await response.json();
-                    if (data && data.message) {
-                        console.error(data.message);
-                    }
-                } catch (err) {
-                    console.error("Errore durante il riordino dei tile:", err);
-                }
-            },
-        });
+                },
+            });
+        }
     }
 }
 
