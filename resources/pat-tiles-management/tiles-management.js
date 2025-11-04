@@ -15,7 +15,6 @@ class Pattern extends BasePattern {
 
     async init() {
         import("./tiles-management.scss");
-
         // Patternslib converte 'manager-id' da HTML/parser in 'managerId' qui.
         this.managerId = this.options.managerId;
 
@@ -49,7 +48,21 @@ class Pattern extends BasePattern {
                 this.el.remove();
                 return;
             }
-            this.el.innerHTML = html;
+            // Creiamo un contenitore temporaneo per manipolare l'HTML
+            const tempDiv = document.createElement("div");
+            tempDiv.innerHTML = html;
+
+            // Troviamo e rimuoviamo tutti i trigger .pat-tiles-management ANNIDATI
+            // per evitare il loop ricorsivo.
+            const nestedTriggers = tempDiv.querySelectorAll(".pat-tiles-management");
+            nestedTriggers.forEach((trigger) => trigger.remove());
+
+            // Ora svuotiamo this.el e aggiungiamo il contenuto "pulito"
+            this.el.innerHTML = "";
+            while (tempDiv.firstChild) {
+                this.el.appendChild(tempDiv.firstChild);
+            }
+
             this.el.dispatchEvent(new CustomEvent("rtTilesLoaded", { bubbles: true }));
             this._enableInteractions();
             registry.scan(this.el);
