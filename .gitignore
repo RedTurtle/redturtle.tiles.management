@@ -27,4 +27,3 @@ lib/
 pip-selfcheck.json
 local/
 man/
-src/redturtle/tiles/management/browser/static/bundles/chunks/
