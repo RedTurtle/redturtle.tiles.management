@@ -22,9 +22,10 @@
 
         <div class="list-group">
           <a class="list-group-item pat-plone-modal"
+             data-pat-plone-modal="content: #content; modalSizeClass: modal-xl;"
              tal:repeat="tiletype view/tileTypes"
              tal:attributes="
-               href string:${context/absolute_url}/@@add-tile/${tiletype/__name__};
+               href string:${context/absolute_url}/@@add-tile/${tiletype/__name__}?ajax_load=1;
              "
           >
             <span class="tileTitle"

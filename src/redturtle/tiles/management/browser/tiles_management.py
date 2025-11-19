@@ -40,6 +40,7 @@ class BaseView(BrowserView):
                 "redirectOnResponse": True,
                 "redirectToUrl": self.context.absolute_url(),
             },
+            "modalSizeClass": "modal-xl",
             "templateOptions": {"className": "modal fade tiles-management-modal"},
         }
         return json.dumps(options)
