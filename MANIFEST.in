@@ -1,6 +1,10 @@
 graft src/redturtle
 graft docs
-include *.cfg *.rst *.in
+graft resources
+include *.cfg
+include *.rst
+include *.RST
+include *.in
 include *.py
 include .coveragerc
 recursive-include docs *
@@ -16,3 +20,7 @@ include *.txt
 exclude .installed.cfg
 exclude .mr.developer.cfg
 exclude pip-selfcheck.json
+exclude .prettierignore
+exclude .python-version
+exclude .tox/.pkg/file.lock
+exclude DEVELOPMENT.rst

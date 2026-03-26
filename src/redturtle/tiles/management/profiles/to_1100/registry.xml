@@ -1,12 +1,14 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="utf-8"?>
 <registry>
-  <records prefix="plone.resources/tiles-management"
-        interface='Products.CMFPlone.interfaces.IResourceRegistry'
-        remove="True">
-  </records>
-  <records prefix="plone.bundles/redturtle-tiles-management"
-            interface='Products.CMFPlone.interfaces.IBundleRegistry'
-            remove="True">
-  </records>
+  <records interface="Products.CMFPlone.interfaces.IResourceRegistry"
+           prefix="plone.resources/tiles-management"
+           remove="True"
+  >
+</records>
+  <records interface="Products.CMFPlone.interfaces.IBundleRegistry"
+           prefix="plone.bundles/redturtle-tiles-management"
+           remove="True"
+  >
+</records>
 
 </registry>

@@ -1,0 +1,118 @@
+div.loading-tiles {
+    text-align: center;
+    margin: 2em;
+}
+
+.editableTiles {
+    .tileEditButtons {
+        position: absolute;
+        z-index: 100;
+        /* background: #FFF5CD; */
+        top: 15px;
+        right: 15px;
+
+        .tileSizeLink {
+            display: inline-block;
+        }
+    }
+
+    .tilesList>*:hover {
+        cursor: move;
+        cursor: -webkit-grab;
+        background: #fff5cd;
+    }
+
+    .tileWrapper.hiddenTile {
+        position: relative;
+
+        &:after {
+            content: '';
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            background-color: rgba(239, 239, 239, 0.5);
+        }
+    }
+}
+
+.tilesList {
+
+    &::before,
+    &::after {
+        content: ' ';
+        display: table;
+    }
+
+    &::after {
+        clear: both;
+    }
+
+    .tileWrapper {
+        clear: both;
+        position: relative;
+
+        &.half-width {
+            width: 50%;
+            float: left;
+            clear: none;
+        }
+    }
+}
+
+.available-tiles {
+    margin-bottom: 2em;
+
+    .list-group {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-flex-flow: row wrap;
+        -ms-flex-flow: row wrap;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        flex-flow: row wrap;
+        -webkit-box-pack: start;
+        -webkit-justify-content: flex-start;
+        -ms-flex-pack: start;
+        justify-content: flex-start;
+
+        a.list-group-item {
+            width: 18%;
+            text-align: center;
+            background-color: #ddd;
+            padding: 9px 12px;
+            margin: 15px 0.5% 0;
+            border-radius: 4px;
+        }
+    }
+
+    a.list-group-item small {
+        display: block;
+    }
+}
+
+body.template-tiles_view {
+    .modal-content {
+        .pattern-modal-buttons {
+            button {
+                margin-left: 1em;
+                &#buttons-delete {
+                    background-color: #dc3545;
+                    border-color: #dc3545;
+                    &:hover {
+                        background-color: #bb2d3b;
+                    }
+                }
+            }
+        }
+    }
+}
+
+/*# sourceMappingURL=integration.css.map */

@@ -1,43 +1,57 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
     xmlns:gs="http://namespaces.zope.org/genericsetup"
-    i18n_domain="redturtle.tiles.management">
+    i18n_domain="redturtle.tiles.management"
+    >
 
   <!-- Upgrade steps -->
   <gs:upgradeStep
-        title="Upgrade redturtle.tiles.management 1100"
-        description="redturtle.tiles.management upgrade step"
-        source="1000"
-        destination="1100"
-        handler=".setuphandlers.to_1100"
-        profile="redturtle.tiles.management:default" />
+      title="Upgrade redturtle.tiles.management 1100"
+      description="redturtle.tiles.management upgrade step"
+      profile="redturtle.tiles.management:default"
+      source="1000"
+      destination="1100"
+      handler=".upgrades.to_1100"
+      />
 
   <gs:upgradeStep
-        title="Upgrade redturtle.tiles.management 1200"
-        description="redturtle.tiles.management upgrade step"
-        source="1100"
-        destination="1200"
-        handler=".setuphandlers.update_registry"
-        profile="redturtle.tiles.management:default" />
+      title="Upgrade redturtle.tiles.management 1200"
+      description="redturtle.tiles.management upgrade step"
+      profile="redturtle.tiles.management:default"
+      source="1100"
+      destination="1200"
+      handler=".upgrades.update_registry"
+      />
   <gs:upgradeStep
-        title="Upgrade redturtle.tiles.management 1300"
-        description="redturtle.tiles.management upgrade step"
-        source="1200"
-        destination="1300"
-        handler=".setuphandlers.update_registry"
-        profile="redturtle.tiles.management:default" />
+      title="Upgrade redturtle.tiles.management 1300"
+      description="redturtle.tiles.management upgrade step"
+      profile="redturtle.tiles.management:default"
+      source="1200"
+      destination="1300"
+      handler=".upgrades.update_registry"
+      />
   <gs:upgradeStep
-        title="Upgrade redturtle.tiles.management 1400"
-        description="clean bundle compile date"
-        source="1300"
-        destination="1400"
-        handler=".setuphandlers.update_registry"
-        profile="redturtle.tiles.management:default" />
+      title="Upgrade redturtle.tiles.management 1400"
+      description="clean bundle compile date"
+      profile="redturtle.tiles.management:default"
+      source="1300"
+      destination="1400"
+      handler=".upgrades.update_registry"
+      />
   <gs:upgradeStep
-        title="Upgrade redturtle.tiles.management 1500"
-        description="added field in controlpanel for tile sizes CSS classes"
-        source="1400"
-        destination="1500"
-        handler=".setuphandlers.update_registry"
-        profile="redturtle.tiles.management:default" />
+      title="Upgrade redturtle.tiles.management 1500"
+      description="added field in controlpanel for tile sizes CSS classes"
+      profile="redturtle.tiles.management:default"
+      source="1400"
+      destination="1500"
+      handler=".upgrades.update_registry"
+      />
+  <gs:upgradeStep
+      title="Upgrade redturtle.tiles.management 2000"
+      description="Plone 6 compatibility"
+      profile="redturtle.tiles.management:default"
+      source="1500"
+      destination="2000"
+      handler=".upgrades.to_2000"
+      />
 </configure>

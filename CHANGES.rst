@@ -5,7 +5,8 @@ Changelog
 3.0.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Plone 6 compatibility.
+  [cekk]
 
 
 3.0.1 (2023-05-31)

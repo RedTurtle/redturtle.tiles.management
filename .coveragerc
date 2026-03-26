@@ -1,6 +1,20 @@
+[run]
+relative_files = True
+
 [report]
 include =
-    src/redturtle/*
+    */src/redturtle/*
 omit =
     */test*
-    */upgrades/*
+    */upgrades*
+    /home/*/.buildout/eggs/*
+    /home/travis/buildout-cache/eggs/*
+    /home/travis/virtualenv/*
+    /usr/*
+    bin/test
+    eggs/*
+    parts/*
+    */lib/*
+    *.txt
+    *.rst
+    */upgrades.py

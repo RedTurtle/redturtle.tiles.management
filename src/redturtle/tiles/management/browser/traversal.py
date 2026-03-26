@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 try:
     # plone.app.tiles >= 3.*
     from plone.app.tiles import _
