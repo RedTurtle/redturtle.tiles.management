@@ -36,7 +36,7 @@ target-version = ["py38"]
 
 [tool.codespell]
 ignore-words-list = "discreet,"
-skip = "*.po,src/redturtle/tiles/management/browser/static/bundles/*,yarn.lock"
+skip = "*.po,src/redturtle/tiles/management/browser/static/bundles/*,yarn.lock,package-lock.json"
 
 ##
 # Add extra configuration options in .meta.toml:

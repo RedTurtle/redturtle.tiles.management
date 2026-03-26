@@ -8,7 +8,7 @@
     >
 
   <i18n:registerTranslations directory="locales" />
-  
+
   <include package="plone.app.blocks" />
 
   <!--Register permission id-->
