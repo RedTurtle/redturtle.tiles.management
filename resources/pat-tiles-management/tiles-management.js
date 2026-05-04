@@ -4,6 +4,7 @@ import BasePattern from "@patternslib/patternslib/src/core/basepattern";
 import Parser from "@patternslib/patternslib/src/core/parser";
 import registry from "@patternslib/patternslib/src/core/registry";
 import Sortable from "sortablejs";
+import("./tiles-management.scss");
 
 export const parser = new Parser("tiles-management");
 parser.addArgument("managerId", null);
@@ -14,7 +15,7 @@ class Pattern extends BasePattern {
     static parser = parser;
 
     async init() {
-        import("./tiles-management.scss");
+        
         // Patternslib converte 'manager-id' da HTML/parser in 'managerId' qui.
         this.managerId = this.options.managerId;
 
