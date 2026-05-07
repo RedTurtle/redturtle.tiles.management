@@ -58,6 +58,11 @@ div.loading-tiles {
             width: 50%;
             float: left;
             clear: none;
+            
+            @media (max-width: 767px) {
+                width: 100%;
+                float: none;
+            }
         }
     }
 }
