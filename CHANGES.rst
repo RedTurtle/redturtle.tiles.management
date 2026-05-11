@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-4.0.1 (unreleased)
+4.0.1 (2026-05-11)
 ------------------
 
 - Fix `managerId` propagation in Plone 6.1 modal forms for add/delete tiles,
