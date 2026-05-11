@@ -36,6 +36,7 @@ def tileCreated(tile, event):
     # store tiles_order in persistent object attribute.
     if not getattr(context, "tiles_list", {}):
         context.tiles_list = PersistentMapping()
+
     if managerId not in context.tiles_list:
         context.tiles_list[managerId] = PersistentList()
     context.tiles_list[managerId].append(new_tile)

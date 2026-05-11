@@ -20,15 +20,233 @@ class Pattern extends BasePattern {
 
         if (!this.managerId) {
             this.el.innerHTML = `<p class="error">Errore: l'attributo 'data-pat-tiles-management' deve specificare un manager-id.</p>`;
-            console.error("manager-id non fornito per pat-tiles-management", this.el);
             return;
         }
+
+        this._bindManagerIdToModalForms();
+        this._bindManagerIdToModalClicks();
+        this._bindManagerIdToFormData();
+        this._observeModalForms();
 
         await this._loadManager();
     }
 
+    _bindManagerIdToModalForms() {
+        if (this._managerIdSubmitHandler) {
+            return;
+        }
+
+        this._managerIdSubmitHandler = (event) => {
+            const form = event.target;
+            if (!(form instanceof HTMLFormElement)) {
+                return;
+            }
+
+            if (!this._isTilesManagementForm(form)) {
+                return;
+            }
+
+            this._normalizeTilesManagementForm(form);
+        };
+
+        document.addEventListener("submit", this._managerIdSubmitHandler, true);
+    }
+
+    _bindManagerIdToModalClicks() {
+        if (this._managerIdClickHandler) {
+            return;
+        }
+
+        this._managerIdClickHandler = (event) => {
+            const target = event.target;
+            if (!(target instanceof Element)) {
+                return;
+            }
+
+            const submitTrigger = target.closest(
+                'button[type="submit"], input[type="submit"], .btn-primary',
+            );
+            if (!submitTrigger) {
+                return;
+            }
+
+            const form = this._resolveTilesManagementFormFromTrigger(submitTrigger);
+            if (!(form instanceof HTMLFormElement)) {
+                return;
+            }
+
+            this._normalizeTilesManagementForm(form);
+        };
+        document.addEventListener("click", this._managerIdClickHandler, true);
+    }
+
+    _resolveTilesManagementFormFromTrigger(trigger) {
+        if (!(trigger instanceof Element)) {
+            return null;
+        }
+
+        const directForm = trigger.closest("form");
+        if (
+            directForm instanceof HTMLFormElement &&
+            this._isTilesManagementForm(directForm)
+        ) {
+            return directForm;
+        }
+
+        // Nelle modali Plone il footer puo contenere submit fuori dal form.
+        const modalContent = trigger.closest(".modal-content");
+        if (modalContent instanceof Element) {
+            const modalForm = modalContent.querySelector("form");
+            if (
+                modalForm instanceof HTMLFormElement &&
+                this._isTilesManagementForm(modalForm)
+            ) {
+                return modalForm;
+            }
+        }
+
+        return null;
+    }
+
+    _bindManagerIdToFormData() {
+        if (this._managerIdFormDataHandler) {
+            return;
+        }
+
+        this._managerIdFormDataHandler = (event) => {
+            const form = event.target;
+            if (!(form instanceof HTMLFormElement)) {
+                return;
+            }
+
+            const isRelevantForm = this._isTilesManagementForm(form);
+            if (!isRelevantForm) {
+                return;
+            }
+
+            event.formData.set("managerId", this.managerId || "");
+        };
+        document.addEventListener("formdata", this._managerIdFormDataHandler, true);
+    }
+
+    _observeModalForms() {
+        if (this._modalFormsObserver) {
+            return;
+        }
+
+        this._modalFormsObserver = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                mutation.addedNodes.forEach((node) => {
+                    if (!(node instanceof Element)) {
+                        return;
+                    }
+
+                    const forms = [];
+                    if (node.matches("form") && this._isTilesManagementForm(node)) {
+                        forms.push(node);
+                    }
+                    node.querySelectorAll("form").forEach((f) => {
+                        if (this._isTilesManagementForm(f)) {
+                            forms.push(f);
+                        }
+                    });
+
+                    forms.forEach((form) => {
+                        if (form instanceof HTMLFormElement) {
+                            this._normalizeTilesManagementForm(form);
+                        }
+                    });
+                });
+            });
+        });
+
+        this._modalFormsObserver.observe(document.body, {
+            childList: true,
+            subtree: true,
+        });
+    }
+
+    _normalizeTilesManagementForm(form) {
+        this._ensureManagerIdInput(form);
+        this._removeManagerIdFromFormAction(form);
+    }
+
+    _ensureManagerIdInput(form) {
+        if (!this.managerId) {
+            return;
+        }
+
+        let managerField = form.querySelector('input[name="managerId"]');
+        if (!managerField) {
+            managerField = document.createElement("input");
+            managerField.type = "hidden";
+            managerField.name = "managerId";
+            form.appendChild(managerField);
+        }
+
+        managerField.value = this.managerId;
+    }
+
+    _removeManagerIdFromFormAction(form) {
+        if (!form?.action) {
+            return;
+        }
+
+        try {
+            const actionUrl = new URL(form.action, window.location.href);
+            if (!actionUrl.searchParams.has("managerId")) {
+                return;
+            }
+
+            actionUrl.searchParams.delete("managerId");
+            form.action = actionUrl.toString();
+        } catch (err) {
+            // Ignore malformed URLs and keep current form action.
+        }
+    }
+
+    _isTilesManagementForm(form) {
+        if (!(form instanceof HTMLFormElement)) {
+            return false;
+        }
+
+        if (form.id === "add_tile" || form.id === "delete_tile") {
+            return true;
+        }
+
+        const action = form.getAttribute("action") || "";
+        return action.includes("/@@add-tile/") || action.includes("@@delete-tile");
+    }
+
+    _decorateTileModalLinksWithManagerId() {
+        const selectors = [
+            'a[href*="/@@add-tile/"]',
+            'a[href*="@@delete-tile"]',
+            "a.tileDeleteLink",
+        ];
+        this.el.querySelectorAll(selectors.join(", ")).forEach((link) => {
+            this._ensureManagerIdInLinkHref(link);
+        });
+    }
+
+    _ensureManagerIdInLinkHref(link) {
+        if (!this.managerId || !(link instanceof HTMLAnchorElement) || !link.href) {
+            return;
+        }
+
+        try {
+            const hrefUrl = new URL(link.href, window.location.href);
+            if (hrefUrl.searchParams.get("managerId") === this.managerId) {
+                return;
+            }
+            hrefUrl.searchParams.set("managerId", this.managerId);
+            link.href = hrefUrl.toString();
+        } catch (err) {
+            // Ignore malformed link href.
+        }
+    }
+
     async _loadManager() {
-        const portalUrl = document.body.dataset.portalUrl || "";
         this.el.innerHTML =
             '<div class="spinner-border" role="status"><span class="visually-hidden">Loading...</span></div>';
 
@@ -73,6 +291,8 @@ class Pattern extends BasePattern {
     }
 
     _enableInteractions() {
+        this._decorateTileModalLinksWithManagerId();
+
         const addTileButton = this.el.querySelector(".add-tile-btn");
         if (addTileButton) {
             addTileButton.addEventListener("click", (e) => {
@@ -96,7 +316,7 @@ class Pattern extends BasePattern {
         if (!container || !container.classList.contains("available-tiles")) {
             button.parentElement.insertAdjacentHTML(
                 "beforeend",
-                '<div class="available-tiles" style="display: none;"></div>'
+                '<div class="available-tiles" style="display: none;"></div>',
             );
             container = button.nextElementSibling;
 
@@ -112,6 +332,7 @@ class Pattern extends BasePattern {
                     container.innerHTML = ""; // Pulisci prima il contenitore
                     container.appendChild(tilesList);
                     container.querySelectorAll("a.list-group-item").forEach((link) => {
+                        this._ensureManagerIdInLinkHref(link);
                         const modalOptions = {
                             actionOptions: {
                                 redirectOnResponse: true,
@@ -139,7 +360,7 @@ class Pattern extends BasePattern {
 
     _enableAjaxLinks(tile) {
         const links = tile.querySelectorAll(
-            "div.tileEditButtons a.tileVisibilityLink, div.tileEditButtons .tileSizeLink a.dropdown-item"
+            "div.tileEditButtons a.tileVisibilityLink, div.tileEditButtons .tileSizeLink a.dropdown-item",
         );
         links.forEach((link) => {
             link.addEventListener("click", async (e) => {
@@ -174,13 +395,14 @@ class Pattern extends BasePattern {
     }
 
     _enableSorting() {
-        if (this.el.querySelector(".tilesList")) {
-            Sortable.create(this.el.querySelector(".tilesList"), {
+        const tilesList = this.el.querySelector(".tilesList");
+        if (tilesList) {
+            Sortable.create(tilesList, {
                 draggable: "div.tileWrapper",
                 animation: 200,
                 onUpdate: async (data) => {
                     const tileIds = Array.from(data.to.children).map(
-                        (el) => el.dataset.tileid
+                        (el) => el.dataset.tileid,
                     );
                     const absoluteUrl = document.body.dataset.baseUrl || "";
                     const url = new URL(`${absoluteUrl}/reorder_tiles`);

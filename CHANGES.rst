@@ -5,7 +5,15 @@ Changelog
 4.0.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fix `managerId` propagation in Plone 6.1 modal forms for add/delete tiles,
+  including modal footer submit buttons outside the form.
+  [cekk]
+- Ensure `managerId` is submitted in POST body while avoiding duplicate
+  propagation in form action querystring.
+  [cekk]
+- Refactor and simplify `tiles-management` frontend handlers without changing
+  behavior.
+  [cekk]
 
 
 4.0.0 (2026-03-26)
