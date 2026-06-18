@@ -23,116 +23,28 @@ class Pattern extends BasePattern {
             return;
         }
 
-        this._bindManagerIdToModalForms();
-        this._bindManagerIdToModalClicks();
-        this._bindManagerIdToFormData();
         this._observeModalForms();
 
         await this._loadManager();
-    }
-
-    _bindManagerIdToModalForms() {
-        if (this._managerIdSubmitHandler) {
-            return;
-        }
-
-        this._managerIdSubmitHandler = (event) => {
-            const form = event.target;
-            if (!(form instanceof HTMLFormElement)) {
-                return;
-            }
-
-            if (!this._isTilesManagementForm(form)) {
-                return;
-            }
-
-            this._normalizeTilesManagementForm(form);
-        };
-
-        document.addEventListener("submit", this._managerIdSubmitHandler, true);
-    }
-
-    _bindManagerIdToModalClicks() {
-        if (this._managerIdClickHandler) {
-            return;
-        }
-
-        this._managerIdClickHandler = (event) => {
-            const target = event.target;
-            if (!(target instanceof Element)) {
-                return;
-            }
-
-            const submitTrigger = target.closest(
-                'button[type="submit"], input[type="submit"], .btn-primary',
-            );
-            if (!submitTrigger) {
-                return;
-            }
-
-            const form = this._resolveTilesManagementFormFromTrigger(submitTrigger);
-            if (!(form instanceof HTMLFormElement)) {
-                return;
-            }
-
-            this._normalizeTilesManagementForm(form);
-        };
-        document.addEventListener("click", this._managerIdClickHandler, true);
-    }
-
-    _resolveTilesManagementFormFromTrigger(trigger) {
-        if (!(trigger instanceof Element)) {
-            return null;
-        }
-
-        const directForm = trigger.closest("form");
-        if (
-            directForm instanceof HTMLFormElement &&
-            this._isTilesManagementForm(directForm)
-        ) {
-            return directForm;
-        }
-
-        // Nelle modali Plone il footer puo contenere submit fuori dal form.
-        const modalContent = trigger.closest(".modal-content");
-        if (modalContent instanceof Element) {
-            const modalForm = modalContent.querySelector("form");
-            if (
-                modalForm instanceof HTMLFormElement &&
-                this._isTilesManagementForm(modalForm)
-            ) {
-                return modalForm;
-            }
-        }
-
-        return null;
-    }
-
-    _bindManagerIdToFormData() {
-        if (this._managerIdFormDataHandler) {
-            return;
-        }
-
-        this._managerIdFormDataHandler = (event) => {
-            const form = event.target;
-            if (!(form instanceof HTMLFormElement)) {
-                return;
-            }
-
-            const isRelevantForm = this._isTilesManagementForm(form);
-            if (!isRelevantForm) {
-                return;
-            }
-
-            event.formData.set("managerId", this.managerId || "");
-        };
-        document.addEventListener("formdata", this._managerIdFormDataHandler, true);
     }
 
     _observeModalForms() {
         if (this._modalFormsObserver) {
             return;
         }
+
+        // Track the last tile-management link clicked within THIS instance's element.
+        // This lets us know which managerId owns the modal that is about to open.
+        this._lastClickedTileLink = null;
+        this._tileLinksClickHandler = (event) => {
+            const link = event.target.closest(
+                'a[href*="/@@add-tile/"], a[href*="@@delete-tile"], a.tileDeleteLink',
+            );
+            if (link && this.el.contains(link)) {
+                this._lastClickedTileLink = link;
+            }
+        };
+        document.addEventListener("click", this._tileLinksClickHandler, true);
 
         this._modalFormsObserver = new MutationObserver((mutations) => {
             mutations.forEach((mutation) => {
@@ -169,6 +81,8 @@ class Pattern extends BasePattern {
     _normalizeTilesManagementForm(form) {
         this._ensureManagerIdInput(form);
         this._removeManagerIdFromFormAction(form);
+        // Reset after normalization so the next modal open is evaluated fresh.
+        this._lastClickedTileLink = null;
     }
 
     _ensureManagerIdInput(form) {
@@ -210,12 +124,40 @@ class Pattern extends BasePattern {
             return false;
         }
 
-        if (form.id === "add_tile" || form.id === "delete_tile") {
-            return true;
+        const matchesById = form.id === "add_tile" || form.id === "delete_tile";
+        const action = form.getAttribute("action") || "";
+        const matchesByAction =
+            action.includes("/@@add-tile/") || action.includes("@@delete-tile");
+
+        if (!matchesById && !matchesByAction) {
+            return false;
         }
 
-        const action = form.getAttribute("action") || "";
-        return action.includes("/@@add-tile/") || action.includes("@@delete-tile");
+        // Primary check: the last tile link clicked was inside this instance's element.
+        // This is the most reliable way to know which managerId owns this modal,
+        // and avoids conflicts when multiple pat-tiles-management instances are on the page.
+        if (this._lastClickedTileLink !== null) {
+            return this.el.contains(this._lastClickedTileLink);
+        }
+
+        // Fallback: check managerId in form action URL.
+        try {
+            const actionUrl = new URL(form.action, window.location.href);
+            const formManagerId = actionUrl.searchParams.get("managerId");
+            if (formManagerId) {
+                return formManagerId === this.managerId;
+            }
+        } catch (e) {
+            // ignore malformed URLs
+        }
+
+        // Fallback: check hidden input already injected.
+        const managerInput = form.querySelector('input[name="managerId"]');
+        if (managerInput?.value) {
+            return managerInput.value === this.managerId;
+        }
+
+        return true;
     }
 
     _decorateTileModalLinksWithManagerId() {
