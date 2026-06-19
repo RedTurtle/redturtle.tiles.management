@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-4.0.2 (unreleased)
+4.0.2 (2026-06-19)
 ------------------
 
 - Fix `managerId` routing when multiple `pat-tiles-management` instances are
