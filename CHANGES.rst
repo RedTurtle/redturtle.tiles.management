@@ -5,7 +5,15 @@ Changelog
 4.0.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fix `managerId` routing when multiple `pat-tiles-management` instances are
+  present on the same page (e.g. ``defaultManager`` and ``wideManager``).
+  Replace the three global document listeners (``submit``, ``click``,
+  ``formdata``) with a single click tracker per instance that records the last
+  tile link clicked inside its own element. The MutationObserver now uses this
+  information as the primary signal to decide which instance owns an incoming
+  modal form, preventing the first-registered instance from overwriting the
+  ``managerId`` of forms opened from a different manager slot.
+  [cekk]
 
 
 4.0.1 (2026-05-11)
