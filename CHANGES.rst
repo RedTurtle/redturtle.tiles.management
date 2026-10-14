@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-4.0.3 (unreleased)
+4.0.3 (2026-10-14)
 ------------------
 
 - Do not remove nested ``pat-tiles-management`` elements with a different
