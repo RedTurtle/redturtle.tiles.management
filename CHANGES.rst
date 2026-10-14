@@ -5,7 +5,12 @@ Changelog
 4.0.3 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Do not remove nested ``pat-tiles-management`` elements with a different
+  ``managerId`` (e.g. redturtle.tiles.tileoftiles): only nested managers with
+  the same ``managerId`` are removed to avoid recursive loading.
+  A tile link now belongs only to its closest manager, so modal forms opened
+  from a nested manager get the right ``managerId``.
+  [cekk]
 
 
 4.0.2 (2026-06-19)

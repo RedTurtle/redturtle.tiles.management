@@ -40,7 +40,7 @@ class Pattern extends BasePattern {
             const link = event.target.closest(
                 'a[href*="/@@add-tile/"], a[href*="@@delete-tile"], a.tileDeleteLink',
             );
-            if (link && this.el.contains(link)) {
+            if (link && this._ownsElement(link)) {
                 this._lastClickedTileLink = link;
             }
         };
@@ -76,6 +76,12 @@ class Pattern extends BasePattern {
             childList: true,
             subtree: true,
         });
+    }
+
+    _ownsElement(el) {
+        // An element belongs to this instance only if its closest manager is this
+        // one: links inside a nested manager (e.g. tile of tiles) belong to it.
+        return el.closest(".pat-tiles-management") === this.el;
     }
 
     _normalizeTilesManagementForm(form) {
@@ -137,7 +143,7 @@ class Pattern extends BasePattern {
         // This is the most reliable way to know which managerId owns this modal,
         // and avoids conflicts when multiple pat-tiles-management instances are on the page.
         if (this._lastClickedTileLink !== null) {
-            return this.el.contains(this._lastClickedTileLink);
+            return this._ownsElement(this._lastClickedTileLink);
         }
 
         // Fallback: check managerId in form action URL.
@@ -212,10 +218,16 @@ class Pattern extends BasePattern {
             const tempDiv = document.createElement("div");
             tempDiv.innerHTML = html;
 
-            // Troviamo e rimuoviamo tutti i trigger .pat-tiles-management ANNIDATI
-            // per evitare il loop ricorsivo.
+            // Rimuoviamo solo i trigger .pat-tiles-management annidati con lo stesso
+            // managerId di questa istanza, per evitare il loop ricorsivo.
+            // Quelli con un managerId diverso (es. tile of tiles) vanno mantenuti.
             const nestedTriggers = tempDiv.querySelectorAll(".pat-tiles-management");
-            nestedTriggers.forEach((trigger) => trigger.remove());
+            nestedTriggers.forEach((trigger) => {
+                const nestedManagerId = parser.parse(trigger).managerId;
+                if (!nestedManagerId || nestedManagerId === this.managerId) {
+                    trigger.remove();
+                }
+            });
 
             // Ora svuotiamo this.el e aggiungiamo il contenuto "pulito"
             this.el.innerHTML = "";
