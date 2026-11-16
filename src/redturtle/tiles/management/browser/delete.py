@@ -81,7 +81,10 @@ class DeleteForm(DefaultDeleteForm):
 
     @button.buttonAndHandler(_("Cancel"), name="cancel")
     def handleCancel(self, action):
-        super().handleCancel(action)
+        # The parent's handleCancel is a z3c.form Handler object (created by
+        # @buttonAndHandler), not a bound method: it must be called with the
+        # form explicitly, i.e. Handler.__call__(form, action).
+        DefaultDeleteForm.handleCancel(self, action)
 
 
 class DeleteView(DefaultDeleteView):

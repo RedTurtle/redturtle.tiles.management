@@ -5,7 +5,8 @@ Changelog
 4.0.5 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fix ``TypeError`` when clicking "Cancel" in the delete tile popup.
+  [cekk]
 
 
 4.0.4 (2026-11-16)
