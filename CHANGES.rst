@@ -5,7 +5,8 @@ Changelog
 4.0.4 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fix broken release.
+  [cekk]
 
 
 4.0.3 (2026-10-14)
